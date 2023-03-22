@@ -1,9 +1,9 @@
-# 한밭대학교 OOOO학과 ㅁㅁㅁㅁ팀
+# 한밭대학교 컴퓨터공학과 GDT팀
 
 **팀 구성**
-- 20XX0001 김이박 
-- 20XX0002 이박김
-- 20XX0003 박김이
+- 20171721 조동현 
+- 20171597 정영균
+- 20171628 정해교
 
 ## <u>Teamate</u> Project Background
 - ### 필요성
@@ -15,8 +15,8 @@
   
 ## System Design
   - ### System Requirements
-    - OOO
-    - OOO
+    - 퍼즐형식
+    - 색을 이용한 해결방법
     
 ## Case Study
   - ### Description
