@@ -3,35 +3,38 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[RequireComponent(typeof(Rigidbody2D))]//해당구문으로 자동으로 컴포넌트 추가 
-[RequireComponent(typeof(CapsuleCollider2D))]
+
 public class Movement2D : MonoBehaviour
 {
 
     [SerializeField]
-    private float speed=5;
-    private Vector3 velocity;
+    private float speed=5.0f;
+
+    private Rigidbody2D rigid2d;
+    private Vector3 movedirection;
 
 
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-           
+        rigid2d=GetComponent<Rigidbody2D>();
+        movedirection = Vector3.right;
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector3 curentVelocity = velocity * Time.deltaTime;
+        float x = Input.GetAxisRaw("Horizontal");
 
-        transform.position += curentVelocity;
+        float y = Input.GetAxisRaw("Vertical");
+
+        movedirection = new Vector3(x, y, 0);
+
+
+        rigid2d.velocity = movedirection * speed;
     }
 
-    public void MoveTo(float input) {//input은 움직이는 방향 
-
-        velocity.x = input*speed;
-
-    }
+   
 }
