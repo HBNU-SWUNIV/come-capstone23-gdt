@@ -20,12 +20,14 @@ public class Movement2D : MonoBehaviour
     {
         rigid2d=GetComponent<Rigidbody2D>();
         movedirection = Vector3.right;
-
+        speed=5.0f;
     }
 
     // Update is called once per frame
     void Update()
     {
+       
+
         float x = Input.GetAxisRaw("Horizontal");
 
         float y = Input.GetAxisRaw("Vertical");
