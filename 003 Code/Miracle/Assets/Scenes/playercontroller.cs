@@ -17,5 +17,12 @@ public class playercontroller : MonoBehaviour
     {
         float x = Input.GetAxisRaw("Horizontal");
         movement2d.Move(x);
+
+        if (Input.GetKeyDown(KeyCode.Space)) {
+
+            movement2d.Jump();
+        
+        
+        }
     }
 }
