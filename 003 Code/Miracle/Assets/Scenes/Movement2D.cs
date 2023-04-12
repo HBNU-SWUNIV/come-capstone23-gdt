@@ -22,6 +22,8 @@ public class Movement2D : MonoBehaviour
     private bool isGround;
     private Vector3 footposition;
 
+    
+
 
 
     // Start is called before the first frame update
@@ -37,6 +39,8 @@ public class Movement2D : MonoBehaviour
         footposition = new Vector2(bounds.center.x, bounds.min.y);
         isGround = Physics2D.OverlapCircle(footposition, 0.1f, groundLayer);
 
+        
+
     }
 
 
@@ -48,8 +52,10 @@ public class Movement2D : MonoBehaviour
 
     public void Jump() {
 
-        if (isGround == true) {
+        if (isGround==true) {
             rigid2d.velocity = Vector2.up * jumpforce;
+
+            
         }
         
     }
