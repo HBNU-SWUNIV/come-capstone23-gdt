@@ -25,10 +25,15 @@ public class EnemyMove : MonoBehaviour
     {
         rigid.velocity = new Vector2(nextMove*movespeed,rigid.velocity.y);
 
-        Debug.DrawRay(rigid.position, Vector3.down, new Color(0, 1, 0));
 
-        //RaycastHit2D rayHit=Physics2D.Raycast(rigid.position,Vector3.down,)
+        Vector2 frontVec = new Vector2(rigid.position.x + nextMove, rigid.position.y);
+        Debug.DrawRay(frontVec, Vector3.down, new Color(0, 1, 0));
+        RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, Vector3.down, 1, LayerMask.GetMask("ground"));
+        if (rayHit.collider == null)
+        {
 
+
+        }
     }
 
     void Think() {
