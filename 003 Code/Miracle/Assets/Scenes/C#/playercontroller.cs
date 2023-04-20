@@ -32,7 +32,7 @@ public class playercontroller : MonoBehaviour
             case goodstate.non:
                 break;
             case goodstate.strength:
-
+                init_goodstate(new_goodstate);
                 current_goodstate = goodstate.strength;
                 if (currentnumber_goodstate != maxnumber_goodstate)
                 {
@@ -41,6 +41,7 @@ public class playercontroller : MonoBehaviour
                 }
                 break;
             case goodstate.quick:
+                init_goodstate(new_goodstate);
                 current_goodstate = goodstate.quick;
                 if (currentnumber_goodstate != maxnumber_goodstate)
                 {
@@ -49,6 +50,7 @@ public class playercontroller : MonoBehaviour
                 }
                 break;
             case goodstate.solid:
+                init_goodstate(new_goodstate);
                 current_goodstate = goodstate.solid;
                 if (currentnumber_goodstate != maxnumber_goodstate)
                 {
@@ -57,6 +59,7 @@ public class playercontroller : MonoBehaviour
                 }
                 break;
             case goodstate.agility:
+                init_goodstate(new_goodstate);
                 current_goodstate = goodstate.agility;
                 if (currentnumber_goodstate != maxnumber_goodstate)
                 {
@@ -65,6 +68,7 @@ public class playercontroller : MonoBehaviour
                 }
                 break;
             case goodstate.focus:
+                init_goodstate(new_goodstate);
                 current_goodstate = goodstate.focus;
                 if (currentnumber_goodstate != maxnumber_goodstate)
                 {
@@ -77,15 +81,33 @@ public class playercontroller : MonoBehaviour
                 break;
         }
     }
-    public void init_goodstate(goodstate state)
+    public void init_goodstate(goodstate newstate)
     {
-        switch (state)
+        if(newstate!= current_goodstate)
         {
-            
-
-
-
-
+            switch (current_goodstate)
+            {
+                case goodstate.strength:
+                    currentnumber_goodstate = 0;
+                    status.init_offensive_power();
+                    break;
+                case goodstate.quick:
+                    currentnumber_goodstate = 0;
+                    status.init_attack_speed();
+                    break;
+                case goodstate.solid:
+                    currentnumber_goodstate = 0;
+                    status.init_defensive_power();
+                    break;
+                case goodstate.agility:
+                    currentnumber_goodstate = 0;
+                    status.init_move_speed();
+                    break;
+                case goodstate.focus:
+                    currentnumber_goodstate = 0;
+                    status.init_critical();
+                    break;
+            }
         }
 
     }
