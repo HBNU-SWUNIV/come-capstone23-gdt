@@ -22,19 +22,19 @@ public class Status : MonoBehaviour
         this.critical = critical;
     }
 
-    public void add_hp(int add)
+    public void add_hp(int add)//체력증가
     {
         this.hp += add;
     }
-    public void add_offensive_power()
+    public void add_offensive_power()//공격력 증가 
     {
         this.offensive_power += 10;
     }
-    public void init_offensive_power()
+    public void init_offensive_power()//공격력 초기화
     {
         this.offensive_power =20;
     }
-    public void add_defensive_power()
+    public void add_defensive_power()//위와 같음
     {
         this.defensive_power += 10;
     }
@@ -71,7 +71,7 @@ public class Status : MonoBehaviour
         this.critical = 0;
     }
     // Start is called before the first frame update
-    void Start()
+    void Start()//초기 스텟 설정
     {
         Status status = new Status(100, 20, 30, 5, 0, 10, 0);
     }

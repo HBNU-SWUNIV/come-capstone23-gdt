@@ -20,21 +20,21 @@ public class playercontroller : MonoBehaviour
         movement2d = GetComponent<Movement2D>();
         status= GetComponent<Status>();
     }
-    public void Get_HP(int add)
+    public void Get_HP(int add)//체력회복
     {
         status.add_hp(add);
     }
     
-    public void Apply_goodstate() 
+    public void Apply_goodstate()//버프 설정 
     {
         switch (new_goodstate)
         {
             case goodstate.non:
                 break;
-            case goodstate.strength:
+            case goodstate.strength://괴력
                 init_goodstate(new_goodstate);
                 current_goodstate = goodstate.strength;
-                if (currentnumber_goodstate != maxnumber_goodstate)
+                if (currentnumber_goodstate < maxnumber_goodstate)
                 {
                     status.add_offensive_power();
                     currentnumber_goodstate++;
@@ -43,7 +43,7 @@ public class playercontroller : MonoBehaviour
             case goodstate.quick:
                 init_goodstate(new_goodstate);
                 current_goodstate = goodstate.quick;
-                if (currentnumber_goodstate != maxnumber_goodstate)
+                if (currentnumber_goodstate < maxnumber_goodstate)
                 {
                     status.add_attack_speed();
                     currentnumber_goodstate++;
@@ -52,7 +52,7 @@ public class playercontroller : MonoBehaviour
             case goodstate.solid:
                 init_goodstate(new_goodstate);
                 current_goodstate = goodstate.solid;
-                if (currentnumber_goodstate != maxnumber_goodstate)
+                if (currentnumber_goodstate < maxnumber_goodstate)
                 {
                     status.add_defensive_power();
                     currentnumber_goodstate++;
@@ -61,7 +61,7 @@ public class playercontroller : MonoBehaviour
             case goodstate.agility:
                 init_goodstate(new_goodstate);
                 current_goodstate = goodstate.agility;
-                if (currentnumber_goodstate != maxnumber_goodstate)
+                if (currentnumber_goodstate < maxnumber_goodstate)
                 {
                     status.add_move_speed();
                     currentnumber_goodstate++;
@@ -70,7 +70,7 @@ public class playercontroller : MonoBehaviour
             case goodstate.focus:
                 init_goodstate(new_goodstate);
                 current_goodstate = goodstate.focus;
-                if (currentnumber_goodstate != maxnumber_goodstate)
+                if (currentnumber_goodstate < maxnumber_goodstate)
                 {
                     status.add_critical();
                     currentnumber_goodstate++;
@@ -81,7 +81,7 @@ public class playercontroller : MonoBehaviour
                 break;
         }
     }
-    public void init_goodstate(goodstate newstate)
+    public void init_goodstate(goodstate newstate)//
     {
         if(newstate!= current_goodstate)
         {
