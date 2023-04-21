@@ -30,6 +30,17 @@ public class Status : MonoBehaviour
     {
         this.hp += add;
     }
+    public void burn()//지속적인 체력감소 
+    {
+
+        this.hp -= 5f;
+
+        Invoke("burn", 3f);
+    }
+    public void CancleInvoke_burn()
+    {
+        CancelInvoke("burn");
+    }
     public void add_offensive_power()//공격력 증가 
     {
         this.offensive_power += 10f;
@@ -38,39 +49,58 @@ public class Status : MonoBehaviour
     {
         this.offensive_power =20f;
     }
-    public void add_defensive_power()//위와 같음
+    public void reduce_offensive_power()//약화 
+    {
+        this.offensive_power -= 2f;
+
+    }
+    public void add_defensive_power()//방어력 증가 
     {
         this.defensive_power += 10f;
     }
-    public void init_defensive_power()
+    public void init_defensive_power()//방어력 초기화
     {
         this.offensive_power = 30f;
     }
-    public void add_move_speed()
+    public void reduce_defensive_powe()//파괴 
+    {
+
+        this.defensive_power -= 2f;
+    }
+    public void add_move_speed()//이동속도 증가 
     {
         this.move_speed += 10f;
     }
-    public void init_move_speed()
+    public void init_move_speed()//이동속도 초기화 
     {
         this.move_speed = 5f;
     }
-    public void add_protective_film()
+    public void reduce_move_speed()//냉기 
+    {
+        this.move_speed -= 3f;
+    }
+    public void add_protective_film()//보호막 증가 
     {
         this.protective_film += 10f;
     }
-    public void add_attack_speed()
+    public void add_attack_speed()//공격속도 증가 
     {
         this.attack_speed += 10f;
     }
-    public void init_attack_speed()
+    public void init_attack_speed()//공격속도 초기화 
     {
         this.attack_speed = 10f;
     }
-    public void add_critical()
+    public void reduce_attack_speed()//감속
+    {
+
+        this.attack_speed -= 1;
+    }
+    public void add_critical()//치명타율 증가 
     {
         this.critical += 10f;
     }
-    public void init_critical()
+    public void init_critical()//치명타율 초기화 
     {
         this.critical = 0f;
     }
