@@ -12,14 +12,14 @@ public class playercontroller : MonoBehaviour
     private Status status;
     public goodstate new_goodstate = goodstate.non;//새로운 버프 상태 적용
     public goodstate current_goodstate = goodstate.non;//현재 버프 상태 
-    public badstate new_badstate = badstate.non;//새로운 디버프 상태적용 
+   
     public badstate current_badstate = badstate.non;//현재 디버프 상태 
     int currentnumber_goodstate = 0;
     int maxnumber_goodstate = 3;
+
     float  valid_time_goodstate = 60;//버프 유효시간
     float current_time_goodstate = 0;
-    float valid_time_badstate = 60;//디버프 유효시간
-    float current_time_badstate = 0;
+    
     // Start is called before the first frame update
     private void Awake()
     {
@@ -38,6 +38,7 @@ public class playercontroller : MonoBehaviour
             case goodstate.non:
                 init_goodstate(input_new_goodstate);
                 current_goodstate = goodstate.non;
+                current_time_goodstate = 0;
                 currentnumber_goodstate = 0;
                 break;
             case goodstate.strength://괴력
@@ -120,35 +121,32 @@ public class playercontroller : MonoBehaviour
         }
 
     }
+    
     public void Apply_badstate(badstate input_new_badstate)//디버프 적용 
     {
         switch (input_new_badstate)
         {
-
-            case badstate.non://디버프 중단 
-
-
-                break;
-
             case badstate.burn://화상
-
-                status.burn();//Invoke 포함 
+                current_badstate = badstate.burn;
+                status.burn();
                 break;
-            case badstate.weak://약화 
+            case badstate.weak://약화
+                current_badstate = badstate.weak;
                 status.reduce_offensive_power();
                 break;
             case badstate.deceleration://감속
+                current_badstate = badstate.deceleration;
                 status.reduce_attack_speed();
                 break;
-            case badstate.destroy://파괴 
+            case badstate.destroy://파괴
+                current_badstate = badstate.destroy;
                 status.reduce_defensive_powe();
                 break;
-            case badstate.coldair://냉기 
+            case badstate.coldair://냉기
+                current_badstate = badstate.coldair;
                 status.reduce_move_speed();
                 break;
-            case badstate.cooling:
-
-                break;
+            
         }
 
     }
@@ -169,11 +167,11 @@ public class playercontroller : MonoBehaviour
             }
         }
     }
-
+   
     // Update is called once per frame
     void Update()//실질적 움직임 컨트롤
     {
-        if(new_goodstate != goodstate.non)
+        if(new_goodstate != goodstate.non)//쿨타임 설정?
         {
             if(current_time_goodstate< valid_time_goodstate)//버프 효과 진행중 
             {
@@ -185,18 +183,7 @@ public class playercontroller : MonoBehaviour
             }
 
         }
-        if (new_badstate!= badstate.non)
-        {
-            if (current_time_badstate < valid_time_badstate)//디버프 효과 진행중 
-            {
-                current_time_badstate += Time.deltaTime;
-            }
-            else if (current_time_badstate >= valid_time_badstate)//버프 효과 끝 
-            {
-                Apply_badstate(badstate.non);
-            }
-
-        }
+       
         float x = Input.GetAxisRaw("Horizontal");
         movement2d.Move(x);
 

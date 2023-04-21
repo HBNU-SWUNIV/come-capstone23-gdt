@@ -30,17 +30,25 @@ public class Status : MonoBehaviour
     {
         this.hp += add;
     }
-    public void burn()//지속적인 체력감소 
+    public void reduce_hp()
     {
-
         this.hp -= 5f;
 
-        Invoke("burn", 3f);
     }
-    public void CancleInvoke_burn()
+    public void burn()//지속적인 체력감소 
     {
-        CancelInvoke("burn");
+        StartCoroutine("recover_burn");
     }
+    IEnumerator recover_burn()//체력감소 cover
+    {
+        reduce_hp();
+        Invoke("reduce_hp", 3f);
+
+        yield return new WaitForSeconds(60.0f);
+
+        CancelInvoke("reduce_hp");
+    }
+   
     public void add_offensive_power()//공격력 증가 
     {
         this.offensive_power += 10f;
@@ -53,6 +61,13 @@ public class Status : MonoBehaviour
     {
         this.offensive_power -= 2f;
 
+        StartCoroutine("recover_offensive_power");
+    }
+    IEnumerator recover_offensive_power()//약화 cover
+    {
+        yield return new WaitForSeconds(60.0f);
+
+        this.offensive_power += 2f;
     }
     public void add_defensive_power()//방어력 증가 
     {
@@ -66,6 +81,14 @@ public class Status : MonoBehaviour
     {
 
         this.defensive_power -= 2f;
+
+        StartCoroutine("recover_defensive_powe");
+    }
+    IEnumerator recover_defensive_powe()//파괴  cover
+    {
+        yield return new WaitForSeconds(60.0f);
+
+        this.defensive_power += 2f;
     }
     public void add_move_speed()//이동속도 증가 
     {
@@ -78,6 +101,14 @@ public class Status : MonoBehaviour
     public void reduce_move_speed()//냉기 
     {
         this.move_speed -= 3f;
+
+        StartCoroutine("recover_move_speed");
+    }
+    IEnumerator recover_move_speed()//냉기  cover
+    {
+        yield return new WaitForSeconds(60.0f);
+
+        this.move_speed += 3f;
     }
     public void add_protective_film()//보호막 증가 
     {
@@ -94,7 +125,15 @@ public class Status : MonoBehaviour
     public void reduce_attack_speed()//감속
     {
 
-        this.attack_speed -= 1;
+        this.attack_speed -= 1f;
+
+        StartCoroutine("recover_attack_speed");
+    }
+    IEnumerator recover_attack_speed()//감속 cover
+    {
+        yield return new WaitForSeconds(60.0f);
+
+        this.attack_speed += 1f;
     }
     public void add_critical()//치명타율 증가 
     {
