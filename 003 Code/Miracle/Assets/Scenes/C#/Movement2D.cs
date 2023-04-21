@@ -65,8 +65,6 @@ public class Movement2D : MonoBehaviour
 
         if (isGround==true) {
             rigid2d.velocity = Vector2.up * jumpforce;
-
-            
         }
         
     }

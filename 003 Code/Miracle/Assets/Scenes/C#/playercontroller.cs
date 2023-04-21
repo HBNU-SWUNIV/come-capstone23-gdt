@@ -10,7 +10,7 @@ public class playercontroller : MonoBehaviour
     public enum badstate { non,burn,weak, deceleration ,destroy,toxin,coldair,cooling}//화상,약화,감속,파괴,독,냉기,냉각
     private Movement2D movement2d;
     private Status status;
-    public goodstate new_goodstate = goodstate.non;
+    public goodstate new_goodstate = goodstate.non;//
     public goodstate current_goodstate = goodstate.non;
     int currentnumber_goodstate = 0;
     int maxnumber_goodstate = 3;
@@ -25,14 +25,14 @@ public class playercontroller : MonoBehaviour
         status.add_hp(add);
     }
     
-    public void Apply_goodstate()//버프 설정 
+    public void Apply_goodstate(goodstate input_new_goodstate)//버프 설정
     {
-        switch (new_goodstate)
+        switch (input_new_goodstate)
         {
             case goodstate.non:
                 break;
             case goodstate.strength://괴력
-                init_goodstate(new_goodstate);
+                init_goodstate(input_new_goodstate);
                 current_goodstate = goodstate.strength;
                 if (currentnumber_goodstate < maxnumber_goodstate)
                 {
@@ -41,7 +41,7 @@ public class playercontroller : MonoBehaviour
                 }
                 break;
             case goodstate.quick:
-                init_goodstate(new_goodstate);
+                init_goodstate(input_new_goodstate);
                 current_goodstate = goodstate.quick;
                 if (currentnumber_goodstate < maxnumber_goodstate)
                 {
@@ -50,7 +50,7 @@ public class playercontroller : MonoBehaviour
                 }
                 break;
             case goodstate.solid:
-                init_goodstate(new_goodstate);
+                init_goodstate(input_new_goodstate);
                 current_goodstate = goodstate.solid;
                 if (currentnumber_goodstate < maxnumber_goodstate)
                 {
@@ -59,7 +59,7 @@ public class playercontroller : MonoBehaviour
                 }
                 break;
             case goodstate.agility:
-                init_goodstate(new_goodstate);
+                init_goodstate(input_new_goodstate);
                 current_goodstate = goodstate.agility;
                 if (currentnumber_goodstate < maxnumber_goodstate)
                 {
@@ -68,7 +68,7 @@ public class playercontroller : MonoBehaviour
                 }
                 break;
             case goodstate.focus:
-                init_goodstate(new_goodstate);
+                init_goodstate(input_new_goodstate);
                 current_goodstate = goodstate.focus;
                 if (currentnumber_goodstate < maxnumber_goodstate)
                 {
@@ -81,7 +81,7 @@ public class playercontroller : MonoBehaviour
                 break;
         }
     }
-    public void init_goodstate(goodstate newstate)//
+    public void init_goodstate(goodstate newstate)//새로운 버프 설정시 기존 버프 초기화 
     {
         if(newstate!= current_goodstate)
         {
@@ -111,11 +111,27 @@ public class playercontroller : MonoBehaviour
         }
 
     }
-    // Update is called once per frame
-    void Update()
-    {
-        
 
+    private void OnCollisionEnter2D(Collision2D collision)//적의 공격에 피격 당할경우 
+    {
+        if (collision.collider.name == "Enemy_weapon")
+        {
+            if (status.Is_protective_film == true)//캐릭터의 보호막이 있는 경우 
+            {
+
+
+            }
+            else if(status.Is_protective_film == false)//캐릭터의 보호막이 없는 경우 
+            {
+               
+
+            }
+        }
+    }
+
+    // Update is called once per frame
+    void Update()//실질적 움직임 컨트롤
+    {
         float x = Input.GetAxisRaw("Horizontal");
         movement2d.Move(x);
 
