@@ -11,8 +11,8 @@ public class playercontroller : MonoBehaviour
     public enum badstate { non,burn,weak, deceleration ,destroy,coldair,cooling}//화상,약화,감속,파괴,독,냉기,냉각
     private Movement2D movement2d;
     private Status status;
-    private float current_filled_time=0.0f;//현재 스킬 사용시간
-    private float max_filled_time=60.0f;
+    private float current_filled_time=0.0f;//현재 버프  사용시간
+    private float max_filled_time=60.0f;//최대 버프 사용시간 
     public goodstate new_goodstate = goodstate.non;//새로운 버프 상태 적용
     public goodstate current_goodstate = goodstate.non;//현재 버프 상태 
    

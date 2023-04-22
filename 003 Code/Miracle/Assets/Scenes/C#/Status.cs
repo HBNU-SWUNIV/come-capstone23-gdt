@@ -8,11 +8,20 @@ public class Status : MonoBehaviour
 
     
     public float hp, offensive_power, defensive_power, move_speed, protective_film, attack_speed, critical;
+    
+    public  float[] current_valid_statetime = new float[12]; //상태이상의 시간 
 
     public bool Is_protective_film;
     public void Update()
     {
         Is_protective_film = protective_film > 0 ? true : false;
+    }
+    private void Awake()
+    {
+        for(int i=0;i< current_valid_statetime.Length;i++)
+        {
+            current_valid_statetime[i] = 0.0f;
+        }
     }
     public Status(int hp, int offensive_power, int defensive_power, int move_speed, int protective_film, int attack_speed, int critical)
     {//체력,공격력,방어력,데미지,이동속도,실드,공격속도,치명타율
@@ -30,7 +39,7 @@ public class Status : MonoBehaviour
     {
         this.hp += add;
     }
-    public void reduce_hp()
+    public void reduce_hp()//체력 감소 
     {
         this.hp -= 5f;
 
