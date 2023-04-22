@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using System.Xml.Serialization;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class playercontroller : MonoBehaviour
@@ -10,15 +11,16 @@ public class playercontroller : MonoBehaviour
     public enum badstate { non,burn,weak, deceleration ,destroy,coldair,cooling}//화상,약화,감속,파괴,독,냉기,냉각
     private Movement2D movement2d;
     private Status status;
+    private float current_filled_time=0.0f;//현재 스킬 사용시간
+    private float max_filled_time=60.0f;
     public goodstate new_goodstate = goodstate.non;//새로운 버프 상태 적용
     public goodstate current_goodstate = goodstate.non;//현재 버프 상태 
    
     public badstate current_badstate = badstate.non;//현재 디버프 상태 
-    int currentnumber_goodstate = 0;
-    int maxnumber_goodstate = 3;
+    private int currentnumber_goodstate = 0;
+    private int maxnumber_goodstate = 3;
 
-    float  valid_time_goodstate = 60;//버프 유효시간
-    float current_time_goodstate = 0;
+   
     
     // Start is called before the first frame update
     private void Awake()
@@ -26,26 +28,24 @@ public class playercontroller : MonoBehaviour
         movement2d = GetComponent<Movement2D>();
         status= GetComponent<Status>();
     }
-    public void Get_HP(int add)//체력회복
-    {
-        status.add_hp(add);
-    }
+   
     
     public void Apply_goodstate(goodstate input_new_goodstate)//버프 설정
     {
         switch (input_new_goodstate)
         {
-            case goodstate.non:
-                init_goodstate(input_new_goodstate);
+            case goodstate.non://버프 해체
+                status.all_init();//모든 버프 초기화 
                 current_goodstate = goodstate.non;
-                current_time_goodstate = 0;
-                currentnumber_goodstate = 0;
+                currentnumber_goodstate = 0; 
                 break;
             case goodstate.strength://괴력
-                init_goodstate(input_new_goodstate);
+                init_goodstate(input_new_goodstate);//current_goodstate 변경 없음 
                 current_goodstate = goodstate.strength;
                 if (currentnumber_goodstate < maxnumber_goodstate)
                 {
+                    StopCoroutine("start_reuse_waiting_time");//기존에 동작하던 현재 버프 사용시간 타이머 중단 
+                    StartCoroutine("start_reuse_waiting_time");//새로운 버프 사용시간 타이머 동작
                     status.add_offensive_power();
                     currentnumber_goodstate++;
                 }
@@ -55,6 +55,8 @@ public class playercontroller : MonoBehaviour
                 current_goodstate = goodstate.quick;
                 if (currentnumber_goodstate < maxnumber_goodstate)
                 {
+                    StopCoroutine("start_reuse_waiting_time");//기존에 동작하던 현재 버프 사용시간 타이머 중단 
+                    StartCoroutine("start_reuse_waiting_time");//새로운 버프 사용시간 타이머 동작
                     status.add_attack_speed();
                     currentnumber_goodstate++;
                 }
@@ -64,6 +66,8 @@ public class playercontroller : MonoBehaviour
                 current_goodstate = goodstate.solid;
                 if (currentnumber_goodstate < maxnumber_goodstate)
                 {
+                    StopCoroutine("start_reuse_waiting_time");//기존에 동작하던 현재 버프 사용시간 타이머 중단 
+                    StartCoroutine("start_reuse_waiting_time");//새로운 버프 사용시간 타이머 동작
                     status.add_defensive_power();
                     currentnumber_goodstate++;
                 }
@@ -73,6 +77,8 @@ public class playercontroller : MonoBehaviour
                 current_goodstate = goodstate.agility;
                 if (currentnumber_goodstate < maxnumber_goodstate)
                 {
+                    StopCoroutine("start_reuse_waiting_time");//기존에 동작하던 현재 버프 사용시간 타이머 중단 
+                    StartCoroutine("start_reuse_waiting_time");//새로운 버프 사용시간 타이머 동작
                     status.add_move_speed();
                     currentnumber_goodstate++;
                 }
@@ -82,6 +88,8 @@ public class playercontroller : MonoBehaviour
                 current_goodstate = goodstate.focus;
                 if (currentnumber_goodstate < maxnumber_goodstate)
                 {
+                    StopCoroutine("start_reuse_waiting_time");//기존에 동작하던 현재 버프 사용시간 타이머 중단 
+                    StartCoroutine("start_reuse_waiting_time");//새로운 버프 사용시간 타이머 동작
                     status.add_critical();
                     currentnumber_goodstate++;
                 }
@@ -97,6 +105,7 @@ public class playercontroller : MonoBehaviour
         {
             switch (current_goodstate)
             {
+
                 case goodstate.strength:
                     currentnumber_goodstate = 0;
                     status.init_offensive_power();
@@ -155,34 +164,52 @@ public class playercontroller : MonoBehaviour
     {
         if (collision.collider.name == "Enemy_weapon")
         {
+            float enemy_offensive = collision.gameObject.GetComponent<EnemyStatus>().offensive_power;
+            
             if (status.Is_protective_film == true)//캐릭터의 보호막이 있는 경우 
             {
+                if(status.protective_film>=enemy_offensive)//실수치 깎아내기 
+                {
+                    status.protective_film -= enemy_offensive;
 
+                }
+                else if(status.protective_film < enemy_offensive)
+                {
+                    float Remaining_attack_power = enemy_offensive - status.protective_film;
+                    status.protective_film = 0f;
+                    status.Is_protective_film = false;
+                    status.hp -= Remaining_attack_power - (status.defensive_power / 10);
+                }
 
             }
             else if(status.Is_protective_film == false)//캐릭터의 보호막이 없는 경우 
             {
-               
-
+                status.hp -= enemy_offensive - (status.defensive_power / 10);
             }
         }
     }
+
+    IEnumerator start_reuse_waiting_time()//버프 시간 시작,60초가 되면 버프 해체 
+    {
+        current_filled_time=0.0f;
+        while (true) {
+
+            if (current_filled_time == max_filled_time)
+            {
+                Apply_goodstate(goodstate.non);
+                yield break;
+            }
+            yield return new WaitForSeconds(1.0f);//1초마다 유니티에게 통제권 넘기기
+            current_filled_time+=1.0f;
+        }
+       
+    }
+
    
     // Update is called once per frame
     void Update()//실질적 움직임 컨트롤
     {
-        if(new_goodstate != goodstate.non)//쿨타임 설정?
-        {
-            if(current_time_goodstate< valid_time_goodstate)//버프 효과 진행중 
-            {
-                current_time_goodstate += Time.deltaTime;
-            }
-            else if(current_time_goodstate >= valid_time_goodstate)//버프 효과 끝 
-            {
-                Apply_goodstate(goodstate.non);
-            }
-
-        }
+        
        
         float x = Input.GetAxisRaw("Horizontal");
         movement2d.Move(x);

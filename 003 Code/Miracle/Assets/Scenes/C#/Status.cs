@@ -6,8 +6,8 @@ using UnityEngine;
 public class Status : MonoBehaviour
 {
 
-    [SerializeField]
-    private float hp, offensive_power, defensive_power, move_speed, protective_film, attack_speed, critical;
+    
+    public float hp, offensive_power, defensive_power, move_speed, protective_film, attack_speed, critical;
 
     public bool Is_protective_film;
     public void Update()
@@ -142,6 +142,15 @@ public class Status : MonoBehaviour
     public void init_critical()//치명타율 초기화 
     {
         this.critical = 0f;
+    }
+
+    public void all_init()
+    {
+        init_offensive_power();
+        init_defensive_power();
+        init_move_speed();
+        init_attack_speed();
+        init_critical();
     }
     // Start is called before the first frame update
     void Start()//초기 스텟 설정
