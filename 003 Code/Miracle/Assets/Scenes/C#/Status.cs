@@ -10,6 +10,7 @@ public class Status : MonoBehaviour
     public float hp, offensive_power, defensive_power, move_speed, protective_film, attack_speed, critical;
     
     public  float[] current_valid_statetime = new float[12]; //상태이상의 시간 
+    public int[] current_validnumber_state = new int[12]; //각 상태별 
 
     public bool Is_protective_film;
     public void Update()
