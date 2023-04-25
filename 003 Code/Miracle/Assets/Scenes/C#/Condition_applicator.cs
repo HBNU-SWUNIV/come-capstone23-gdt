@@ -4,7 +4,8 @@ using UnityEditor.PackageManager;
 using UnityEngine;
 
 
-public enum State { non_good, strength, quick, solid, agility, focus, recovery, non_bad, burn, weak, deceleration, destroy, toxin, coldair, cooling }
+public enum State {  strength, quick, solid, agility, focus, recovery,  burn, weak, deceleration, destroy, toxin, coldair, cooling }
+
 
 
 public class Condition_applicator : MonoBehaviour
@@ -36,8 +37,9 @@ public class Condition_applicator : MonoBehaviour
                 selected_state_index=0;
                 if (status.current_validnumber_state[0] < max_number_state)
                 {
-                    StopCoroutine("start_reuse_waiting_time");//기존에 동작하던 현재 버프 사용시간 타이머 중단 
-                    StartCoroutine("start_reuse_waiting_time");//새로운 버프 사용시간 타이머 동작
+                    status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
+                    StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단 
+                    StartCoroutine(status.enumerators[selected_state_index]);//새로운 버프 사용시간 타이머 동작
                     status.add_offensive_power(input_offensive_power);
                     status.current_validnumber_state[0]++;
                 }
@@ -46,13 +48,14 @@ public class Condition_applicator : MonoBehaviour
                 selected_state_index = 1;
                 if (status.current_validnumber_state[1] < max_number_state)
                 {
-                    StopCoroutine("start_reuse_waiting_time");//기존에 동작하던 현재 버프 사용시간 타이머 중단 
-                    StartCoroutine("start_reuse_waiting_time");//새로운 버프 사용시간 타이머 동작
-                    status.add_offensive_power(input_defensive_power);
+                    status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
+                    StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단 
+                    StartCoroutine(status.enumerators[selected_state_index]);//새로운 버프 사용시간 타이머 동작
+                    status.add_defensive_power(input_defensive_power);
                     status.current_validnumber_state[1]++;
                 }
                 break;
-           
+            
 
 
 
@@ -80,18 +83,18 @@ public class Condition_applicator : MonoBehaviour
         }
 
     }
-    IEnumerator start_reuse_waiting_time()//버프 시간 시작,60초가 되면 버프 해체 
+    IEnumerator start_reuse_waiting_time(int i)//버프 시간 시작,60초가 되면 버프 해체 
     {
-        status.current_valid_statetime[selected_state_index] = 0.0f;
+        status.current_valid_statetime[i] = 0.0f;
         while (true)
         {
-            if (status.current_valid_statetime[selected_state_index] == max_filled_time)
+            if (status.current_valid_statetime[i] == max_filled_time)
             {
-                Init_state(selected_state_index);
+                Init_state(i);
                 yield break;
             }
             yield return new WaitForSeconds(1.0f);//1초마다 유니티에게 통제권 넘기기
-            status.current_valid_statetime[selected_state_index] += 1.0f;
+            status.current_valid_statetime[i] += 1.0f;
         }
 
     }

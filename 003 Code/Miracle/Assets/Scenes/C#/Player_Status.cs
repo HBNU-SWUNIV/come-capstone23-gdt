@@ -11,6 +11,7 @@ public class Player_Status : MonoBehaviour
 
     public float[] current_valid_statetime = new float[12];//각 상태별 시간 
     public int[] current_validnumber_state = new int[12]; //각 상태별 횟수 
+    public IEnumerator[] enumerators = new IEnumerator[12];//코루틴 상태 저장 
 
     private bool Is_protective_film;
     void Start()
