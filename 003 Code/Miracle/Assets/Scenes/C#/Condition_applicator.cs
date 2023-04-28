@@ -15,7 +15,8 @@ public class Condition_applicator : MonoBehaviour
 
     private float max_filled_time = 60.0f;//최대 버프 사용시간
     private int max_number_state = 3;
-    private float input_offensive_power = 5.0f, input_defensive_power = 5.0f;
+    private float input_offensive_power = 5.0f, input_attack_speed = 5.0f, input_defensive_power = 5.0f, input_move_speed = 5.0f, input_critical = 5.0f, input_recovery = 5.0f;
+    private float input_weak = 5.0f, input_deceleration = 5.0f, input_destroy = 5.0f,input_coldair=5.0f;
     private int selected_state_index;
 
     [SerializeField]
@@ -51,16 +52,133 @@ public class Condition_applicator : MonoBehaviour
                     status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
                     StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단 
                     StartCoroutine(status.enumerators[selected_state_index]);//새로운 버프 사용시간 타이머 동작
-                    status.add_defensive_power(input_defensive_power);
+                    status.add_attack_speed(input_attack_speed);
                     status.current_validnumber_state[1]++;
                 }
                 break;
-            
+            case State.solid://2==견고 
+                selected_state_index = 2;
+                if (status.current_validnumber_state[2] < max_number_state)
+                {
+                    status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
+                    StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단 
+                    StartCoroutine(status.enumerators[selected_state_index]);//새로운 버프 사용시간 타이머 동작
+                    status.add_defensive_power(input_defensive_power);
+                    status.current_validnumber_state[2]++;
+                }
+                break;
+            case State.agility://3==민첩
+                selected_state_index = 3;
+                if (status.current_validnumber_state[3] < max_number_state)
+                {
+                    status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
+                    StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단 
+                    StartCoroutine(status.enumerators[selected_state_index]);//새로운 버프 사용시간 타이머 동작
+                    status.add_move_speed(input_move_speed);
+                    status.current_validnumber_state[3]++;
+                }
+                break;
 
+            case State.focus://4==집중
+                selected_state_index = 4;
+                if (status.current_validnumber_state[4] < max_number_state)
+                {
+                    status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
+                    StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단 
+                    StartCoroutine(status.enumerators[selected_state_index]);//새로운 버프 사용시간 타이머 동작
+                    status.add_critical(input_critical);
+                    status.current_validnumber_state[4]++;
+                }
+                break;
+            case State.recovery://5==회복
+                selected_state_index = 5;
+                if (status.current_validnumber_state[5] < max_number_state)
+                {
+                    status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
+                    StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단 
+                    StartCoroutine(status.enumerators[selected_state_index]);//새로운 버프 사용시간 타이머 동작
+                    status.add_recovery(input_recovery);
+                    status.current_validnumber_state[5]++;
+                }
+                break;
+            case State.burn://화상은 스테이터스에서 관리 
 
+                if (status.current_burn < 1)
+                {
+                    status.continuous_decline_hp(1);
+                    status.current_burn++;
+                }
+                break;
+            case State.weak://6== 약화 
+                selected_state_index = 6;
+                if (status.current_validnumber_state[6] < max_number_state)
+                {
+                    status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
+                    StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단 
+                    StartCoroutine(status.enumerators[selected_state_index]);//새로운 버프 사용시간 타이머 동작
+                    status.reduce_offensive_power(input_weak);
+                    status.current_validnumber_state[6]++;
+                }
+                break;
+            case State.deceleration://7==감속
+                selected_state_index = 7;
+                if (status.current_validnumber_state[7] < max_number_state)
+                {
+                    status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
+                    StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단 
+                    StartCoroutine(status.enumerators[selected_state_index]);//새로운 버프 사용시간 타이머 동작
+                    status.reduce_attack_speed(input_deceleration);
+                    status.current_validnumber_state[7]++;
+                }
+                break;
+            case State.destroy://8==파괴 
+                selected_state_index = 8;
+                if (status.current_validnumber_state[8] < max_number_state)
+                {
+                    status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
+                    StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단 
+                    StartCoroutine(status.enumerators[selected_state_index]);//새로운 버프 사용시간 타이머 동작
+                    status.reduce_defensive_power(input_destroy);
+                    status.current_validnumber_state[8]++;
+                }
+                break;
+            case State.toxin://독은 스테이터스에서 관리 
 
+                if (status.current_toxin < 1)
+                {
+                    status.continuous_decline_hp(2);
+                    status.current_toxin++;
+                }
+                break;
+            case State.coldair://9==냉기 
+                selected_state_index = 9;
+                if (status.current_validnumber_state[9]==max_number_state)//냉각 발동
+                {
+                    state = State.cooling;
+                    Apply_state();
+                }
 
-
+                else if(status.current_validnumber_state[9] < max_number_state)
+                {
+                    status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
+                    StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단 
+                    StartCoroutine(status.enumerators[selected_state_index]);//새로운 버프 사용시간 타이머 동작
+                    status.reduece_move_speed(input_coldair);
+                    status.current_validnumber_state[9]++;
+                }
+                break;
+            case State.cooling:
+                selected_state_index = 10;
+                if (status.current_validnumber_state[10] < 1)
+                {
+                    status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
+                    StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단 
+                    StartCoroutine(status.enumerators[selected_state_index]);//새로운 버프 사용시간 타이머 동작
+                    status.movement.jumpforce = 0.0f;
+                    status.move_speed = 0.0f;
+                    status.current_validnumber_state[10]++;
+                }
+                break;
 
         }
     }
@@ -78,8 +196,53 @@ public class Condition_applicator : MonoBehaviour
                 status.current_validnumber_state[i] = 0;
                 status.current_valid_statetime[i] = 0.0f;
                 break;
+            case 2:
+                status.init_defensive_power();//견고 초기화 
+                status.current_validnumber_state[i] = 0;
+                status.current_valid_statetime[i] = 0.0f;
+                break;
+            case 3:
+                status.init_move_speed();//민첩 초기화 
+                status.current_validnumber_state[i] = 0;
+                status.current_valid_statetime[i] = 0.0f;
+                break;
+            case 4:
+                status.init_critical();//집중 초기화 
+                status.current_validnumber_state[i] = 0;
+                status.current_valid_statetime[i] = 0.0f;
+                break;
+            case 5:
+                status.init_recovery();//회복 초기화 
+                status.current_validnumber_state[i] = 0;
+                status.current_valid_statetime[i] = 0.0f;
+                break;
+            case 6:
+                status.init_offensive_power();//약화 초기화 
+                status.current_validnumber_state[i] = 0;
+                status.current_valid_statetime[i] = 0.0f;
+                break;
+            case 7:
+                status.init_attack_speed();//감속 초기화 
+                status.current_validnumber_state[i] = 0;
+                status.current_valid_statetime[i] = 0.0f;
+                break;
+            case 8:
+                status.init_defensive_power();//파괴 초기화 
+                status.current_validnumber_state[i] = 0;
+                status.current_valid_statetime[i] = 0.0f;
+                break;
 
-
+            case 9:
+                status.init_move_speed();//냉기 초기화 
+                status.current_validnumber_state[i] = 0;
+                status.current_valid_statetime[i] = 0.0f;
+                break;
+            case 10://냉각 초기화 
+                status.movement.jumpforce = 8.0f;//점프 초기값
+                status.init_move_speed();//초기 이동속도 값
+                status.current_validnumber_state[i] = 0;
+                status.current_valid_statetime[i] = 0.0f;
+                break;
         }
 
     }

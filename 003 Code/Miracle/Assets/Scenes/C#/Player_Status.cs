@@ -12,8 +12,11 @@ public class Player_Status : MonoBehaviour
     public float[] current_valid_statetime = new float[12];//각 상태별 시간 
     public int[] current_validnumber_state = new int[12]; //각 상태별 횟수 
     public IEnumerator[] enumerators = new IEnumerator[12];//코루틴 상태 저장 
-
+    public int current_burn=0, current_toxin=0;
     private bool Is_protective_film;
+
+    public Movement2D movement;
+
     void Start()
     {
         
@@ -28,6 +31,8 @@ public class Player_Status : MonoBehaviour
     }
     public void Awake()
     {
+        movement = GetComponent<Movement2D>();
+
         for (int i = 0; i < current_valid_statetime.Length; i++)
         {
             current_valid_statetime[i] = 0.0f;
@@ -38,6 +43,8 @@ public class Player_Status : MonoBehaviour
     void Update()
     {
         Is_protective_film = protective_film > 0 ? true : false;
+
+        movement.speed = move_speed;
     }
 
     public void add_offensive_power(float input)//괴력
@@ -102,7 +109,7 @@ public class Player_Status : MonoBehaviour
     }
     public void continuous_decline_hp(int i)//화상,독
     {
-        StartCoroutine("recover_burn",i);
+        StartCoroutine("recover_reduce_hp", i);
     }
     IEnumerator recover_reduce_hp(int i)//화상,독
     {
@@ -111,7 +118,7 @@ public class Player_Status : MonoBehaviour
             reduce_hp_1();
             Invoke("reduce_hp_1", 5f);
             yield return new WaitForSeconds(60.0f);
-
+            current_burn = 0;
             CancelInvoke("reduce_hp_1");
         }
         else if (i == 2)
@@ -120,7 +127,7 @@ public class Player_Status : MonoBehaviour
             Invoke("reduce_hp_2", 5f);
 
             yield return new WaitForSeconds(60.0f);
-
+            current_toxin = 0;
             CancelInvoke("reduce_hp_2");
         }
     }

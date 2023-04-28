@@ -7,11 +7,11 @@ using UnityEngine.UIElements;
 public class Movement2D : MonoBehaviour
 {
 
-    [SerializeField]
-    private float speed=5.0f;
+    
+    public float speed;
 
-    [SerializeField]
-    private float jumpforce = 8.0f;
+    
+    public float jumpforce = 8.0f;
 
     private Rigidbody2D rigid2d;
 
