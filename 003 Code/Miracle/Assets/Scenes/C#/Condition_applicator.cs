@@ -36,147 +36,144 @@ public class Condition_applicator : MonoBehaviour
         {
             case State.strength://0==괴력
                 selected_state_index=0;
-                if (status.current_validnumber_state[0] < max_number_state)
+                if (status.current_validnumber_state[selected_state_index] < max_number_state)
                 {
                     status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
                     StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단 
                     StartCoroutine(status.enumerators[selected_state_index]);//새로운 버프 사용시간 타이머 동작
                     status.add_offensive_power(input_offensive_power);
-                    status.current_validnumber_state[0]++;
+                    status.current_validnumber_state[selected_state_index]++;
                 }
                 break;
             case State.quick://1==신속
                 selected_state_index = 1;
-                if (status.current_validnumber_state[1] < max_number_state)
+                if (status.current_validnumber_state[selected_state_index] < max_number_state)
                 {
                     status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
                     StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단 
                     StartCoroutine(status.enumerators[selected_state_index]);//새로운 버프 사용시간 타이머 동작
                     status.add_attack_speed(input_attack_speed);
-                    status.current_validnumber_state[1]++;
+                    status.current_validnumber_state[selected_state_index]++;
                 }
                 break;
             case State.solid://2==견고 
                 selected_state_index = 2;
-                if (status.current_validnumber_state[2] < max_number_state)
+                if (status.current_validnumber_state[selected_state_index] < max_number_state)
                 {
                     status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
                     StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단 
                     StartCoroutine(status.enumerators[selected_state_index]);//새로운 버프 사용시간 타이머 동작
                     status.add_defensive_power(input_defensive_power);
-                    status.current_validnumber_state[2]++;
+                    status.current_validnumber_state[selected_state_index]++;
                 }
                 break;
             case State.agility://3==민첩
                 selected_state_index = 3;
-                if (status.current_validnumber_state[3] < max_number_state)
+                if (status.current_validnumber_state[selected_state_index] < max_number_state)
                 {
                     status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
                     StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단 
                     StartCoroutine(status.enumerators[selected_state_index]);//새로운 버프 사용시간 타이머 동작
                     status.add_move_speed(input_move_speed);
-                    status.current_validnumber_state[3]++;
+                    status.current_validnumber_state[selected_state_index]++;
                 }
                 break;
 
             case State.focus://4==집중
                 selected_state_index = 4;
-                if (status.current_validnumber_state[4] < max_number_state)
+                if (status.current_validnumber_state[selected_state_index] < max_number_state)
                 {
                     status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
                     StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단 
                     StartCoroutine(status.enumerators[selected_state_index]);//새로운 버프 사용시간 타이머 동작
                     status.add_critical(input_critical);
-                    status.current_validnumber_state[4]++;
+                    status.current_validnumber_state[selected_state_index]++;
                 }
                 break;
             case State.recovery://5==회복
                 selected_state_index = 5;
-                if (status.current_validnumber_state[5] < max_number_state)
+                if (status.current_validnumber_state[selected_state_index] < max_number_state)
                 {
                     status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
                     StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단 
                     StartCoroutine(status.enumerators[selected_state_index]);//새로운 버프 사용시간 타이머 동작
                     status.add_recovery(input_recovery);
-                    status.current_validnumber_state[5]++;
+                    status.current_validnumber_state[selected_state_index]++;
                 }
                 break;
             case State.burn://화상은 스테이터스에서 관리 
-
+                
                 if (status.current_burn < 1)
                 {
                     status.continuous_decline_hp(1);
-                    status.current_burn++;
                 }
                 break;
             case State.weak://6== 약화 
                 selected_state_index = 6;
-                if (status.current_validnumber_state[6] < max_number_state)
+                if (status.current_validnumber_state[selected_state_index] < max_number_state)
                 {
                     status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
                     StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단 
                     StartCoroutine(status.enumerators[selected_state_index]);//새로운 버프 사용시간 타이머 동작
                     status.reduce_offensive_power(input_weak);
-                    status.current_validnumber_state[6]++;
+                    status.current_validnumber_state[selected_state_index]++;
                 }
                 break;
             case State.deceleration://7==감속
                 selected_state_index = 7;
-                if (status.current_validnumber_state[7] < max_number_state)
+                if (status.current_validnumber_state[selected_state_index] < max_number_state)
                 {
                     status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
                     StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단 
                     StartCoroutine(status.enumerators[selected_state_index]);//새로운 버프 사용시간 타이머 동작
                     status.reduce_attack_speed(input_deceleration);
-                    status.current_validnumber_state[7]++;
+                    status.current_validnumber_state[selected_state_index]++;
                 }
                 break;
             case State.destroy://8==파괴 
                 selected_state_index = 8;
-                if (status.current_validnumber_state[8] < max_number_state)
+                if (status.current_validnumber_state[selected_state_index] < max_number_state)
                 {
                     status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
                     StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단 
                     StartCoroutine(status.enumerators[selected_state_index]);//새로운 버프 사용시간 타이머 동작
                     status.reduce_defensive_power(input_destroy);
-                    status.current_validnumber_state[8]++;
+                    status.current_validnumber_state[selected_state_index]++;
                 }
                 break;
             case State.toxin://독은 스테이터스에서 관리 
-
                 if (status.current_toxin < 1)
                 {
                     status.continuous_decline_hp(2);
-                    status.current_toxin++;
                 }
                 break;
             case State.coldair://9==냉기 
                 selected_state_index = 9;
-                if (status.current_validnumber_state[9]==max_number_state)//냉각 발동
+                if (status.current_validnumber_state[selected_state_index] ==max_number_state)//냉각 발동
                 {
                     state = State.cooling;
                     Apply_state();
                 }
 
-                else if(status.current_validnumber_state[9] < max_number_state)
+                else if(status.current_validnumber_state[selected_state_index] < max_number_state)
                 {
                     status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
                     StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단 
                     StartCoroutine(status.enumerators[selected_state_index]);//새로운 버프 사용시간 타이머 동작
                     status.reduece_move_speed(input_coldair);
-                    status.current_validnumber_state[9]++;
+                    status.current_validnumber_state[selected_state_index]++;
                 }
                 break;
-            case State.cooling:
+            case State.cooling://10==냉각 
                 selected_state_index = 10;
-                if (status.current_validnumber_state[10] < 1)
+                if (status.current_validnumber_state[selected_state_index] < 1)
                 {
                     status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
                     StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단 
                     StartCoroutine(status.enumerators[selected_state_index]);//새로운 버프 사용시간 타이머 동작
                     status.movement.jumpforce = 0.0f;
                     status.move_speed = 0.0f;
-                    status.current_validnumber_state[10]++;
+                    status.current_validnumber_state[selected_state_index]++;
                 }
                 break;
 
@@ -249,16 +246,34 @@ public class Condition_applicator : MonoBehaviour
     IEnumerator start_reuse_waiting_time(int i)//버프 시간 시작,60초가 되면 버프 해체 
     {
         status.current_valid_statetime[i] = 0.0f;
-        while (true)
-        {
-            if (status.current_valid_statetime[i] == max_filled_time)
-            {
-                Init_state(i);
-                yield break;
-            }
-            yield return new WaitForSeconds(1.0f);//1초마다 유니티에게 통제권 넘기기
-            status.current_valid_statetime[i] += 1.0f;
-        }
 
+        if (i == 10)//냉각 
+        {
+            while (true)
+            {
+                if (status.current_valid_statetime[i] == 10)
+                {
+                    Init_state(i);
+                    yield break;
+                }
+                yield return new WaitForSeconds(1.0f);//1초마다 유니티에게 통제권 넘기기
+                status.current_valid_statetime[i] += 1.0f;
+            }
+        }
+        if (i != 10)//냉각 이외의 상태 
+        {
+            while (true)
+            {
+                if (status.current_valid_statetime[i] == max_filled_time)
+                {
+                    Init_state(i);
+                    yield break;
+                }
+                yield return new WaitForSeconds(1.0f);//1초마다 유니티에게 통제권 넘기기
+                status.current_valid_statetime[i] += 1.0f;
+            }
+
+
+        }
     }
 }

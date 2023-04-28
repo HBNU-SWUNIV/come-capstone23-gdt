@@ -5,9 +5,11 @@ using UnityEngine;
 public class Player_Status : MonoBehaviour
 {
     [SerializeField]
-    private float hp, offensive_power, defensive_power, move_speed, protective_film, attack_speed, critical, recovery,figure_burn,figure_toxin;//실시간 적용 수치 
+    private float hp, offensive_power, defensive_power, protective_film, attack_speed, critical, recovery,figure_burn,figure_toxin;//실시간 적용 수치 
+    public float move_speed;
 
     private float early_hp, early_offensive_power, early_defensive_power, early_move_speed, early_protective_film, early_attack_speed, early_critical,early_recovery;//입력한 초기값 저장 
+   
 
     public float[] current_valid_statetime = new float[12];//각 상태별 시간 
     public int[] current_validnumber_state = new int[12]; //각 상태별 횟수 
@@ -99,11 +101,11 @@ public class Player_Status : MonoBehaviour
     {
         this.recovery = early_recovery;
     }
-    private void reduce_hp_1()//화상,방어력 비례
+    public void reduce_hp_1()//화상,방어력 비례
     {
         this.hp -= figure_burn-(defensive_power/10);
     }
-    private void reduce_hp_2()//독,순수 체력감소 
+    public void reduce_hp_2()//독,순수 체력감소 
     {
         this.hp -= figure_toxin;
     }
@@ -115,17 +117,18 @@ public class Player_Status : MonoBehaviour
     {
         if (i == 1)
         {
+            current_burn=1;
             reduce_hp_1();
             Invoke("reduce_hp_1", 5f);
             yield return new WaitForSeconds(60.0f);
-            current_burn = 0;
+            current_burn=0;
             CancelInvoke("reduce_hp_1");
         }
         else if (i == 2)
         {
+            current_toxin = 1;
             reduce_hp_2();
             Invoke("reduce_hp_2", 5f);
-
             yield return new WaitForSeconds(60.0f);
             current_toxin = 0;
             CancelInvoke("reduce_hp_2");
