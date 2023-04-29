@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Player_Status : MonoBehaviour
 {
-    [SerializeField]
-    private float hp, offensive_power, defensive_power, protective_film, attack_speed, critical, recovery,figure_burn;//실시간 적용 수치 
+    
+    public float hp, offensive_power, defensive_power, protective_film, attack_speed, critical, recovery,figure_burn;//실시간 적용 수치 
     public float move_speed;
 
     private float early_hp, early_offensive_power, early_defensive_power, early_move_speed, early_protective_film, early_attack_speed, early_critical,early_recovery;//입력한 초기값 저장 
@@ -15,7 +15,7 @@ public class Player_Status : MonoBehaviour
     public int[] current_validnumber_state = new int[12]; //각 상태별 횟수 
     public IEnumerator[] enumerators = new IEnumerator[12];//코루틴 상태 저장 
     public int current_burn=0, current_toxin=0;
-    private bool Is_protective_film;
+    public bool Is_protective_film;
 
     public Movement2D movement;
 
