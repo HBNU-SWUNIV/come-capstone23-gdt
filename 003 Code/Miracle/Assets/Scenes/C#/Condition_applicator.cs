@@ -16,7 +16,7 @@ public class Condition_applicator : MonoBehaviour
     private float max_filled_time = 60.0f;//최대 버프 사용시간
     private int max_number_state = 3;
     private float input_offensive_power = 5.0f, input_attack_speed = 5.0f, input_defensive_power = 5.0f, input_move_speed = 5.0f, input_critical = 5.0f, input_recovery = 5.0f;
-    private float input_weak = 5.0f, input_deceleration = 5.0f, input_destroy = 5.0f,input_coldair=5.0f;
+    private float input_burn=5.0f,input_weak = 5.0f, input_deceleration = 5.0f, input_destroy = 5.0f,input_coldair=5.0f;
     private int selected_state_index;
 
     [SerializeField]
@@ -141,14 +141,20 @@ public class Condition_applicator : MonoBehaviour
                     status.current_validnumber_state[selected_state_index]++;
                 }
                 break;
-            case State.toxin://독은 스테이터스에서 관리 
-                if (status.current_toxin < 1)
+            case State.toxin://9==독
+                selected_state_index = 9;
+                if (status.current_validnumber_state[selected_state_index] < max_number_state)
                 {
-                    status.continuous_decline_hp(2);
+                    status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
+                    status.current_toxin++;
+                    StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단 
+                    StartCoroutine(status.enumerators[selected_state_index]);//새로운 버프 사용시간 타이머 동작
+                    status.InVoke_fuction();
+                    status.current_validnumber_state[selected_state_index]++;
                 }
                 break;
-            case State.coldair://9==냉기 
-                selected_state_index = 9;
+            case State.coldair://10==냉기 
+                selected_state_index = 10;
                 if (status.current_validnumber_state[selected_state_index] ==max_number_state)//냉각 발동
                 {
                     state = State.cooling;
@@ -164,8 +170,8 @@ public class Condition_applicator : MonoBehaviour
                     status.current_validnumber_state[selected_state_index]++;
                 }
                 break;
-            case State.cooling://10==냉각 
-                selected_state_index = 10;
+            case State.cooling://11==냉각 
+                selected_state_index = 11;
                 if (status.current_validnumber_state[selected_state_index] < 1)
                 {
                     status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
@@ -228,13 +234,18 @@ public class Condition_applicator : MonoBehaviour
                 status.current_validnumber_state[i] = 0;
                 status.current_valid_statetime[i] = 0.0f;
                 break;
-
             case 9:
+                status.InVoke_Cancel_fuction();//독 초기화 
+                status.current_toxin = 0;
+                status.current_validnumber_state[i] = 0;
+                status.current_valid_statetime[i] = 0.0f;
+                break;
+            case 10:
                 status.init_move_speed();//냉기 초기화 
                 status.current_validnumber_state[i] = 0;
                 status.current_valid_statetime[i] = 0.0f;
                 break;
-            case 10://냉각 초기화 
+            case 11://냉각 초기화 
                 status.movement.jumpforce = 8.0f;//점프 초기값
                 status.init_move_speed();//초기 이동속도 값
                 status.current_validnumber_state[i] = 0;
@@ -247,7 +258,7 @@ public class Condition_applicator : MonoBehaviour
     {
         status.current_valid_statetime[i] = 0.0f;
 
-        if (i == 10)//냉각 
+        if (i == 11)//냉각 
         {
             while (true)
             {
@@ -260,7 +271,7 @@ public class Condition_applicator : MonoBehaviour
                 status.current_valid_statetime[i] += 1.0f;
             }
         }
-        if (i != 10)//냉각 이외의 상태 
+        else if (i != 11)//냉각 이외의 상태 
         {
             while (true)
             {
