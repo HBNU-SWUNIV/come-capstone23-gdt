@@ -7,7 +7,7 @@ public class EnemyMove : MonoBehaviour
     Rigidbody2D rigid;
     SpriteRenderer sprite;
 
-    [SerializeField]
+    
     public int movespeed;
 
     public int nextMove;
