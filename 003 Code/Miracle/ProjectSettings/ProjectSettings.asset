@@ -763,11 +763,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: 
+  cloudProjectId: b21c120f-31ce-4c66-bf81-0231b4ba64a0
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: 
-  organizationId: 
+  projectName: Miracle
+  organizationId: gdt_repository
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 1
   playerDataPath: 
