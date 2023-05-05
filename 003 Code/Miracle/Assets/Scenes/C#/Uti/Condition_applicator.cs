@@ -190,47 +190,47 @@ public class Condition_applicator : MonoBehaviour
         switch (i)
         {
             case 0:
-                status.init_offensive_power();//괴력 초기화 
+                status.init_state(1);//괴력 초기화 
                 status.current_validnumber_state[i]=0;
                 status.current_valid_statetime[i] = 0.0f;
                 break;
             case 1:
-                status.init_attack_speed();//신속 초기화 
+                status.init_state(2);//신속 초기화 
                 status.current_validnumber_state[i] = 0;
                 status.current_valid_statetime[i] = 0.0f;
                 break;
             case 2:
-                status.init_defensive_power();//견고 초기화 
+                status.init_state(3);//견고 초기화 
                 status.current_validnumber_state[i] = 0;
                 status.current_valid_statetime[i] = 0.0f;
                 break;
             case 3:
-                status.init_move_speed();//민첩 초기화 
+                status.init_state(4);//민첩 초기화 
                 status.current_validnumber_state[i] = 0;
                 status.current_valid_statetime[i] = 0.0f;
                 break;
             case 4:
-                status.init_critical();//집중 초기화 
+                status.init_state(5);//집중 초기화 
                 status.current_validnumber_state[i] = 0;
                 status.current_valid_statetime[i] = 0.0f;
                 break;
             case 5:
-                status.init_recovery();//회복 초기화 
+                status.init_state(6);//회복 초기화 
                 status.current_validnumber_state[i] = 0;
                 status.current_valid_statetime[i] = 0.0f;
                 break;
             case 6:
-                status.init_offensive_power();//약화 초기화 
+                status.init_state(1);//약화 초기화 
                 status.current_validnumber_state[i] = 0;
                 status.current_valid_statetime[i] = 0.0f;
                 break;
             case 7:
-                status.init_attack_speed();//감속 초기화 
+                status.init_state(2);//감속 초기화 
                 status.current_validnumber_state[i] = 0;
                 status.current_valid_statetime[i] = 0.0f;
                 break;
             case 8:
-                status.init_defensive_power();//파괴 초기화 
+                status.init_state(3);//파괴 초기화 
                 status.current_validnumber_state[i] = 0;
                 status.current_valid_statetime[i] = 0.0f;
                 break;
@@ -241,13 +241,13 @@ public class Condition_applicator : MonoBehaviour
                 status.current_valid_statetime[i] = 0.0f;
                 break;
             case 10:
-                status.init_move_speed();//냉기 초기화 
+                status.init_state(4);//냉기 초기화 
                 status.current_validnumber_state[i] = 0;
                 status.current_valid_statetime[i] = 0.0f;
                 break;
             case 11://냉각 초기화 
                 status.movement.jumpforce = 8.0f;//점프 초기값
-                status.init_move_speed();//초기 이동속도 값
+                status.init_state(4);//초기 이동속도 값
                 status.current_validnumber_state[i] = 0;
                 status.current_valid_statetime[i] = 0.0f;
                 break;

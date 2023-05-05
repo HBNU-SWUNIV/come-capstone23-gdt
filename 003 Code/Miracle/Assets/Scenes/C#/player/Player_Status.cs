@@ -8,7 +8,7 @@ public class Player_Status : MonoBehaviour
     public float hp, offensive_power, defensive_power, protective_film, attack_speed, critical, recovery,figure_burn;//실시간 적용 수치 
     public float move_speed;
 
-    private float early_hp, early_offensive_power, early_defensive_power, early_move_speed, early_protective_film, early_attack_speed, early_critical,early_recovery;//입력한 초기값 저장 
+    private float early_hp, early_offensive_power, early_defensive_power, early_move_speed,  early_attack_speed, early_critical,early_recovery;//입력한 초기값 저장 
    
 
     public float[] current_valid_statetime = new float[12];//각 상태별 시간 
@@ -21,15 +21,19 @@ public class Player_Status : MonoBehaviour
 
     void Start()
     {
-        
+        core_init();
+   
+       
+    }
+    public void core_init() {//일시적인 스테이터스 상승이 아닌 영구적인 스테이터스 상승시 초기화 
+
         early_offensive_power = offensive_power;
         early_defensive_power = defensive_power;
         early_move_speed = move_speed;
-        early_protective_film = protective_film;
+        early_recovery = recovery;
         early_attack_speed = attack_speed;
         early_critical = critical;
 
-       
     }
     public void Awake()
     {
@@ -150,5 +154,30 @@ public class Player_Status : MonoBehaviour
     public void InVoke_Cancel_fuction()
     {
         CancelInvoke("Start_toxin");
+    }
+
+    public void init_state(int i) {//1=공격력 초기화.2=공격속도 초기화 3=방어력 초기화 4=이동속도 초기화 5=크리티컬 확률 초기화  6=회복 초기화
+
+        switch (i)
+        {
+            case 1:
+                this.offensive_power = early_offensive_power;
+                break;
+            case 2:
+                this.attack_speed = early_attack_speed;
+                break;
+            case 3:
+                this.defensive_power = early_defensive_power;
+                break;
+            case 4:
+                this.move_speed = early_move_speed;
+                break;
+            case 5:
+                this.critical = early_critical;
+                break;
+            case 6:
+                this.recovery = early_recovery;
+                break;
+        }
     }
 }
