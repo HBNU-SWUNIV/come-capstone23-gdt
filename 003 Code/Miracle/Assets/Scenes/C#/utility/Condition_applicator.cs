@@ -4,7 +4,7 @@ using UnityEditor.PackageManager;
 using UnityEngine;
 
 
-public enum State {  strength, quick, solid, agility, focus, recovery,  burn, weak, deceleration, destroy, toxin, coldair, cooling }
+public enum State {  non,strength, quick, solid, agility, focus, recovery,  burn, weak, deceleration, destroy, toxin, coldair, cooling }
 
 
 
@@ -19,8 +19,8 @@ public class Condition_applicator : MonoBehaviour
     private float input_burn=5.0f,input_weak = 5.0f, input_deceleration = 5.0f, input_destroy = 5.0f,input_coldair=5.0f;
     private int selected_state_index;
 
-    [SerializeField]
-    private GameObject player;
+    
+    public GameObject player;
 
 
     private Player_Status status;
@@ -29,7 +29,10 @@ public class Condition_applicator : MonoBehaviour
     {
         status = player.GetComponent<Player_Status>();//플레이어 오브젝트의 status 컴포넌트 접근 
     }
+    public void Set_state(State state) {
 
+        this.state = state;
+    }
     public void Apply_state()//상태 적용 
     {
         switch (state)

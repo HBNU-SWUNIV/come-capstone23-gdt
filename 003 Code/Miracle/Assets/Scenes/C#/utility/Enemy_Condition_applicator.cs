@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public enum Enemy_State { burn, deceleration, coldair, cooling }
+public enum Enemy_State { non,burn, deceleration, coldair, cooling }
 
 
 public class Enemy_Condition_applicator : MonoBehaviour
@@ -14,9 +14,13 @@ public class Enemy_Condition_applicator : MonoBehaviour
     private int  input_deceleration = 5,input_coldair = 5;
     private int selected_state_index;
 
+    public void Set_Enemy_State(Enemy_State state) {
 
-    [SerializeField]
-    private GameObject enemy;
+        this.state = state;
+    
+    }
+    
+    public GameObject enemy;
 
     private EnemyStatus status;
 

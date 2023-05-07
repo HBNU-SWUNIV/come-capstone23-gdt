@@ -10,16 +10,19 @@ public class playercontroller : MonoBehaviour
     
     private Movement2D movement2d;
     private Player_Status status;
- 
- 
 
-   
-    
+
+    GameObject condition_applicator;
+
+
+
     // Start is called before the first frame update
     private void Awake()
     {
         movement2d = GetComponent<Movement2D>();
         status= GetComponent<Player_Status>();
+        condition_applicator = GameObject.FindWithTag("Condition_applicator");
+        
     }
    
    
