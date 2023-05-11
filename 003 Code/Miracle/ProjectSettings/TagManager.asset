@@ -4,31 +4,28 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Grass
-  - Horse
-  - Item
-  - Rapira
-  - Chest
-  - Inventory
-  - Furnace
-  - Fuel
   - Enemy
+  - Weapon
+  - Enemy_weapon
   - Weapon
   - Enemy_weapon
   - Condition_applicator
   - Enemy_Condition_applicator
+  - Red_attack
+  - Blue_attack
+  - Purple_attack
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Ground
+  - 
   - Water
   - UI
-  - Enemy
-  - Weapon
-  - Player
-  - PlayerDamaged
-  - Enemy_weapon
+  - Ground
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 

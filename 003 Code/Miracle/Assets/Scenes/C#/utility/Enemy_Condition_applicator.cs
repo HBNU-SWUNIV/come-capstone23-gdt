@@ -13,22 +13,23 @@ public class Enemy_Condition_applicator : MonoBehaviour
     private int max_number_state = 3;
     private int  input_deceleration = 5,input_coldair = 5;
     private int selected_state_index;
+    
 
-    public void Set_Enemy_State(Enemy_State state) {
+    public void Set_Enemy_State(Enemy_State state) {//상태 설정
 
         this.state = state;
     
     }
     
-    public GameObject enemy;
+    public EnemyStatus status;
 
-    private EnemyStatus status;
-
-
-    private void Awake()
+    public void Set_status(EnemyStatus status)//적 스테이터스 받기 
     {
-        status = enemy.GetComponent<EnemyStatus>();
+
+        this.status = status;
     }
+
+   
 
     public void Apply_state() 
     {

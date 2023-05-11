@@ -15,7 +15,8 @@ public class B_Player : MonoBehaviour
     public GameObject Shadow1;
     List<GameObject> Sh = new List<GameObject>();
 
-    
+    //히트 이펙트
+    public GameObject hit_lazer;
     Animator BpAnimator;
     Rigidbody2D BpRig2D;
     SpriteRenderer sBp;
@@ -73,6 +74,7 @@ public class B_Player : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             BpAnimator.SetTrigger("Attack");
+            Instantiate(hit_lazer, transform.position, Quaternion.identity); 
         }
 
     }
@@ -136,13 +138,14 @@ public class B_Player : MonoBehaviour
         {
             BpRig2D.AddForce(Vector2.right * power, ForceMode2D.Impulse);
            GameObject go = Instantiate(B_Slash, transform.position, Quaternion.identity);
-            go.GetComponent<SpriteRenderer>().flipX = sBp.flipX;
+            //go.GetComponent<SpriteRenderer>().flipX = sBp.flipX;
+            //마우스 방향으로 이미지가 회전하기에 플립이 필요없음
         }
         else
         {
             BpRig2D.AddForce(Vector2.left * power, ForceMode2D.Impulse);
             GameObject go = Instantiate(B_Slash, transform.position, Quaternion.identity);
-            go.GetComponent<SpriteRenderer>().flipX = sBp.flipX;
+            //go.GetComponent<SpriteRenderer>().flipX = sBp.flipX;
         }
 
        

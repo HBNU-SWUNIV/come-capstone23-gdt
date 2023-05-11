@@ -11,7 +11,7 @@ public class Color_Attack : MonoBehaviour
     public Color_mode selected_color;
 
     public GameObject Object_applicator;
-    public GameObject Object_enemy_applicator;
+    //public GameObject Object_enemy_applicator;
 
     private Condition_applicator applicator;
    
@@ -26,8 +26,6 @@ public class Color_Attack : MonoBehaviour
         switch (selected_color) 
         {
             case Color_mode.white:
-
-
 
                 break;
             case Color_mode.red://»¡°­
@@ -47,19 +45,20 @@ public class Color_Attack : MonoBehaviour
                 applicator.Apply_state();
                 break;
             case Color_mode.green://ÃÊ·Ï
-
-
-
+                applicator.Set_state(State.weak);
+                applicator.Apply_state();
+                applicator.Set_state(State.deceleration);
+                applicator.Apply_state();
+                applicator.Set_state(State.recovery);
+                applicator.Apply_state();
                 break;
             case Color_mode.blue://ÆÄ¶û
-
-
-
+                applicator.Set_state(State.destroy);
+                applicator.Apply_state();
                 break;
             case Color_mode.purple://º¸¶ó 
-
-
-
+                applicator.Set_state(State.weak);
+                applicator.Apply_state();
                 break;
         }
     }
@@ -70,7 +69,7 @@ public class Color_Attack : MonoBehaviour
     void Awake()
     {
         Object_applicator = GameObject.FindWithTag("Condition_applicator");
-        Object_enemy_applicator = GameObject.FindWithTag("Enemy_Condition_applicator");
+        //Object_enemy_applicator = GameObject.FindWithTag("Enemy_Condition_applicator");
         applicator = Object_applicator.GetComponent<Condition_applicator>();
     }
 

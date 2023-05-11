@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyStatus : MonoBehaviour
@@ -18,6 +19,8 @@ public class EnemyStatus : MonoBehaviour
     private Material Enemy_material;
     private SpriteRenderer render;
     private EnemyMove enemy_move;
+    private GameObject Object_enemy_applicator;
+    private Enemy_Condition_applicator enemy_applicator;
     // Start is called before the first frame update
 
     private void Awake()
@@ -25,6 +28,8 @@ public class EnemyStatus : MonoBehaviour
         render = GetComponent<SpriteRenderer>();
         Enemy_material = render.material;
         enemy_move = GetComponent<EnemyMove>();
+        Object_enemy_applicator = GameObject.FindWithTag("Enemy_Condition_applicator");
+        enemy_applicator = Object_enemy_applicator.GetComponent<Enemy_Condition_applicator>();
     }
     void Start()
     {
@@ -81,5 +86,27 @@ public class EnemyStatus : MonoBehaviour
     public void init_move_speed()//민첩 초기화 
     {
         this.move_speed = early_move_speed;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)//플레이어의 공격에 당할경우 
+    {
+        if(collision.collider.name == "Red_attack")
+        {
+            enemy_applicator.Set_status(this);
+            enemy_applicator.Set_Enemy_State(Enemy_State.burn);
+            enemy_applicator.Apply_state();
+        }
+        else if(collision.collider.name == "Blue_attack") 
+        {
+            enemy_applicator.Set_status(this);
+            enemy_applicator.Set_Enemy_State(Enemy_State.cooling);
+            enemy_applicator.Apply_state();
+        }
+        else if(collision.collider.name == "Purple_attack")
+        {
+            enemy_applicator.Set_status(this);
+            enemy_applicator.Set_Enemy_State(Enemy_State.deceleration);
+            enemy_applicator.Apply_state();
+        }
     }
 }
