@@ -7,7 +7,7 @@
 
 ## <u>Teamate</u> Project Background
 - ### 필요성
-  - OOO
+  - 로그라이크 게임의 새로운 형식 제안
   - OOO
 - ### 기존 해결책의 문제점
   - OOO
@@ -23,7 +23,7 @@
   
   
 ## Conclusion
-  - ### OOO
+  - ### 스크립트를 통한 프로젝트의 뼈대를 세운후 에셋을 설정하여 디자인 마무리 
   - ### OOO
   
 ## Project Outcome
