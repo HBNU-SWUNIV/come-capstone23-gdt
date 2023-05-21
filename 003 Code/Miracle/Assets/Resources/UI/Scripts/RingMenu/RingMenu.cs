@@ -29,7 +29,7 @@ public class RingMenu : MonoBehaviour
             Pieces[i].CakePiece.transform.localPosition = Vector3.zero;
             Pieces[i].CakePiece.transform.localRotation = Quaternion.Euler(0, 0, -stepLength / 2f + GapWidthDegree / 2f + i * stepLength);
 
-            //Pieces[i].CakePiece.material = Data.Elements[i].RingMaterial;
+            Pieces[i].CakePiece.material = Data.Elements[i].RingMaterial;
         }
     }
 

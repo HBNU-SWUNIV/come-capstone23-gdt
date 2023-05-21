@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 6242087106736935393}
   - component: {fileID: 6242087106736935403}
   - component: {fileID: 3838519155081353492}
+  - component: {fileID: 449261271046402557}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -80,8 +81,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -6447722072507503168, guid: 10f3cacccb0c4c547be76836eba20664,
-    type: 3}
+  m_Sprite: {fileID: -6447722072507503168, guid: 10f3cacccb0c4c547be76836eba20664, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -158,6 +158,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70c4f7ec9d3ec004d9b6196aa0a1d87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  condition_applicator: {fileID: 0}
+  applicator: {fileID: 0}
 --- !u!95 &6242087106736935403
 Animator:
   serializedVersion: 5
@@ -217,6 +219,18 @@ MonoBehaviour:
   current_toxin: 0
   Is_protective_film: 0
   movement: {fileID: 0}
+--- !u!114 &449261271046402557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6242087106736935394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa0e522cca8b3f345ab1258ae301dadc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6242087106908805567
 GameObject:
   m_ObjectHideFlags: 0

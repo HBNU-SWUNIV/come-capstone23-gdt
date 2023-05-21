@@ -14,6 +14,7 @@ TagManager:
   - Red_attack
   - Blue_attack
   - Purple_attack
+  - Fade
   layers:
   - Default
   - TransparentFX
