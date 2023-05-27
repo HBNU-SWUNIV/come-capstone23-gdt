@@ -9,19 +9,18 @@ public class RingMenu : MonoBehaviour
     public RingCakePiece RingCakePiecePrefab;
     public float GapWidthDegree = 1f;               //RingElements 사이의 거리
     protected RingCakePiece[] Pieces;
+    protected Vector3 RingPosition;
 
     void Start()
     {
         var stepLength = 360f / Data.Elements.Length;               //RIngElement 하나의 길이    
-
-        //
         Pieces = new RingCakePiece[Data.Elements.Length];
+        RingPosition = Input.mousePosition;
 
         for (int i = 0; i < Data.Elements.Length; i++)
         {
             Pieces[i] = Instantiate(RingCakePiecePrefab, transform);
-            //
-            Pieces[i].transform.localPosition = Vector3.zero;
+            Pieces[i].transform.localPosition = Input.mousePosition;
             Pieces[i].transform.localRotation = Quaternion.identity;
 
             //RingCakePiece 생성
@@ -36,7 +35,7 @@ public class RingMenu : MonoBehaviour
     private void Update()
     {
         var stepLength = 360f / Data.Elements.Length;
-        var mouseAngle = NormalizeAngle(Vector3.SignedAngle(Vector3.up, Input.mousePosition - transform.position, Vector3.forward) + stepLength);          //Vector3.up을 기준으로 마우스 위치의 각도
+        var mouseAngle = NormalizeAngle(Vector3.SignedAngle(transform.up, Input.mousePosition - RingPosition, transform.forward) + stepLength);             //RingMenu를 기준으로 마우스 위치의 각도
         var activeElement = (int)(mouseAngle / stepLength);             //마우스가 위치한 RingElement
 
         //

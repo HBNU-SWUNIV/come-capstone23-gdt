@@ -192,7 +192,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89ae38987523e1042b8dbe5551df7a9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 0
+  max_hp: 0
+  current_hp: 0
   offensive_power: 0
   defensive_power: 0
   protective_film: 0
@@ -200,7 +201,7 @@ MonoBehaviour:
   critical: 0
   recovery: 0
   figure_burn: 0
-  move_speed: 0
+  move_speed: 5
   current_valid_statetime:
   - 0
   - 0

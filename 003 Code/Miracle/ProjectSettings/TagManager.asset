@@ -25,9 +25,9 @@ TagManager:
   - Ground
   - 
   - 
-  - 
-  - 
-  - 
+  - Enemy
+  - Player
+  - Player_Damaged
   - 
   - 
   - 

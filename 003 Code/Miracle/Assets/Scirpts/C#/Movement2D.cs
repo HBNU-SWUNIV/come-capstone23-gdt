@@ -10,9 +10,10 @@ public class Movement2D : MonoBehaviour
     
     public float speed;
 
-    
+    public float Invincible_time;//피격시 무적시간
     public float jumpforce = 8.0f;
 
+    public bool is_attacked;
     private Rigidbody2D rigid2d;
 
     [SerializeField]
@@ -21,7 +22,7 @@ public class Movement2D : MonoBehaviour
     private bool isGround;
     private Vector3 footposition;
     private SpriteRenderer sprite;
-
+   
 
 
 
@@ -49,12 +50,7 @@ public class Movement2D : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.collider.name == "Enemy") {
-            OnDamaged(collision.transform.position);
-        }
-    }
+   
 
     public void Move(float x)
     {
@@ -68,21 +64,23 @@ public class Movement2D : MonoBehaviour
         }
         
     }
-    void OnDamaged(Vector2 damagecposition) {
-        gameObject.layer = 9;
+    public void OnDamaged(Vector2 damagecposition) {
+        gameObject.layer = 11;
 
         sprite.color = new Color(1, 1, 1, 0.4f);
 
         int dirc = transform.position.x - damagecposition.x > 0 ?  1 : -1;
         rigid2d.AddForce(new Vector2(dirc, 1)*3, ForceMode2D.Impulse);//피격시 튕김
+        is_attacked = true;
 
-        Invoke("OffDamaged", 3);
+        Invoke("OffDamaged", Invincible_time);
 
     }
 
-    void OffDamaged()
+    public void OffDamaged()
     {
-        gameObject.layer = 8;
+        is_attacked = false;
+        gameObject.layer = 10;
         sprite.color = new Color(1, 1, 1, 1);
 
 

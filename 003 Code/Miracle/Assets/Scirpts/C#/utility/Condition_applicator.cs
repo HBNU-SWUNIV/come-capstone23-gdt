@@ -27,6 +27,7 @@ public class Condition_applicator : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        player= GameObject.FindWithTag("Player");
         status = player.GetComponent<Player_Status>();//플레이어 오브젝트의 status 컴포넌트 접근 
        
     }
@@ -255,6 +256,7 @@ public class Condition_applicator : MonoBehaviour
                 status.current_validnumber_state[i] = 0;
                 status.current_valid_statetime[i] = 0.0f;
                 break;
+           
         }
 
     }
