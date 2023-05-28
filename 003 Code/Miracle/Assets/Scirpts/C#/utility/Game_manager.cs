@@ -15,6 +15,8 @@ public class PlayerData //플레이어 이름,플레이어스테이터스,도감상황,무기
 
 public class Game_manager : MonoBehaviour
 {
+    public RingMenu ColorSelectPrefab;
+    protected RingMenu ColorSelectInstance;
     public int Fade_time;
     public GameObject Fade_image;
     SpriteRenderer render;
@@ -61,6 +63,11 @@ public class Game_manager : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.O)) {
             StartCoroutine(Fadeout());
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            ColorSelectInstance = Instantiate(ColorSelectPrefab, FindAnyObjectByType<Canvas>().transform);
         }
 
     }

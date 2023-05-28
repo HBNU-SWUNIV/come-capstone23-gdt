@@ -73,7 +73,7 @@ public class Movement2D : MonoBehaviour
         rigid2d.AddForce(new Vector2(dirc, 1)*3, ForceMode2D.Impulse);//피격시 튕김
         is_attacked = true;
 
-        Invoke("OffDamaged", Invincible_time);
+        Invoke("OffDamaged", Invincible_time);//무적시간 설정
 
     }
 

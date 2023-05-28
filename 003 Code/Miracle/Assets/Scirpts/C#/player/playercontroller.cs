@@ -4,6 +4,7 @@ using System.Diagnostics.Tracing;
 using System.Xml.Serialization;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class playercontroller : MonoBehaviour//피격 상태정의 
 {
@@ -28,10 +29,10 @@ public class playercontroller : MonoBehaviour//피격 상태정의
    
    
     
-    private void OnCollisionEnter2D(Collision2D collision)//적의 공격에 피격 당할경우 
+    private void OnCollisionEnter2D(Collision2D collision) 
     {
         
-        if (collision.gameObject.tag.Equals("Enemy_weapon"))
+        if (collision.gameObject.tag.Equals("Enemy_weapon"))//적의 공격에 당할경우 
         {
             float enemy_offensive = collision.gameObject.GetComponent<EnemyStatus>().offensive_power;
             movement2d.OnDamaged(collision.transform.position);
@@ -56,7 +57,7 @@ public class playercontroller : MonoBehaviour//피격 상태정의
                 status.current_hp -= enemy_offensive - (status.defensive_power / 10);
             }
         }
-        else if (collision.gameObject.tag.Equals("Enemy"))
+        else if (collision.gameObject.tag.Equals("Enemy"))//적에게 접촉할경우 
         {
             float enemy_offensive = collision.gameObject.GetComponent<EnemyStatus>().offensive_power;
 
@@ -85,7 +86,28 @@ public class playercontroller : MonoBehaviour//피격 상태정의
 
 
         }
+       
     }
+    private void OnTriggerStay2D(Collider2D collision) 
+    {
+        if (Input.GetKeyDown(KeyCode.F))//포탈 이용시 f키 사용
+        {
+            if (collision.gameObject.tag.Equals("Teleport_Village"))
+            {
+                SceneManager.LoadScene("Village");
+            }
+
+
+
+
+        }
+
+       
+
+
+    }
+
+
 
     public void end_game() { //게임 종료시 모든 버프 및 디버프 삭제 
 
