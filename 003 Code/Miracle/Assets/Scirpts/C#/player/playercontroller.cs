@@ -11,6 +11,8 @@ public class playercontroller : MonoBehaviour//피격 상태정의
     
     private Movement2D movement2d;
     private Player_Status status;
+    AudioSource audiosrc;
+    bool isMoving = false;
 
 
     [SerializeField]GameObject condition_applicator;
@@ -25,6 +27,7 @@ public class playercontroller : MonoBehaviour//피격 상태정의
         status= GetComponent<Player_Status>();
         condition_applicator = GameObject.FindWithTag("Condition_applicator");
         applicator = condition_applicator.GetComponent<Condition_applicator>();
+        audiosrc = GetComponent<AudioSource>();
     }
    
    
@@ -124,7 +127,29 @@ public class playercontroller : MonoBehaviour//피격 상태정의
         
        
         float x = Input.GetAxisRaw("Horizontal");
-        movement2d.Move(x);
+
+        if (x != 0)
+        {
+            movement2d.Move(x);
+            isMoving = true;
+        }
+        else if (x == 0) {
+            movement2d.Move(0);
+            isMoving = false;
+        }
+
+        if (isMoving && movement2d.isGround)//땅위에 있고 움직인다는 가정
+        {
+
+            if (!audiosrc.isPlaying)
+            {
+                audiosrc.Play();
+            }
+        }
+        else {
+            audiosrc.Stop();
+        }
+
 
         if (Input.GetKeyDown(KeyCode.Space)) {
 

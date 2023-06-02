@@ -6,7 +6,7 @@ using UnityEngine.Windows;
 public class Player_Status : MonoBehaviour//초기 스테이터스 설정
 {
     //[Header("")]
-    public float max_hp,current_hp, offensive_power, defensive_power, protective_film, attack_speed, critical, recovery;//실시간 적용 수치 
+    public float max_hp,current_hp, offensive_power, defensive_power, protective_film, attack_speed, critical, recovery;//실시간 적용 수치-최초 
     public float move_speed;
 
     private float early_max_hp, early_offensive_power, early_defensive_power, early_move_speed,  early_attack_speed, early_critical,early_recovery;//입력한 초기값 저장 또는 영구적인 값 저장
@@ -37,12 +37,13 @@ public class Player_Status : MonoBehaviour//초기 스테이터스 설정
         switch (i) {
 
             case 0://0은 체력
+
                 early_max_hp = max_hp;
                 
                 break;
             case 1://1은 공격력
                 early_offensive_power = offensive_power;
-               
+
                 break;
             case 2://2는 방어력
                 early_defensive_power = defensive_power;
@@ -89,36 +90,36 @@ public class Player_Status : MonoBehaviour//초기 스테이터스 설정
         movement.speed = move_speed;
     }
 
-    public void permanent_add(int i,float input)//영구적인 스테이터스 상승시 저장,도감 시스템
+    public void permanent_status_add(int i)//영구적인 스테이터스 상승시 저장,도감 시스템
     {
         switch (i) 
         {
             case 0://0은 체력
-                this.max_hp += input;
+                this.max_hp+=100;
                 core_init(0);
                 break;
             case 1://1은 공격력
-                this.offensive_power += input;
+                this.offensive_power += 10;
                 core_init(1);
                 break;
             case 2://2는 방어력
-                this.defensive_power += input;
+                this.defensive_power += 10;
                 core_init(2);
                 break;
             case 3://3은 이동속도
-                this.move_speed += input;
+                this.move_speed += 5;
                 core_init(3);
                 break;
             case 4://4는 공격속도 
-                this.attack_speed += input;
+                this.attack_speed += 5;
                 core_init(4);
                 break;
             case 5://5는 회복
-                this.recovery += input;
+                this.recovery += 10;
                 core_init(5);
                 break;
             case 6://크리티컬
-                this.critical += input;
+                this.critical +=10;
                 core_init(6);
                 break;
         }

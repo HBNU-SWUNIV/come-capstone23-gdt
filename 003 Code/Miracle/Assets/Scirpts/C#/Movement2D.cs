@@ -19,7 +19,7 @@ public class Movement2D : MonoBehaviour
     [SerializeField]
     private LayerMask groundLayer;
     private CapsuleCollider2D capsulecollider2d;
-    private bool isGround;
+    public  bool isGround;
     private Vector3 footposition;
     private SpriteRenderer sprite;
    
