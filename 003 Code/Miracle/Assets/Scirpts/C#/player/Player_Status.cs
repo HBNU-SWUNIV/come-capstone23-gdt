@@ -5,22 +5,23 @@ using UnityEngine.Windows;
 
 public class Player_Status : MonoBehaviour//초기 스테이터스 설정
 {
-    //[Header("")]
-    public float max_hp,current_hp, offensive_power, defensive_power, protective_film, attack_speed, critical, recovery;//실시간 적용 수치-최초 
-    public float move_speed;
+    [Header("실시간 적용")]
+    public float max_hp,current_hp, offensive_power, defensive_power, move_speed, protective_film, attack_speed, critical, recovery;//실시간 적용 수치-최초 
 
-    private float early_max_hp, early_offensive_power, early_defensive_power, early_move_speed,  early_attack_speed, early_critical,early_recovery;//입력한 초기값 저장 또는 영구적인 값 저장
+    [Header("플레이어 극 초기값")]
+    public  float early_max_hp, early_offensive_power, early_defensive_power, early_move_speed,  early_attack_speed, early_critical,early_recovery;//입력한 초기값 저장 또는 영구적인 값 저장
    
 
     public float[] current_valid_statetime = new float[12];//각 상태별 시간 
     public int[] current_validnumber_state = new int[12]; //각 상태별 횟수 
-    public IEnumerator[] enumerators = new IEnumerator[12];//코루틴 상태 저장 
+    public IEnumerator[] enumerators = new IEnumerator[12];//코루틴 상태 저장
+    public int[] permanent_index = new int[7];//영구 수치 증가 인덱스 저장
     public int current_burn=0, current_toxin=0;
     public bool Is_protective_film;
 
     public Movement2D movement;
 
-
+    private float permanent_hp=100f, permanent_offensive_power=5f, permanent_defensive_power=5f, permanent_move_speed=2f, permanent_attack_speed=0.1f, permanent_recovery=10f, permanent_critical=5f;
 
 
     void Start()
@@ -32,36 +33,37 @@ public class Player_Status : MonoBehaviour//초기 스테이터스 설정
         current_hp = max_hp;
        
     }
-    public void core_init(int i) {//일시적인 스테이터스 상승후 시간 종료후 초기화하기 위한 값저장 또는 영구 스테이터스 상승후 저장기능
+    public void core_init(int i) {// 영구 스테이터스 상승후 저장기능
 
         switch (i) {
 
             case 0://0은 체력
 
-                early_max_hp = max_hp;
-                
+                max_hp = early_max_hp + (permanent_index[i]*permanent_hp);
+
+
                 break;
             case 1://1은 공격력
-                early_offensive_power = offensive_power;
+                offensive_power = early_offensive_power+ (permanent_index[i]*permanent_offensive_power);
 
                 break;
             case 2://2는 방어력
-                early_defensive_power = defensive_power;
+                defensive_power = early_defensive_power + (permanent_index[i]*permanent_defensive_power); 
                 
                 break;
             case 3://3은 이동속도
-                early_move_speed = move_speed;
+                move_speed = early_move_speed + (permanent_index[i]*permanent_move_speed);
                
                 break;
             case 4://4는 공격속도 
-                early_attack_speed = attack_speed;
+                attack_speed = early_attack_speed + (permanent_index[i]*permanent_attack_speed);
                 break;
             case 5://5는 회복
-                early_recovery = recovery;
+                recovery = early_recovery + (permanent_index[i]*permanent_recovery);
                 
                 break;
             case 6://크리티컬
-                early_critical = critical;
+                critical = early_critical + (permanent_index[i]*permanent_critical);
                
                 break;
 
@@ -95,32 +97,32 @@ public class Player_Status : MonoBehaviour//초기 스테이터스 설정
         switch (i) 
         {
             case 0://0은 체력
-                this.max_hp+=100;
-                core_init(0);
+                permanent_index[i]++;
+                core_init(i);
                 break;
             case 1://1은 공격력
-                this.offensive_power += 10;
-                core_init(1);
+                permanent_index[i]++;
+                core_init(i);
                 break;
             case 2://2는 방어력
-                this.defensive_power += 10;
-                core_init(2);
+                permanent_index[i]++;
+                core_init(i);
                 break;
             case 3://3은 이동속도
-                this.move_speed += 5;
-                core_init(3);
+                permanent_index[i]++;
+                core_init(i);
                 break;
             case 4://4는 공격속도 
-                this.attack_speed += 5;
-                core_init(4);
+                permanent_index[i]++;
+                core_init(i);
                 break;
             case 5://5는 회복
-                this.recovery += 10;
-                core_init(5);
+                permanent_index[i]++;
+                core_init(i);
                 break;
             case 6://크리티컬
-                this.critical +=10;
-                core_init(6);
+                permanent_index[i]++;
+                core_init(i);
                 break;
         }
     }
@@ -150,7 +152,7 @@ public class Player_Status : MonoBehaviour//초기 스테이터스 설정
     }
     public void init_offensive_power()//괴력 초기화
     {
-        this.offensive_power = early_offensive_power;
+        this.offensive_power = early_offensive_power + permanent_index[1];
     }
 
     public void add_attack_speed(float input)//신속
@@ -159,7 +161,7 @@ public class Player_Status : MonoBehaviour//초기 스테이터스 설정
     }
     public void init_attack_speed()//신속 초기화 
     {
-        this.attack_speed = early_attack_speed;
+        this.attack_speed = early_attack_speed + permanent_index[4];
     }
 
     public void add_defensive_power(float input)//견고  
@@ -168,7 +170,7 @@ public class Player_Status : MonoBehaviour//초기 스테이터스 설정
     }
     public void init_defensive_power()//견고 초기화
     {
-        this.defensive_power = early_defensive_power;
+        this.defensive_power = early_defensive_power + permanent_index[2];
     }
 
     public void add_move_speed(float input)//민첩
@@ -177,7 +179,7 @@ public class Player_Status : MonoBehaviour//초기 스테이터스 설정
     }
     public void init_move_speed()//민첩 초기화 
     {
-        this.move_speed = early_move_speed;
+        this.move_speed = early_move_speed + permanent_index[3];
     }
     public void add_critical(float input)//집중
     {
@@ -185,7 +187,7 @@ public class Player_Status : MonoBehaviour//초기 스테이터스 설정
     }
     public void init_critical()//집중 초기화 
     {
-        this.critical = early_critical;
+        this.critical = early_critical + permanent_index[6];
     }
     public void add_recovery(float input)//회복
     {
@@ -194,7 +196,7 @@ public class Player_Status : MonoBehaviour//초기 스테이터스 설정
     }
     public void init_recovery()//회복 초기화 
     {
-        this.recovery = early_recovery;
+        this.recovery = early_recovery + permanent_index[5];
     }
     public void reduce_hp_1()//화상,방어력 비례//화상데미지 10
     {
@@ -209,7 +211,7 @@ public class Player_Status : MonoBehaviour//초기 스테이터스 설정
         if (i == 1)
         {
             current_burn=1;
-            Invoke("reduce_hp_1", 5f);
+            InvokeRepeating("reduce_hp_1", 3f,5f);
             yield return new WaitForSeconds(60.0f);
             current_burn=0;
             CancelInvoke("reduce_hp_1");
@@ -240,36 +242,40 @@ public class Player_Status : MonoBehaviour//초기 스테이터스 설정
     }
     public void InVoke_fuction()
     {
-        Invoke("Start_toxin", 5);
+        InvokeRepeating("Start_toxin", 3f,5f);
     }
     public void InVoke_Cancel_fuction()
     {
         CancelInvoke("Start_toxin");
     }
 
-    public void init_state(int i) {//1=공격력 초기화.2=공격속도 초기화 3=방어력 초기화 4=이동속도 초기화 5=크리티컬 확률 초기화  6=회복 초기화
+    public void init_state(int i) {//1-공격력,2-방어력,3-이동속도,4-공격속도,5-회복,6-크리티컬
 
         switch (i)
         {
-            case 1:
-                this.offensive_power = early_offensive_power;
+            case 1://1은 공격력
+                offensive_power = early_offensive_power + (permanent_index[i] * permanent_offensive_power);
+
                 break;
-            case 2:
-                this.attack_speed = early_attack_speed;
+            case 2://2는 방어력
+                defensive_power = early_defensive_power + (permanent_index[i] * permanent_defensive_power);
+
                 break;
-            case 3:
-                this.defensive_power = early_defensive_power;
+            case 3://3은 이동속도
+                move_speed = early_move_speed + (permanent_index[i] * permanent_move_speed);
+
                 break;
-            case 4:
-                this.move_speed = early_move_speed;
+            case 4://4는 공격속도 
+                attack_speed = early_attack_speed + (permanent_index[i] * permanent_attack_speed);
                 break;
-            case 5:
-                this.critical = early_critical;
+            case 5://5는 회복
+                recovery = early_recovery + (permanent_index[i] * permanent_recovery);
+
                 break;
-            case 6:
-                this.recovery = early_recovery;
+            case 6://크리티컬
+                critical = early_critical + (permanent_index[i] * permanent_critical);
+
                 break;
-            
         }
     }
 }

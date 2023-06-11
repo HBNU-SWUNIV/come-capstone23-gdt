@@ -101,13 +101,13 @@ public class B_Player : MonoBehaviour
     {
         Debug.DrawRay(BpRig2D.position, Vector3.down, new Color(0, 1, 0));
 
-        RaycastHit2D rayHit = Physics2D.Raycast(BpRig2D.position, Vector3.down, 1, LayerMask.GetMask("Ground"));
+        RaycastHit2D rayHit = Physics2D.Raycast(BpRig2D.position, Vector3.down, 2, LayerMask.GetMask("Ground"));
 
         if(BpRig2D.velocity.y < 0)
         {
             if(rayHit.collider != null)
             {
-                if(rayHit.distance < 0.7f)
+                if(rayHit.distance < 4.7f)
                 {
                     BpAnimator.SetBool("Jump", false);
                 }

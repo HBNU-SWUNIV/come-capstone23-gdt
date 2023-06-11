@@ -13,6 +13,8 @@ public class playercontroller : MonoBehaviour//피격 상태정의
     private Player_Status status;
     AudioSource audiosrc;
     bool isMoving = false;
+    GameObject fade_system;
+    FadeSystem performer_fade_system;
 
 
     [SerializeField]GameObject condition_applicator;
@@ -28,6 +30,8 @@ public class playercontroller : MonoBehaviour//피격 상태정의
         condition_applicator = GameObject.FindWithTag("Condition_applicator");
         applicator = condition_applicator.GetComponent<Condition_applicator>();
         audiosrc = GetComponent<AudioSource>();
+        fade_system = GameObject.FindWithTag("Fade");
+        performer_fade_system = fade_system.GetComponent<FadeSystem>();
     }
    
    
@@ -65,6 +69,7 @@ public class playercontroller : MonoBehaviour//피격 상태정의
             float enemy_offensive = collision.gameObject.GetComponent<EnemyStatus>().offensive_power;
 
             movement2d.OnDamaged(collision.transform.position);
+            
 
             if (status.Is_protective_film == true)//캐릭터의 보호막이 있는 경우 
             {
@@ -99,15 +104,28 @@ public class playercontroller : MonoBehaviour//피격 상태정의
             {
                 SceneManager.LoadScene("Village");
             }
+            else if (collision.gameObject.tag.Equals("Teleport_Desert_normal"))
+            {
+                SceneManager.LoadScene("Desert_normal");
+            }
+            else if (collision.gameObject.tag.Equals("Teleport_Lake_normal"))
+            {
+                SceneManager.LoadScene("Lake_normal");
+            }
+            else if (collision.gameObject.tag.Equals("Teleport_Deepforest_normal"))
+            {
+                SceneManager.LoadScene("Deepforest_normal");
+            }
 
 
+            performer_fade_system.total_start();
 
 
         }
 
-       
 
 
+        
     }
 
 

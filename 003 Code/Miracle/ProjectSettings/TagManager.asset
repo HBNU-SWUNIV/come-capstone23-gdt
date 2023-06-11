@@ -16,6 +16,11 @@ TagManager:
   - Purple_attack
   - Fade
   - Teleport_Village
+  - YellowDust
+  - Teleport_Desert_normal
+  - icon
+  - Teleport_Lake_normal
+  - Teleport_Deepforest_normal
   layers:
   - Default
   - TransparentFX

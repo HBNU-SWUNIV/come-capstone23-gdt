@@ -4,27 +4,66 @@ using UnityEngine;
 
 public class EnemyMove : MonoBehaviour
 {
-    Rigidbody2D rigid;
-    SpriteRenderer sprite;
 
+    public GameObject player;
+    Rigidbody2D rb;
+    SpriteRenderer sprite;
     
+    public float detectionRange = 10f;    // 추적을 시작할 플레이어의 거리
+    public float raycastDistance = 1f;   // 몬스터가 플레이어가 있는지 체크할 레이캐스트 거리
+
     public int movespeed;
 
-    public int nextMove;
+    //public int nextMove;
 
+    private bool isPlayerInRange;
+    private bool isFacingRight = true;
     // Start is called before the first frame update
     void Awake()
     {
-        rigid = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
+        player = GameObject.FindWithTag("Player");
         
-        Invoke("Think", 5);
     }
 
     // Update is called once per frame
     void Update()
     {
-        rigid.velocity = new Vector2(nextMove*movespeed,rigid.velocity.y);
+        if (player != null)
+        {
+            float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
+
+            // 플레이어가 일정 거리 이내에 있을 때 추적 시작
+            if (distanceToPlayer <= detectionRange)
+            {
+                isPlayerInRange = true;
+
+                // 플레이어와의 방향을 체크
+                float direction = player.transform.position.x - transform.position.x;
+
+                // 좌우 이동
+                rb.velocity = new Vector2(direction, rb.velocity.y).normalized * movespeed;
+
+                // 몬스터가 바라보는 방향 설정
+                if (direction > 0f && isFacingRight)
+                {
+                    Flip();
+                }
+                else if (direction < 0f && !isFacingRight)
+                {
+                    Flip();
+                }
+            }
+            else
+            {
+                isPlayerInRange = false;
+                rb.velocity = new Vector2(0f, rb.velocity.y);
+            }
+        }
+
+   
+        /*rigid.velocity = new Vector2(nextMove*movespeed,rigid.velocity.y);
 
 
         Vector2 frontVec = new Vector2(rigid.position.x + nextMove*0.2f, rigid.position.y);
@@ -33,10 +72,35 @@ public class EnemyMove : MonoBehaviour
         if (rayHit.collider == null)
         {
             Turn();
+        }*/
+    }
+
+    public void Flip()
+    {
+        isFacingRight = !isFacingRight;
+        transform.Rotate(0f, 180f, 0f);
+    }
+
+    private void FixedUpdate()
+    {
+        // 플레이어를 감지하기 위해 레이캐스트 사용
+        if (isPlayerInRange)
+        {
+            Debug.DrawRay(rb.position, Vector2.left, new Color(0, 1, 0));
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, isFacingRight ? Vector2.right : Vector2.left, raycastDistance);
+
+            if (hit.collider != null && hit.collider.CompareTag("Player"))
+            {
+                // 플레이어와 충돌 처리
+                // 예: 플레이어에게 데미지를 입히는 등의 로직을 구현
+            }
         }
     }
 
-    void Think() {
+
+
+
+    /*void Think() {
 
         nextMove = Random.Range(-1, 2);
 
@@ -48,13 +112,13 @@ public class EnemyMove : MonoBehaviour
         float nextThinktime = Random.Range(2f, 5f);
 
         Invoke("Think", nextThinktime);
-    }
+    }*/
 
-    void Turn() {
+    /*void Turn() {
 
         nextMove *= -1;
         sprite.flipX = (nextMove == 1);
         CancelInvoke();
         Invoke("Think", 5);
-    }
+    }*/
 }

@@ -2,25 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class dessert_enviroment : MonoBehaviour
+public class sprite_mask : MonoBehaviour
 {
 
-    public GameObject player;
-    private Player_Status status;
+    private GameObject player;
+    Transform mask_transform;
 
     // Start is called before the first frame update
     void Awake()
     {
         player = GameObject.FindWithTag("Player");
-        status = player.GetComponent<Player_Status>();
+        mask_transform = GetComponent<Transform>();
     }
-    private void Start()
-    {
-        
-    }
+
     // Update is called once per frame
     void Update()
     {
-        
+        this.transform.position = player.transform.position;
     }
 }

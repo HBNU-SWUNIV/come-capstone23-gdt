@@ -27,9 +27,13 @@ public class Condition_applicator : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        player= GameObject.FindWithTag("Player");
+        player = GameObject.FindWithTag("Player");
         status = player.GetComponent<Player_Status>();//플레이어 오브젝트의 status 컴포넌트 접근 
-       
+
+        for (int i = 0; i < 12; i++) {//초기 enumerator 설정
+
+            status.enumerators[i] = start_reuse_waiting_time(i);
+        }
     }
     public void Set_state(State state) {
 
@@ -43,8 +47,8 @@ public class Condition_applicator : MonoBehaviour
                 selected_state_index=0;
                 if (status.current_validnumber_state[selected_state_index] < max_number_state)
                 {
+                    StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단
                     status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
-                    StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단 
                     StartCoroutine(status.enumerators[selected_state_index]);//새로운 버프 사용시간 타이머 동작
                     status.add_offensive_power(input_offensive_power);
                     status.current_validnumber_state[selected_state_index]++;
@@ -54,8 +58,8 @@ public class Condition_applicator : MonoBehaviour
                 selected_state_index = 1;
                 if (status.current_validnumber_state[selected_state_index] < max_number_state)
                 {
+                    StopCoroutine(status.enumerators[selected_state_index]);
                     status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
-                    StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단 
                     StartCoroutine(status.enumerators[selected_state_index]);//새로운 버프 사용시간 타이머 동작
                     status.add_attack_speed(input_attack_speed);
                     status.current_validnumber_state[selected_state_index]++;
@@ -65,8 +69,8 @@ public class Condition_applicator : MonoBehaviour
                 selected_state_index = 2;
                 if (status.current_validnumber_state[selected_state_index] < max_number_state)
                 {
+                    StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단
                     status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
-                    StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단 
                     StartCoroutine(status.enumerators[selected_state_index]);//새로운 버프 사용시간 타이머 동작
                     status.add_defensive_power(input_defensive_power);
                     status.current_validnumber_state[selected_state_index]++;
@@ -76,8 +80,8 @@ public class Condition_applicator : MonoBehaviour
                 selected_state_index = 3;
                 if (status.current_validnumber_state[selected_state_index] < max_number_state)
                 {
+                    StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단
                     status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
-                    StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단 
                     StartCoroutine(status.enumerators[selected_state_index]);//새로운 버프 사용시간 타이머 동작
                     status.add_move_speed(input_move_speed);
                     status.current_validnumber_state[selected_state_index]++;
@@ -88,8 +92,8 @@ public class Condition_applicator : MonoBehaviour
                 selected_state_index = 4;
                 if (status.current_validnumber_state[selected_state_index] < max_number_state)
                 {
+                    StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단
                     status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
-                    StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단 
                     StartCoroutine(status.enumerators[selected_state_index]);//새로운 버프 사용시간 타이머 동작
                     status.add_critical(input_critical);
                     status.current_validnumber_state[selected_state_index]++;
@@ -99,8 +103,8 @@ public class Condition_applicator : MonoBehaviour
                 selected_state_index = 5;
                 if (status.current_validnumber_state[selected_state_index] < max_number_state)
                 {
+                    StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단
                     status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
-                    StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단 
                     StartCoroutine(status.enumerators[selected_state_index]);//새로운 버프 사용시간 타이머 동작
                     status.add_recovery(input_recovery);
                     status.current_validnumber_state[selected_state_index]++;
@@ -117,8 +121,8 @@ public class Condition_applicator : MonoBehaviour
                 selected_state_index = 6;
                 if (status.current_validnumber_state[selected_state_index] < max_number_state)
                 {
+                    StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단
                     status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
-                    StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단 
                     StartCoroutine(status.enumerators[selected_state_index]);//새로운 버프 사용시간 타이머 동작
                     status.reduce_offensive_power(input_weak);
                     status.current_validnumber_state[selected_state_index]++;
@@ -128,8 +132,8 @@ public class Condition_applicator : MonoBehaviour
                 selected_state_index = 7;
                 if (status.current_validnumber_state[selected_state_index] < max_number_state)
                 {
+                    StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단
                     status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
-                    StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단 
                     StartCoroutine(status.enumerators[selected_state_index]);//새로운 버프 사용시간 타이머 동작
                     status.reduce_attack_speed(input_deceleration);
                     status.current_validnumber_state[selected_state_index]++;
@@ -139,8 +143,8 @@ public class Condition_applicator : MonoBehaviour
                 selected_state_index = 8;
                 if (status.current_validnumber_state[selected_state_index] < max_number_state)
                 {
+                    StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단
                     status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
-                    StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단 
                     StartCoroutine(status.enumerators[selected_state_index]);//새로운 버프 사용시간 타이머 동작
                     status.reduce_defensive_power(input_destroy);
                     status.current_validnumber_state[selected_state_index]++;
@@ -149,11 +153,11 @@ public class Condition_applicator : MonoBehaviour
             case State.toxin://9==독
                 selected_state_index = 9;
                 if (status.current_validnumber_state[selected_state_index] < max_number_state)
-                {
+                { 
+                    StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단
                     status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
-                    status.current_toxin++;
-                    StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단 
                     StartCoroutine(status.enumerators[selected_state_index]);//새로운 버프 사용시간 타이머 동작
+                    status.current_toxin++;
                     status.InVoke_fuction();
                     status.current_validnumber_state[selected_state_index]++;
                 }
@@ -168,8 +172,8 @@ public class Condition_applicator : MonoBehaviour
 
                 else if(status.current_validnumber_state[selected_state_index] < max_number_state)
                 {
+                    StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단
                     status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
-                    StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단 
                     StartCoroutine(status.enumerators[selected_state_index]);//새로운 버프 사용시간 타이머 동작
                     status.reduece_move_speed(input_coldair);
                     status.current_validnumber_state[selected_state_index]++;
@@ -179,8 +183,8 @@ public class Condition_applicator : MonoBehaviour
                 selected_state_index = 11;
                 if (status.current_validnumber_state[selected_state_index] < 1)
                 {
+                    StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단
                     status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
-                    StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단 
                     StartCoroutine(status.enumerators[selected_state_index]);//새로운 버프 사용시간 타이머 동작
                     status.movement.jumpforce = 0.0f;
                     status.move_speed = 0.0f;
@@ -200,27 +204,27 @@ public class Condition_applicator : MonoBehaviour
                 status.current_valid_statetime[i] = 0.0f;
                 break;
             case 1:
-                status.init_state(2);//신속 초기화 
+                status.init_state(4);//신속 초기화 
                 status.current_validnumber_state[i] = 0;
                 status.current_valid_statetime[i] = 0.0f;
                 break;
             case 2:
-                status.init_state(3);//견고 초기화 
+                status.init_state(2);//견고 초기화 
                 status.current_validnumber_state[i] = 0;
                 status.current_valid_statetime[i] = 0.0f;
                 break;
             case 3:
-                status.init_state(4);//민첩 초기화 
+                status.init_state(3);//민첩 초기화 
                 status.current_validnumber_state[i] = 0;
                 status.current_valid_statetime[i] = 0.0f;
                 break;
             case 4:
-                status.init_state(5);//집중 초기화 
+                status.init_state(6);//집중 초기화 
                 status.current_validnumber_state[i] = 0;
                 status.current_valid_statetime[i] = 0.0f;
                 break;
             case 5:
-                status.init_state(6);//회복 초기화 
+                status.init_state(5);//회복 초기화 
                 status.current_validnumber_state[i] = 0;
                 status.current_valid_statetime[i] = 0.0f;
                 break;
@@ -230,12 +234,12 @@ public class Condition_applicator : MonoBehaviour
                 status.current_valid_statetime[i] = 0.0f;
                 break;
             case 7:
-                status.init_state(2);//감속 초기화 
+                status.init_state(4);//감속 초기화 
                 status.current_validnumber_state[i] = 0;
                 status.current_valid_statetime[i] = 0.0f;
                 break;
             case 8:
-                status.init_state(3);//파괴 초기화 
+                status.init_state(2);//파괴 초기화 
                 status.current_validnumber_state[i] = 0;
                 status.current_valid_statetime[i] = 0.0f;
                 break;
@@ -246,13 +250,13 @@ public class Condition_applicator : MonoBehaviour
                 status.current_valid_statetime[i] = 0.0f;
                 break;
             case 10:
-                status.init_state(4);//냉기 초기화 
+                status.init_state(3);//냉기 초기화 
                 status.current_validnumber_state[i] = 0;
                 status.current_valid_statetime[i] = 0.0f;
                 break;
             case 11://냉각 초기화 
                 status.movement.jumpforce = 8.0f;//점프 초기값
-                status.init_state(4);//초기 이동속도 값
+                status.init_state(3);//초기 이동속도 값
                 status.current_validnumber_state[i] = 0;
                 status.current_valid_statetime[i] = 0.0f;
                 break;
@@ -268,8 +272,9 @@ public class Condition_applicator : MonoBehaviour
         {
             while (true)
             {
-                if (status.current_valid_statetime[i] == 10)
+                if (status.current_valid_statetime[i] == 10)//냉각상태 해제시 냉기상태도 같이 해재 
                 {
+                    Init_state(i - 1);//냉기상태 초기화 
                     Init_state(i);
                     yield break;
                 }

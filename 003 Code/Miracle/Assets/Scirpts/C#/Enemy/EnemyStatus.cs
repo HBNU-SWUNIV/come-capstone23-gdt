@@ -11,8 +11,10 @@ public class EnemyStatus : MonoBehaviour
     public IEnumerator[] enumerators = new IEnumerator[3];
     public int current_burn = 0;
 
-    public int hp, offensive_power, defensive_power,attack_speed;//체력,공격력,방어력,공격속도 
-    public int move_speed;//이동속도 
+
+    [Header("초기값 적용")]
+    public int hp, offensive_power, defensive_power,attack_speed, move_speed;//체력,공격력,방어력,공격속도,이동속도
+    
     private  float initial_hp;//초기체력
     private int  early_move_speed, early_attack_speed;//입력한 초기값 저장 
 
@@ -36,7 +38,7 @@ public class EnemyStatus : MonoBehaviour
         initial_hp = hp;
         early_move_speed = move_speed;
         early_attack_speed = attack_speed;
-        Enemy_material.color= new Color(0/255f, 0 / 255f, 0 / 255f);
+        Enemy_material.color= new Color(0, 0, 0);
     }
 
     // Update is called once per frame
@@ -62,7 +64,7 @@ public class EnemyStatus : MonoBehaviour
         if (i == 1)
         {
             current_burn = 1;
-            Invoke("reduce_hp_1", 5f);
+            InvokeRepeating("reduce_hp_1", 3f,5f);
             yield return new WaitForSeconds(60.0f);
             current_burn = 0;
             CancelInvoke("reduce_hp_1");

@@ -17,9 +17,7 @@ public class Game_manager : MonoBehaviour
 {
     public RingMenu ColorSelectPrefab;
     protected RingMenu ColorSelectInstance;
-    public int Fade_time;
-    public GameObject Fade_image;
-    SpriteRenderer render;
+    
     //single 
     public static Game_manager instance;
 
@@ -42,8 +40,7 @@ public class Game_manager : MonoBehaviour
         }
 
 
-        Fade_image= GameObject.FindWithTag("Fade");
-        render = Fade_image.GetComponent <SpriteRenderer> ();
+        
 
         
     }
@@ -57,13 +54,7 @@ public class Game_manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            StartCoroutine(FadeIn());
-        }
-        else if (Input.GetKeyDown(KeyCode.O)) {
-            StartCoroutine(Fadeout());
-        }
+        
 
         if (Input.GetMouseButtonDown(1))
         {
@@ -72,33 +63,7 @@ public class Game_manager : MonoBehaviour
 
     }
 
-    IEnumerator FadeIn() {
-
-        for (int i = 0; i < Fade_time; i++) {
-            float f = i / Fade_time;
-            Color color = render.material.color;
-            color.a = f;
-            render.material.color = color;
-            yield return new WaitForSeconds(0.1F);
-
-        }
-
     
-    }
-
-
-    IEnumerator Fadeout()
-    {
-        for (int i = Fade_time; i >=0; i--)
-        {
-            float f = i / Fade_time;
-            Color color = render.material.color;
-            color.a = f;
-            render.material.color = color;
-            yield return new WaitForSeconds(0.1F);
-
-        }
-    }
 
     public void SaveData() {
         
@@ -121,4 +86,6 @@ public class Game_manager : MonoBehaviour
 
         
     }
+
+   
 }
