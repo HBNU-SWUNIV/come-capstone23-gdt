@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 23
-  productGUID: 0842a50b9284d4d49b3149667283fd96
+  productGUID: 2872828fb31c39f4ebfab3b41b8048be
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -13,8 +13,8 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: DefaultCompany
-  productName: My project (1)
-  defaultCursor: {fileID: 2800000, guid: e2691593f9df45a4dbf014c98807908a, type: 3}
+  productName: mob4
+  defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
   m_ShowUnitySplashScreen: 1
@@ -756,11 +756,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: b21c120f-31ce-4c66-bf81-0231b4ba64a0
+  cloudProjectId: a7536312-d713-4a75-94a9-f2c96c674453
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: Miracle
-  organizationId: gdt_repository
+  projectName: 
+  organizationId: 
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   playerDataPath: 

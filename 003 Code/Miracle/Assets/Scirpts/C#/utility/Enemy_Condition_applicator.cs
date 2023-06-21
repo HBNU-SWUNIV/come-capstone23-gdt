@@ -27,6 +27,16 @@ public class Enemy_Condition_applicator : MonoBehaviour
     {
 
         this.status = status;
+        Set_enumerators();
+    }
+
+    public void Set_enumerators() {
+
+        for (int i = 0; i < 3; i++)
+        {//초기 enumerator 설정
+
+            status.enumerators[i] = start_reuse_waiting_time(i);
+        }
     }
 
    
@@ -46,8 +56,8 @@ public class Enemy_Condition_applicator : MonoBehaviour
                 selected_state_index = 0;
                 if (status.current_validnumber_state[selected_state_index] < max_number_state)
                 {
+                    StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단
                     status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
-                    StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단 
                     StartCoroutine(status.enumerators[selected_state_index]);//새로운 버프 사용시간 타이머 동작
                     status.reduce_attack_speed(input_deceleration);
                     status.current_validnumber_state[selected_state_index]++;
@@ -63,8 +73,8 @@ public class Enemy_Condition_applicator : MonoBehaviour
 
                 else if (status.current_validnumber_state[selected_state_index] < max_number_state)
                 {
+                    StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단
                     status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
-                    StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단 
                     StartCoroutine(status.enumerators[selected_state_index]);//새로운 버프 사용시간 타이머 동작
                     status.reduece_move_speed(input_coldair);
                     status.current_validnumber_state[selected_state_index]++;
@@ -74,8 +84,8 @@ public class Enemy_Condition_applicator : MonoBehaviour
                 selected_state_index = 2;
                 if (status.current_validnumber_state[selected_state_index] < 1)
                 {
+                    StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단
                     status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
-                    StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단 
                     StartCoroutine(status.enumerators[selected_state_index]);//새로운 버프 사용시간 타이머 동작
                     status.move_speed = 0;
                     status.current_validnumber_state[selected_state_index]++;

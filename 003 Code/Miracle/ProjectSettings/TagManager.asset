@@ -4,23 +4,17 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - FxTemporaire
+  - icon
   - Enemy
-  - Weapon
-  - Enemy_weapon
-  - Weapon
-  - Enemy_weapon
+  - Fade
+  - Teleport_Deepforest_normal
   - Condition_applicator
   - Enemy_Condition_applicator
   - Red_attack
   - Blue_attack
   - Purple_attack
-  - Fade
-  - Teleport_Village
-  - YellowDust
-  - Teleport_Desert_normal
-  - icon
-  - Teleport_Lake_normal
-  - Teleport_Deepforest_normal
+  - Color_Selector
   layers:
   - Default
   - TransparentFX
@@ -29,11 +23,11 @@ TagManager:
   - Water
   - UI
   - Ground
-  - 
-  - 
-  - Enemy
   - Player
-  - Player_Damaged
+  - Enemy
+  - 
+  - 
+  - 
   - 
   - 
   - 

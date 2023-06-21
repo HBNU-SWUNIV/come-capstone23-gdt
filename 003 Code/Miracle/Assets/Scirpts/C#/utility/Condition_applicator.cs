@@ -4,7 +4,7 @@ using UnityEditor.PackageManager;
 using UnityEngine;
 
 
-public enum State {  non,strength, quick, solid, agility, focus, recovery,  burn, weak, deceleration, destroy, toxin, coldair, cooling }
+public enum State {  non,strength, quick, solid, agility, focus, recovery,  burn, weak, deceleration, destroy, toxin, coldair, cooling,fixed_attack }
 
 
 
@@ -30,7 +30,7 @@ public class Condition_applicator : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         status = player.GetComponent<Player_Status>();//플레이어 오브젝트의 status 컴포넌트 접근 
 
-        for (int i = 0; i < 12; i++) {//초기 enumerator 설정
+        for (int i = 0; i < 13; i++) {//초기 enumerator 설정
 
             status.enumerators[i] = start_reuse_waiting_time(i);
         }
@@ -191,7 +191,18 @@ public class Condition_applicator : MonoBehaviour
                     status.current_validnumber_state[selected_state_index]++;
                 }
                 break;
+            case State.fixed_attack://고정데미지 여부 
+                selected_state_index = 12;
+                if (status.current_validnumber_state[selected_state_index] < 1)
+                {
+                    StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단
+                    status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
+                    StartCoroutine(status.enumerators[selected_state_index]);//새로운 버프 사용시간 타이머 동작
+                    status.Is_Fixed_damage = true;
+                    status.current_validnumber_state[selected_state_index]++;
+                }
 
+                break;
         }
     }
     public void Init_state(int i)//상태 초기화 
@@ -260,7 +271,11 @@ public class Condition_applicator : MonoBehaviour
                 status.current_validnumber_state[i] = 0;
                 status.current_valid_statetime[i] = 0.0f;
                 break;
-           
+            case 12://플레이어 고정데미지 
+                status.Is_Fixed_damage = false;
+                status.current_validnumber_state[i] = 0;
+                status.current_valid_statetime[i] = 0.0f;
+                break;
         }
 
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+
 public class EnemyStatus : MonoBehaviour
 {
 
@@ -13,16 +14,20 @@ public class EnemyStatus : MonoBehaviour
 
 
     [Header("초기값 적용")]
-    public int hp, offensive_power, defensive_power,attack_speed, move_speed;//체력,공격력,방어력,공격속도,이동속도
+    public float hp, offensive_power, defensive_power,attack_speed, move_speed;//체력,공격력,방어력,공격속도,이동속도
     
     private  float initial_hp;//초기체력
-    private int  early_move_speed, early_attack_speed;//입력한 초기값 저장 
+    private float  early_move_speed, early_attack_speed;//입력한 초기값 저장 
+    private float damage_magnification;//데미지 배율
 
     private Material Enemy_material;
     private SpriteRenderer render;
+    private Player_Status player_status;
     private EnemyMove enemy_move;
-    private GameObject Object_enemy_applicator;
+    private GameObject Object_enemy_applicator,Player,Color_selector;
     private Enemy_Condition_applicator enemy_applicator;
+    private Rito.WeightedRandomPicker<bool> wrPicker;
+    private Color_Attack color_attack;
     // Start is called before the first frame update
 
     private void Awake()
@@ -32,6 +37,10 @@ public class EnemyStatus : MonoBehaviour
         enemy_move = GetComponent<EnemyMove>();
         Object_enemy_applicator = GameObject.FindWithTag("Enemy_Condition_applicator");
         enemy_applicator = Object_enemy_applicator.GetComponent<Enemy_Condition_applicator>();
+        Player= GameObject.FindWithTag("Player");
+        player_status = Player.GetComponent<Player_Status>();
+        Color_selector= GameObject.FindWithTag("Color_Selector");
+        color_attack = Color_selector.GetComponent<Color_Attack>();
     }
     void Start()
     {
@@ -39,12 +48,14 @@ public class EnemyStatus : MonoBehaviour
         early_move_speed = move_speed;
         early_attack_speed = attack_speed;
         Enemy_material.color= new Color(0, 0, 0);
+
+        wrPicker = new Rito.WeightedRandomPicker<bool>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        float percent = (initial_hp - hp / initial_hp);
+        float percent = (initial_hp - hp / initial_hp)*100;
 
         Enemy_material.color = new Color(percent*255, percent * 255, percent * 255);
 
@@ -89,26 +100,71 @@ public class EnemyStatus : MonoBehaviour
     {
         this.move_speed = early_move_speed;
     }
+    public void calculate() {
+
+        
+
+        wrPicker.Add(
+            
+            (true,player_status.critical+1),
+            (false,100- player_status.critical)
+            );
+
+        if (wrPicker.GetRandomPick())
+        {
+            damage_magnification = 1.2f;
+        }
+        else if (!wrPicker.GetRandomPick())
+        {
+            damage_magnification = 1.0f;
+        }
+
+        wrPicker.Remove(true);
+        wrPicker.Remove(false);
+    }
+
+    public void real_damage_apply()
+    {
+
+        if (player_status.Is_Fixed_damage == true)
+        { //고정데미지 일시 
+
+            hp -= player_status.offensive_power * damage_magnification;
+        }
+        else if (player_status.Is_Fixed_damage == false)//고정데미지 아닐시 
+        {
+            float damage = player_status.offensive_power - (defensive_power / 5);
+            hp -= damage * damage_magnification;
+        }
+
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)//플레이어의 공격에 당할경우 
     {
-        if(collision.gameObject.tag.Equals("Red_attack"))
+
+        calculate();//데미지 배율 계산
+        real_damage_apply();//데미지 실체력 적용 
+
+        if (color_attack.selected_color==Color_mode.red)
         {
             enemy_applicator.Set_status(this);
             enemy_applicator.Set_Enemy_State(Enemy_State.burn);
             enemy_applicator.Apply_state();
         }
-        else if(collision.gameObject.tag.Equals("Blue attack")) 
+        else if(color_attack.selected_color == Color_mode.blue) 
         {
             enemy_applicator.Set_status(this);
             enemy_applicator.Set_Enemy_State(Enemy_State.cooling);
             enemy_applicator.Apply_state();
         }
-        else if(collision.gameObject.tag.Equals("Purplr attack"))
+        else if(color_attack.selected_color == Color_mode.purple)
         {
             enemy_applicator.Set_status(this);
             enemy_applicator.Set_Enemy_State(Enemy_State.deceleration);
             enemy_applicator.Apply_state();
         }
+
+        player_status.add_recovery();//몬스터한테 공격 적중시 회복 적용 
+
     }
 }

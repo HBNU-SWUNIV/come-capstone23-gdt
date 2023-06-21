@@ -12,7 +12,7 @@ public class EnemyMove : MonoBehaviour
     public float detectionRange = 10f;    // 추적을 시작할 플레이어의 거리
     public float raycastDistance = 1f;   // 몬스터가 플레이어가 있는지 체크할 레이캐스트 거리
 
-    public int movespeed;
+    public float movespeed;
 
     //public int nextMove;
 

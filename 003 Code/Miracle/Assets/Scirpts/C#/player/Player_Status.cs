@@ -12,12 +12,12 @@ public class Player_Status : MonoBehaviour//초기 스테이터스 설정
     public  float early_max_hp, early_offensive_power, early_defensive_power, early_move_speed,  early_attack_speed, early_critical,early_recovery;//입력한 초기값 저장 또는 영구적인 값 저장
    
 
-    public float[] current_valid_statetime = new float[12];//각 상태별 시간 
-    public int[] current_validnumber_state = new int[12]; //각 상태별 횟수 
-    public IEnumerator[] enumerators = new IEnumerator[12];//코루틴 상태 저장
+    public float[] current_valid_statetime = new float[13];//각 상태별 시간 
+    public int[] current_validnumber_state = new int[13]; //각 상태별 횟수 
+    public IEnumerator[] enumerators = new IEnumerator[13];//코루틴 상태 저장
     public int[] permanent_index = new int[7];//영구 수치 증가 인덱스 저장
     public int current_burn=0, current_toxin=0;
-    public bool Is_protective_film;
+    public bool Is_protective_film, Is_Fixed_damage;//보호막 및 고정데미지 
 
     public Movement2D movement;
 
@@ -31,7 +31,9 @@ public class Player_Status : MonoBehaviour//초기 스테이터스 설정
             core_init(i);
         }
         current_hp = max_hp;
-       
+        Is_Fixed_damage = false;
+
+
     }
     public void core_init(int i) {// 영구 스테이터스 상승후 저장기능
 
@@ -127,7 +129,7 @@ public class Player_Status : MonoBehaviour//초기 스테이터스 설정
         }
     }
     
-    public void add_hp(float input) {
+    public void add_hp(float input) {//일반적인 체력 증가 
 
         float diff = max_hp - current_hp;//최대 체력과 현재체력 차이 
 
@@ -142,8 +144,31 @@ public class Player_Status : MonoBehaviour//초기 스테이터스 설정
             }
         }
         
-        
     }
+    public void add_recovery()//공격시 회복 적용 
+    {
+
+        float diff = max_hp - current_hp;//최대 체력과 현재체력 차이 
+
+        if (current_hp < max_hp)
+        {
+
+            if (diff <= recovery)
+            {
+                current_hp += diff;
+            }
+            else if (diff > recovery)
+            {
+                current_hp += recovery;
+            }
+        }
+
+    }
+    public void add_protective_film(float input)
+    {
+        this.protective_film += input;
+    }
+
 
 
     public void add_offensive_power(float input)//괴력

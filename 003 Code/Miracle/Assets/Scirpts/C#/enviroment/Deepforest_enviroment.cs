@@ -21,6 +21,8 @@ public class Deepforest_enviroment : MonoBehaviour
      void OnDestroy()
     {
         CancelInvoke("apply_toxin");
+
+        applicator.Init_state(9);
     }
 
     public void apply_toxin() {

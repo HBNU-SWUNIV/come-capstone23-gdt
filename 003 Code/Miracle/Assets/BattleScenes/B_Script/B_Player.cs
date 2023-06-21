@@ -6,8 +6,8 @@ public class B_Player : MonoBehaviour
 {
 
     public float power = 5;
-    public float B_speed = 5;
-    public float B_jumpUp = 1;
+    public float B_speed = 20;
+    public float B_jumpUp = 10;
     public Vector3 B_direction;
     public GameObject B_Slash;
 
@@ -80,7 +80,7 @@ public class B_Player : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void Update() 
     {
         B_KeyInput();
         B_Move();

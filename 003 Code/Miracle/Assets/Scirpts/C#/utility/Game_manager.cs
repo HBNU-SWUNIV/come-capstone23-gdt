@@ -9,7 +9,7 @@ public class PlayerData //플레이어 이름,플레이어스테이터스,도감상황,무기
 {
     public string player_name;
     public Player_Status player_status;
-    
+    public Inventory inventory;
 }
 
 
@@ -17,6 +17,8 @@ public class Game_manager : MonoBehaviour
 {
     public RingMenu ColorSelectPrefab;
     protected RingMenu ColorSelectInstance;
+
+   
     
     //single 
     public static Game_manager instance;
@@ -48,7 +50,7 @@ public class Game_manager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        //inventoryPanel.SetActive(activeInventory);
     }
 
     // Update is called once per frame
@@ -60,6 +62,7 @@ public class Game_manager : MonoBehaviour
         {
             ColorSelectInstance = Instantiate(ColorSelectPrefab, FindAnyObjectByType<Canvas>().transform);
         }
+        
 
     }
 

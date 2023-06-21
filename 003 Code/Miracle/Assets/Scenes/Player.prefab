@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 6242087106736935403}
   - component: {fileID: 3838519155081353492}
   - component: {fileID: 449261271046402557}
-  - component: {fileID: 5428709231849150310}
+  - component: {fileID: 4035098384101145526}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -200,11 +200,18 @@ MonoBehaviour:
   current_hp: 0
   offensive_power: 0
   defensive_power: 0
+  move_speed: 5
   protective_film: 0
   attack_speed: 0
   critical: 0
   recovery: 0
-  move_speed: 5
+  early_max_hp: 0
+  early_offensive_power: 0
+  early_defensive_power: 0
+  early_move_speed: 0
+  early_attack_speed: 0
+  early_critical: 0
+  early_recovery: 0
   current_valid_statetime:
   - 0
   - 0
@@ -219,9 +226,11 @@ MonoBehaviour:
   - 0
   - 0
   current_validnumber_state: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  permanent_index: 00000000000000000000000000000000000000000000000000000000
   current_burn: 0
   current_toxin: 0
   Is_protective_film: 0
+  Is_Fixed_damage: 0
   movement: {fileID: 0}
 --- !u!114 &449261271046402557
 MonoBehaviour:
@@ -235,7 +244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa0e522cca8b3f345ab1258ae301dadc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5428709231849150310
+--- !u!114 &4035098384101145526
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -244,11 +253,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6242087106736935394}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0111edf29dbb3d9419a000ae052792e4, type: 3}
+  m_Script: {fileID: 11500000, guid: b1c10506c1bd90544b5b55eadebb617c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playAura: 1
-  particleObject: {fileID: 0}
 --- !u!1 &6242087106908805567
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,33 +15,33 @@ EditorBuildSettings:
     path: Assets/Scene_list/Mainmenu.unity
     guid: 25358eb7c93b3334ebb2c2e7f2f71556
   - enabled: 1
-    path: Assets/Scene_list/Deepforest_boss.unity
-    guid: 038f5d37462eecc47b12954fbb3966e8
-  - enabled: 1
-    path: Assets/Scene_list/Deepforest_normal.unity
-    guid: afe29a12900a403418ff370da81f2010
-  - enabled: 1
-    path: Assets/Scene_list/Desert_boss.unity
-    guid: ceb2d5b93dfa8c842be12c8976c483d6
-  - enabled: 1
-    path: Assets/Scene_list/Desert_normal.unity
-    guid: 5140de40593d29a46a0403a140815a19
-  - enabled: 1
-    path: Assets/Scene_list/Field_boss.unity
-    guid: 73fbead6e76f7484cb7931a5613b24e1
-  - enabled: 1
-    path: Assets/Scene_list/Field_normal.unity
-    guid: 82669d85a2c2efc49b7f35050aae5712
-  - enabled: 1
-    path: Assets/Scene_list/Forest_boss.unity
-    guid: 318ae931899eb8942845d729cc386454
-  - enabled: 1
-    path: Assets/Scene_list/Forest_normal.unity
-    guid: ea17b701aaac7f146a9306f2cce2fdce
+    path: Assets/Scene_list/Lake_normal.unity
+    guid: baa46d0b7b5fe774ab2bd38d531f357a
   - enabled: 1
     path: Assets/Scene_list/Lake_boss.unity
     guid: 7826a46d76ddc6c4cb9f773fa1f29159
   - enabled: 1
-    path: Assets/Scene_list/Lake_normal.unity
-    guid: baa46d0b7b5fe774ab2bd38d531f357a
+    path: Assets/Scene_list/Forest_normal.unity
+    guid: ea17b701aaac7f146a9306f2cce2fdce
+  - enabled: 1
+    path: Assets/Scene_list/Forest_boss.unity
+    guid: 318ae931899eb8942845d729cc386454
+  - enabled: 1
+    path: Assets/Scene_list/Field_normal.unity
+    guid: 82669d85a2c2efc49b7f35050aae5712
+  - enabled: 1
+    path: Assets/Scene_list/Field_boss.unity
+    guid: 73fbead6e76f7484cb7931a5613b24e1
+  - enabled: 1
+    path: Assets/Scene_list/Desert_normal.unity
+    guid: 5140de40593d29a46a0403a140815a19
+  - enabled: 1
+    path: Assets/Scene_list/Desert_boss.unity
+    guid: ceb2d5b93dfa8c842be12c8976c483d6
+  - enabled: 1
+    path: Assets/Scene_list/Deepforest_normal.unity
+    guid: afe29a12900a403418ff370da81f2010
+  - enabled: 1
+    path: Assets/Scene_list/Deepforest_boss.unity
+    guid: 038f5d37462eecc47b12954fbb3966e8
   m_configObjects: {}
