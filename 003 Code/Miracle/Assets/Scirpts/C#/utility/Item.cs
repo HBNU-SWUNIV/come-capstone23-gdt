@@ -15,9 +15,10 @@ public enum ItemType
 [System.Serializable]
 public class Item  
 {
+    public ItemType itemtype;
     public string itemname;
     public Sprite itemImage;
-    public ItemType itemtype;
+    
 
 
     public bool use()
