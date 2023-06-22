@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 3838519155081353492}
   - component: {fileID: 449261271046402557}
   - component: {fileID: 4035098384101145526}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -256,6 +256,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1c10506c1bd90544b5b55eadebb617c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slotCnt: 5
+  items: []
 --- !u!1 &6242087106908805567
 GameObject:
   m_ObjectHideFlags: 0
@@ -268,7 +270,7 @@ GameObject:
   - component: {fileID: 6242087106908805564}
   - component: {fileID: 6242087106908805566}
   - component: {fileID: 6242087106908805442}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}

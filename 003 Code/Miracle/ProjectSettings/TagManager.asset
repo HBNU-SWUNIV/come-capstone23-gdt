@@ -15,6 +15,7 @@ TagManager:
   - Blue_attack
   - Purple_attack
   - Color_Selector
+  - FieldItem
   layers:
   - Default
   - TransparentFX

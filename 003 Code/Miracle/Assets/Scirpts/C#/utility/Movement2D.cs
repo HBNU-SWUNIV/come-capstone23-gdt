@@ -80,7 +80,7 @@ public class Movement2D : MonoBehaviour
     public void OffDamaged()
     {
         is_attacked = false;
-        gameObject.layer = 10;
+        gameObject.layer = 7;
         sprite.color = new Color(1, 1, 1, 1);
 
 

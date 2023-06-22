@@ -18,12 +18,20 @@ public class Item
     public ItemType itemtype;
     public string itemname;
     public Sprite itemImage;
-    
+    public ItemEffect eft;
 
 
-    public bool use()
+    public bool Use()
     {
-        return false;
+        bool isUsed = false;
+
+        if (eft != null)
+        {
+            isUsed = eft.ExecuteRole();
+        }
+        
+           
+        return isUsed;
     }
 
 }

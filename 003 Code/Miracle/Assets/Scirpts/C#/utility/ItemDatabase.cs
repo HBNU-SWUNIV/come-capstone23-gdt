@@ -15,6 +15,17 @@ public class ItemDatabase : MonoBehaviour
 
     public List<Item> itemDB = new List<Item>();
 
+    public GameObject fieldItemPrefab;
+    public Vector3 pos;
+
+
+
+    private void Start()
+    {
+        GameObject go=Instantiate(fieldItemPrefab, pos,Quaternion.identity);
+        go.GetComponent<FieldItems>().SetItem(itemDB[Random.Range(0, 2)]);
+    }
+
 
     // Update is called once per frame
     void Update()
