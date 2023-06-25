@@ -16,6 +16,10 @@ TagManager:
   - Purple_attack
   - Color_Selector
   - FieldItem
+  - Store
+  - Coin
+  - GameManager
+  - ItemDatabase
   layers:
   - Default
   - TransparentFX
@@ -26,8 +30,8 @@ TagManager:
   - Ground
   - Player
   - Enemy
-  - 
-  - 
+  - Player_damaged
+  - Store
   - 
   - 
   - 

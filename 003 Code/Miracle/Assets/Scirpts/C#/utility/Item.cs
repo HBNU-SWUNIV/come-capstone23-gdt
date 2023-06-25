@@ -19,7 +19,7 @@ public class Item
     public string itemname;
     public Sprite itemImage;
     public ItemEffect eft;
-
+    public int price;
 
     public bool Use()
     {

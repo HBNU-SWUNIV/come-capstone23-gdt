@@ -19,6 +19,7 @@ public class Player_Status : MonoBehaviour//초기 스테이터스 설정
     public int current_burn=0, current_toxin=0;
     public bool Is_protective_film, Is_Fixed_damage;//보호막 및 고정데미지 
 
+    public int pocket_money;
     public Movement2D movement;
 
     private float permanent_hp=100f, permanent_offensive_power=5f, permanent_defensive_power=5f, permanent_move_speed=2f, permanent_attack_speed=0.1f, permanent_recovery=10f, permanent_critical=5f;

@@ -112,7 +112,7 @@ public class EnemyStatus : MonoBehaviour
 
         if (wrPicker.GetRandomPick())
         {
-            damage_magnification = 1.2f;
+            damage_magnification = 1.2f;//최종데미지 배율 1.2
         }
         else if (!wrPicker.GetRandomPick())
         {

@@ -39,7 +39,9 @@ public class Inventory : MonoBehaviour
             onChangeItem.Invoke();
             return true;
         }
+        Debug.Log("인벤토리가 가득입니다.");
         return false;
+        
     }
 
     public void RemoveItem(int index)

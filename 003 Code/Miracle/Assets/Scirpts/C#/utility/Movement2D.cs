@@ -65,7 +65,7 @@ public class Movement2D : MonoBehaviour
         
     }
     public void OnDamaged(Vector2 damagecposition) {
-        gameObject.layer = 11;
+        gameObject.layer = 9;
 
         sprite.color = new Color(1, 1, 1, 0.4f);
 

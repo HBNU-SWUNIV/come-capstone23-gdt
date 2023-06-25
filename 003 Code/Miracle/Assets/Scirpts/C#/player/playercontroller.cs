@@ -11,9 +11,11 @@ public class playercontroller : MonoBehaviour//피격 상태정의
     
     private Movement2D movement2d;
     private Player_Status status;
+    private InventoryUI inventory_ui;
     AudioSource audiosrc;
     bool isMoving = false;
-    GameObject fade_system;
+    bool is_Shop_open;
+    GameObject fade_system, manager;
     FadeSystem performer_fade_system;
 
 
@@ -32,6 +34,9 @@ public class playercontroller : MonoBehaviour//피격 상태정의
         audiosrc = GetComponent<AudioSource>();
         fade_system = GameObject.FindWithTag("Fade");
         performer_fade_system = fade_system.GetComponent<FadeSystem>();
+        manager = GameObject.FindWithTag("GameManager");
+        inventory_ui = manager.GetComponent<InventoryUI>();
+        is_Shop_open = false;
     }
    
    
@@ -94,11 +99,19 @@ public class playercontroller : MonoBehaviour//피격 상태정의
 
 
         }
-       
+        else if (collision.gameObject.tag.Equals("Coin"))
+        {
+            Gold_Coin gold_coin = collision.gameObject.GetComponent<Gold_Coin>();
+            if (gold_coin != null)
+            {
+                status.pocket_money += gold_coin.money;
+                Destroy(collision.gameObject);
+            }
+        }
     }
     private void OnTriggerStay2D(Collider2D collision) 
     {
-        if (Input.GetKeyDown(KeyCode.F))//포탈 이용시 f키 사용
+        if (Input.GetKeyDown(KeyCode.F))// 포탈이용시 f키 사용
         {
             if (collision.gameObject.tag.Equals("Teleport_Village"))
             {
@@ -119,12 +132,9 @@ public class playercontroller : MonoBehaviour//피격 상태정의
 
 
             performer_fade_system.total_start();
-
-
         }
-
-
-
+        
+        
         
     }
 
