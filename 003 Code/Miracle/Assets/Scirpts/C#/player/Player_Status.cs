@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Windows;
+using static Inventory;
 
 public class Player_Status : MonoBehaviour//초기 스테이터스 설정
 {
@@ -10,12 +11,15 @@ public class Player_Status : MonoBehaviour//초기 스테이터스 설정
 
     [Header("플레이어 극 초기값")]
     public  float early_max_hp, early_offensive_power, early_defensive_power, early_move_speed,  early_attack_speed, early_critical,early_recovery;//입력한 초기값 저장 또는 영구적인 값 저장
-   
+
+    public delegate void OnChangecoin();
+    public OnChangecoin onChangecoin;
 
     public float[] current_valid_statetime = new float[13];//각 상태별 시간 
     public int[] current_validnumber_state = new int[13]; //각 상태별 횟수 
     public IEnumerator[] enumerators = new IEnumerator[13];//코루틴 상태 저장
     public int[] permanent_index = new int[7];//영구 수치 증가 인덱스 저장
+    public int[] number_hunted_creature = new int[7];//잡몹별로 잡은 몬스터의 수
     public int current_burn=0, current_toxin=0;
     public bool Is_protective_film, Is_Fixed_damage;//보호막 및 고정데미지 
 
@@ -23,6 +27,17 @@ public class Player_Status : MonoBehaviour//초기 스테이터스 설정
     public Movement2D movement;
 
     private float permanent_hp=100f, permanent_offensive_power=5f, permanent_defensive_power=5f, permanent_move_speed=2f, permanent_attack_speed=0.1f, permanent_recovery=10f, permanent_critical=5f;
+
+    public int Pocket_money
+    {
+        get => pocket_money;
+        set
+        {
+            pocket_money = value;
+            onChangecoin.Invoke();//델리게이트 호출
+        }
+    }
+
 
 
     void Start()

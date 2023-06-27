@@ -11,14 +11,17 @@ public class InventoryUI : MonoBehaviour
     public Player_Status status;
     public Inventory inven;
     public GameObject inventoryPanel;
-    bool activeInventory = false;
+    bool activeInventory = false,active_record=false;
     public GameObject shop;
     public Button closeShop;
     public bool isStoreActive;
     public Slot[] slots;
-    public Transform slotHoler;
-
+    public permanent_slot[] permanent_slots;
+    public Transform slotHoler,permanent_holder;
+    public GameObject player_gained_coin_object;
+    public Text player_gained_coin;
     public GameObject player;
+    public GameObject Record_book;
 
     public int slot_activate_fee;//추가 슬롯 활성화 비용
 
@@ -29,10 +32,12 @@ public class InventoryUI : MonoBehaviour
         status = player.GetComponent<Player_Status>();
         inven = player.GetComponent<Inventory>();
         slots = slotHoler.GetComponentsInChildren<Slot>();
+        permanent_slots= permanent_holder.GetComponentsInChildren<permanent_slot>();
         inven.onSlotCountChange += SlotChange;
         inven.onChangeItem += RedrawSlotUI;
         inventoryPanel.SetActive(activeInventory);
         closeShop.onClick.AddListener(DeActiveShop);//이벤트 함수 연결
+        Record_book.SetActive(active_record);
     }
     
     void SlotChange()
@@ -71,6 +76,11 @@ public class InventoryUI : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             RayShop();
+        }
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            active_record = !active_record;
+            Record_book.SetActive(active_record);
         }
     }
 

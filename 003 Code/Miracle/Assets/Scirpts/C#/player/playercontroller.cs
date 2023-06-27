@@ -14,7 +14,7 @@ public class playercontroller : MonoBehaviour//피격 상태정의
     private InventoryUI inventory_ui;
     AudioSource audiosrc;
     bool isMoving = false;
-    bool is_Shop_open;
+    //bool is_Shop_open;
     GameObject fade_system, manager;
     FadeSystem performer_fade_system;
 
@@ -36,7 +36,7 @@ public class playercontroller : MonoBehaviour//피격 상태정의
         performer_fade_system = fade_system.GetComponent<FadeSystem>();
         manager = GameObject.FindWithTag("GameManager");
         inventory_ui = manager.GetComponent<InventoryUI>();
-        is_Shop_open = false;
+        //is_Shop_open = false;
     }
    
    

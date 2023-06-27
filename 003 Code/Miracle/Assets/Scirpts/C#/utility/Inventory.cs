@@ -13,10 +13,15 @@ public class Inventory : MonoBehaviour
     public int slotCnt;//
 
     public List<Item> items = new List<Item>();
+    public GameObject player;
+    public Player_Status status;
 
     private void Start()
     {
+        player = GameObject.FindWithTag("Player");
+        status = player.GetComponent<Player_Status>();
         onSlotCountChange.Invoke();
+
     }
 
 
@@ -32,15 +37,21 @@ public class Inventory : MonoBehaviour
 
     public bool AddItem(Item _item)
     {
-        if (items.Count < slotCnt)
+        if (status.pocket_money >= _item.price)
         {
-            items.Add(_item);
-            if(onChangeItem!=null)
-            onChangeItem.Invoke();
-            return true;
+            if (items.Count < slotCnt)
+            {
+                status.pocket_money -= _item.price;
+                items.Add(_item);
+                if (onChangeItem != null)
+                    onChangeItem.Invoke();
+                return true;
+            }
         }
-        Debug.Log("인벤토리가 가득입니다.");
-        return false;
+            Debug.Log("아이템 휙득 실패");
+            return false;
+        
+        
         
     }
 

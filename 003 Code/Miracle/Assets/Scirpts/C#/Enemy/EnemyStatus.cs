@@ -11,7 +11,7 @@ public class EnemyStatus : MonoBehaviour
     public int[] current_validnumber_state = new int[3]; //0=감속,1=냉기,2=냉각
     public IEnumerator[] enumerators = new IEnumerator[3];
     public int current_burn = 0;
-
+    public int minimal_enemy_number;//영구 속성 능력치 함수를 위한 숫자 
 
     [Header("초기값 적용")]
     public float hp, offensive_power, defensive_power,attack_speed, move_speed;//체력,공격력,방어력,공격속도,이동속도
@@ -61,6 +61,16 @@ public class EnemyStatus : MonoBehaviour
 
         enemy_move.movespeed = this.move_speed;
     }
+    
+    public void Dead()
+    {
+        if (hp <= 0)
+        {
+            Destroy(gameObject);
+            player_status.number_hunted_creature[minimal_enemy_number]++;
+        }
+    }
+
 
     public void reduce_hp_1()//화상,방어력 비례
     {
