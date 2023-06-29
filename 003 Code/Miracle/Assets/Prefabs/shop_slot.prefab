@@ -231,7 +231,9 @@ MonoBehaviour:
   item:
     itemtype: 0
     itemname: 
+    item_description: 
     itemImage: {fileID: 0}
     eft: {fileID: 0}
+    price: 0
   itemIcon: {fileID: 0}
   inventory: {fileID: 0}

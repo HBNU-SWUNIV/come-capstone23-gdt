@@ -17,6 +17,7 @@ public class Item
 {
     public ItemType itemtype;
     public string itemname;
+    public string item_description;
     public Sprite itemImage;
     public ItemEffect eft;
     public int price;
