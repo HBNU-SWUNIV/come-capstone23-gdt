@@ -166,7 +166,7 @@ public class playercontroller : MonoBehaviour//피격 상태정의
             isMoving = false;
         }
 
-        if (isMoving && movement2d.isGround)//땅위에 있고 움직인다는 가정
+        /*if (isMoving && movement2d.isGround)//땅위에 있고 움직인다는 가정
         {
 
             if (!audiosrc.isPlaying)
@@ -176,7 +176,7 @@ public class playercontroller : MonoBehaviour//피격 상태정의
         }
         else {
             audiosrc.Stop();
-        }
+        }*/
 
 
         if (Input.GetKeyDown(KeyCode.Space)) {

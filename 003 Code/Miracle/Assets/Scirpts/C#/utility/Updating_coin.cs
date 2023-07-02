@@ -8,7 +8,7 @@ public class Updating_coin : MonoBehaviour
 {
     GameObject player;
     Player_Status status;
-    public TextMeshPro current_coin;
+    public TextMeshProUGUI current_coin;
 
     private void Awake()
     {

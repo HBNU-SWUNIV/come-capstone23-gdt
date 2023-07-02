@@ -417,7 +417,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57d8e517c177df145a89657222cf00a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MainMenuPrefab: {fileID: 5678680671761476955, guid: d818a5f8cf09ed34e86ce26d67207e23, type: 3}
+  MainMenuPrefab: {fileID: 761509634798090591, guid: d818a5f8cf09ed34e86ce26d67207e23, type: 3}
   Mode: 0
 --- !u!4 &1763467811
 Transform:

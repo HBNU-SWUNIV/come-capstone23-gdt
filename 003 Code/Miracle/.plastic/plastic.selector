@@ -1,4 +1,3 @@
-repository "Miracle@TEST0@cloud"
+rep "Miracle@TEST0@cloud"
   path "/"
-    smartbranch "/main" changeset "152"                                                                                                                                                                               
-     
+    smartbranch "/main"
