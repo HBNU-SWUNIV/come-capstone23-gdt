@@ -20,6 +20,7 @@ TagManager:
   - Coin
   - GameManager
   - ItemDatabase
+  - Player_skilling
   layers:
   - Default
   - TransparentFX
@@ -33,7 +34,7 @@ TagManager:
   - Player_damaged
   - Store
   - Player_skilling
-  - 
+  - Player_death
   - 
   - 
   - 

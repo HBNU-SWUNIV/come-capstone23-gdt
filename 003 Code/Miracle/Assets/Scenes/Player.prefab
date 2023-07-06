@@ -1,5 +1,70 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &943766698198396609
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3111992701661709239}
+  - component: {fileID: 6104991585901835368}
+  - component: {fileID: 2933131258115753273}
+  m_Layer: 0
+  m_Name: smoke_creator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3111992701661709239
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 943766698198396609}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6242087106736935396}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6104991585901835368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 943766698198396609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b318047311312b4e9dfc46a1e7b6059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!95 &2933131258115753273
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 943766698198396609}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8fc3620851cff420988164470a5a8379, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &6242087106736935394
 GameObject:
   m_ObjectHideFlags: 0
@@ -16,8 +81,9 @@ GameObject:
   - component: {fileID: 3838519155081353492}
   - component: {fileID: 449261271046402557}
   - component: {fileID: 4035098384101145526}
-  - component: {fileID: 3024230580678680747}
   - component: {fileID: 394195984612869209}
+  - component: {fileID: 3556876613640821992}
+  - component: {fileID: 2396315947307116610}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -38,6 +104,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6242087106908805443}
+  - {fileID: 3111992701661709239}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -146,6 +213,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70c4f7ec9d3ec004d9b6196aa0a1d87a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mode: 0
+  animation_controllers:
+  - {fileID: 9100000, guid: e4c29788271229a42b57af2d1b8fb1f7, type: 2}
+  - {fileID: 9100000, guid: 08687413059707243884798c5d4542e8, type: 2}
+  - {fileID: 9100000, guid: b7bb2960e8f3ea246b106b46f0949750, type: 2}
   condition_applicator: {fileID: 0}
   applicator: {fileID: 0}
 --- !u!114 &3838519155081353492
@@ -226,7 +298,27 @@ MonoBehaviour:
   items: []
   player: {fileID: 0}
   status: {fileID: 0}
---- !u!60 &3024230580678680747
+--- !u!95 &394195984612869209
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6242087106736935394}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e4c29788271229a42b57af2d1b8fb1f7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+--- !u!60 &3556876613640821992
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -251,32 +343,60 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.085, y: 0.095}
-      - {x: -0.044999998, y: 0.095}
-      - {x: -0.13499999, y: -0.074999996}
-      - {x: -0.13499999, y: -0.095}
-      - {x: 0.13499999, y: -0.095}
-      - {x: 0.13499999, y: -0.024999999}
---- !u!95 &394195984612869209
-Animator:
-  serializedVersion: 5
+    - - {x: -0.010000001, y: -0.09}
+      - {x: 0, y: -0.08}
+      - {x: 0.020000001, y: -0.09}
+      - {x: 0.060000002, y: -0.06}
+      - {x: 0.07, y: -0.05}
+      - {x: 0.120000005, y: -0.07}
+      - {x: 0.09, y: -0.06}
+      - {x: 0.07, y: -0.04}
+      - {x: 0.040000003, y: 0.02}
+      - {x: 0.030000001, y: 0.04}
+      - {x: 0.040000003, y: 0.05}
+      - {x: 0.040000003, y: 0.07}
+      - {x: 0.020000001, y: 0.09}
+      - {x: 0, y: 0.09}
+      - {x: -0.020000001, y: 0.07}
+      - {x: -0.010000001, y: 0.04}
+      - {x: -0.05, y: -0.05}
+      - {x: -0.11000001, y: -0.08}
+      - {x: -0.05, y: -0.05}
+      - {x: -0.020000001, y: -0.08}
+--- !u!114 &2396315947307116610
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6242087106736935394}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e4c29788271229a42b57af2d1b8fb1f7, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c55c83d4c4dd1145ad5fbbab3c3df36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AlphaTolerance: 20
+  DistanceThreshold: 1
+  Scale: 1
+  Decompose: 0
+  RunInPlayMode: 0
+  UseCache: 0
+  lastAlphaTolerance: 20
+  lastScale: 1
+  lastDistanceThreshold: 1
+  lastDecompose: 0
+  lastSprite: {fileID: -1701472459, guid: 1f86dc1d4874578419591917e5810f2c, type: 3}
+  lastRect:
+    serializedVersion: 2
+    x: 1
+    y: 152
+    width: 27
+    height: 19
+  lastOffset: {x: 13.5, y: 9.5}
+  lastPixelsPerUnit: 100
+  lastFlipX: 0
+  lastFlipY: 0
+  editorCache: []
 --- !u!1 &6242087106908805567
 GameObject:
   m_ObjectHideFlags: 0

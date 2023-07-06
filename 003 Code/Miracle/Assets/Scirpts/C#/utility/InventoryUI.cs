@@ -92,7 +92,10 @@ public class InventoryUI : MonoBehaviour
             if (inven.SlotCnt < slots.Length)
             {
                 inven.SlotCnt++;
-                status.pocket_money -= slot_activate_fee;
+                status.pocket_money
+                    
+                    
+                    -= slot_activate_fee;
             }
             else if (inven.SlotCnt == slots.Length)
             {

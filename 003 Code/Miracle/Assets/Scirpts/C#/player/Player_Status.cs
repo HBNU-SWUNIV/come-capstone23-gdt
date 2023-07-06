@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Windows;
+//using UnityEngine.Windows;
 using static Inventory;
 
 public class Player_Status : MonoBehaviour//초기 스테이터스 설정
@@ -12,8 +12,12 @@ public class Player_Status : MonoBehaviour//초기 스테이터스 설정
     [Header("플레이어 극 초기값")]
     public  float early_max_hp, early_offensive_power, early_defensive_power, early_move_speed,  early_attack_speed, early_critical,early_recovery;//입력한 초기값 저장 또는 영구적인 값 저장
 
+    Animator animator;
+
     public delegate void OnChangecoin();
     public OnChangecoin onChangecoin;
+
+    private playercontroller playercontroller_object;
 
     public float[] current_valid_statetime = new float[13];//각 상태별 시간 
     public int[] current_validnumber_state = new int[13]; //각 상태별 횟수 
@@ -95,7 +99,8 @@ public class Player_Status : MonoBehaviour//초기 스테이터스 설정
     public void Awake()
     {
         movement = GetComponent<Movement2D>();
-
+        animator = GetComponent<Animator>();
+        playercontroller_object = GetComponent<playercontroller>();
         for (int i = 0; i < current_valid_statetime.Length; i++)
         {
             current_valid_statetime[i] = 0.0f;
@@ -108,6 +113,14 @@ public class Player_Status : MonoBehaviour//초기 스테이터스 설정
         Is_protective_film = protective_film > 0 ? true : false;
 
         movement.speed = move_speed;
+
+        
+
+        if (current_hp <= 0)
+        {
+            animator.SetTrigger("Player_death");
+            playercontroller_object.player_death();
+        }
     }
 
     public void permanent_status_add(int i)//영구적인 스테이터스 상승시 저장,도감 시스템

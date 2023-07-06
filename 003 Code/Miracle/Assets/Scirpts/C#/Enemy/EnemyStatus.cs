@@ -1,3 +1,6 @@
+
+
+
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -33,7 +36,7 @@ public class EnemyStatus : MonoBehaviour
     private void Awake()
     {
         render = GetComponent<SpriteRenderer>();
-        Enemy_material = render.material;
+        
         enemy_move = GetComponent<EnemyMove>();
         Object_enemy_applicator = GameObject.FindWithTag("Enemy_Condition_applicator");
         enemy_applicator = Object_enemy_applicator.GetComponent<Enemy_Condition_applicator>();
@@ -47,7 +50,7 @@ public class EnemyStatus : MonoBehaviour
         initial_hp = hp;
         early_move_speed = move_speed;
         early_attack_speed = attack_speed;
-        Enemy_material.color= new Color(0, 0, 0);
+        render.material.color= new Color(0/255f, 0/255f, 0/255f);
 
         wrPicker = new Rito.WeightedRandomPicker<bool>();
     }
@@ -57,7 +60,7 @@ public class EnemyStatus : MonoBehaviour
     {
         float percent = (initial_hp - hp / initial_hp)*100;
 
-        Enemy_material.color = new Color(percent*255, percent * 255, percent * 255);
+        render.material.color = new Color(percent*255 / 255f, percent * 255 / 255f, percent * 255 / 255f);
 
         enemy_move.movespeed = this.move_speed;
     }
@@ -148,33 +151,37 @@ public class EnemyStatus : MonoBehaviour
         }
 
     }
+   
 
     private void OnCollisionEnter2D(Collision2D collision)//플레이어의 공격에 당할경우 
     {
-
-        calculate();//데미지 배율 계산
-        real_damage_apply();//데미지 실체력 적용 
-
-        if (color_attack.selected_color==Color_mode.red)
+        if (Player.CompareTag("Player_skilling"))//플레이어가 공격중일때 
         {
-            enemy_applicator.Set_status(this);
-            enemy_applicator.Set_Enemy_State(Enemy_State.burn);
-            enemy_applicator.Apply_state();
-        }
-        else if(color_attack.selected_color == Color_mode.blue) 
-        {
-            enemy_applicator.Set_status(this);
-            enemy_applicator.Set_Enemy_State(Enemy_State.cooling);
-            enemy_applicator.Apply_state();
-        }
-        else if(color_attack.selected_color == Color_mode.purple)
-        {
-            enemy_applicator.Set_status(this);
-            enemy_applicator.Set_Enemy_State(Enemy_State.deceleration);
-            enemy_applicator.Apply_state();
-        }
+            calculate();//데미지 배율 계산
+            real_damage_apply();//데미지 실체력 적용 
 
-        player_status.add_recovery();//몬스터한테 공격 적중시 회복 적용 
+            if (color_attack.selected_color == Color_mode.red)
+            {
+                enemy_applicator.Set_status(this);
+                enemy_applicator.Set_Enemy_State(Enemy_State.burn);
+                enemy_applicator.Apply_state();
+            }
+            else if (color_attack.selected_color == Color_mode.blue)
+            {
+                enemy_applicator.Set_status(this);
+                enemy_applicator.Set_Enemy_State(Enemy_State.cooling);
+                enemy_applicator.Apply_state();
+            }
+            else if (color_attack.selected_color == Color_mode.purple)
+            {
+                enemy_applicator.Set_status(this);
+                enemy_applicator.Set_Enemy_State(Enemy_State.deceleration);
+                enemy_applicator.Apply_state();
+            }
+
+            player_status.add_recovery();//몬스터한테 공격 적중시 회복 적용 
+        }
+        
 
     }
 }
