@@ -11,7 +11,7 @@ public class InventoryUI : MonoBehaviour
     public Player_Status status;
     public Inventory inven;
     public GameObject inventoryPanel;
-    bool activeInventory = false,active_record=false;
+    public bool activeInventory = false,active_record=false;
     public GameObject shop;
     public Button closeShop;
     public bool isStoreActive;

@@ -243,7 +243,7 @@ public class playercontroller : MonoBehaviour//피격 상태정의
 
         if (Input.GetMouseButtonDown(0))
         {
-            if (!inventory_ui.isStoreActive)
+            if (!inventory_ui.isStoreActive && !inventory_ui.activeInventory)
             {
                 animator.SetTrigger("Attack");
             }

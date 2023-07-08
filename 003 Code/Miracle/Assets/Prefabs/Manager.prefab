@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5262919959795057422}
   - component: {fileID: 2962016734434768176}
   - component: {fileID: 8130201338670463305}
+  - component: {fileID: 1109310455749294590}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -86,4 +87,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8865ac45f3ccad4c97eb584dc7b149d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  status: {fileID: 0}
+  inven: {fileID: 0}
   inventoryPanel: {fileID: 0}
+  shop: {fileID: 0}
+  closeShop: {fileID: 0}
+  isStoreActive: 0
+  slots: []
+  permanent_slots: []
+  slotHoler: {fileID: 0}
+  permanent_holder: {fileID: 0}
+  player_gained_coin_object: {fileID: 0}
+  player_gained_coin: {fileID: 0}
+  player: {fileID: 0}
+  Record_book: {fileID: 0}
+  slot_activate_fee: 0
+--- !u!114 &1109310455749294590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8714025449985907225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec98adc3006c0a14298a9bbeb2268f41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  conditionDB: []

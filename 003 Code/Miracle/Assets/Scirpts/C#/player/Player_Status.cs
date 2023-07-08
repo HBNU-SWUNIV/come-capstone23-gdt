@@ -27,8 +27,12 @@ public class Player_Status : MonoBehaviour//초기 스테이터스 설정
     public int current_burn=0, current_toxin=0;
     public bool Is_protective_film, Is_Fixed_damage;//보호막 및 고정데미지 
 
-    public int pocket_money;
+    public int pocket_money,current_index_conditionofarray;
     public Movement2D movement;
+    public Transform activated_condition_holder;
+    public activated_condition[] activated_Conditions;
+    public GameObject condition_prefab,condition_applicator_object;
+    private Condition_applicator condition_applicator;
 
     private float permanent_hp=100f, permanent_offensive_power=5f, permanent_defensive_power=5f, permanent_move_speed=2f, permanent_attack_speed=0.1f, permanent_recovery=10f, permanent_critical=5f;
 
@@ -42,6 +46,66 @@ public class Player_Status : MonoBehaviour//초기 스테이터스 설정
         }
     }
 
+    public void Add_Condition_icon(ConditionType input_conditiontype,int next_apply_index)// 데이터베이스에서의 타입과 다음에 중첩할 수치 
+    {
+        bool IsExist=false;
+        int exist_index=0;
+
+        if (activated_Conditions.Length == 0)
+        {
+            int index = ConditionDatabase.instance_condition.conditionDB.FindIndex(x => x.conditiontype == input_conditiontype);
+            condition_prefab.GetComponent<activated_condition>().condition_image = ConditionDatabase.instance_condition.conditionDB[index].condition_Image;
+            condition_prefab.GetComponent<activated_condition>().index_image = ConditionDatabase.instance_condition.indexDB[0].index_Image;
+            activated_Conditions[current_index_conditionofarray] = Instantiate(condition_prefab.GetComponent<activated_condition>());
+            current_index_conditionofarray++;
+            return;
+        }
+
+        for(int i=0;i< activated_Conditions.Length; i++)
+        {
+            if (activated_Conditions[i].conditiontype == input_conditiontype)
+            {
+                IsExist = true;
+                exist_index = i;
+                break;
+            }
+        }
+        if (IsExist == true)//이미 존재할시 
+        {
+            if (next_apply_index == 2)
+            {
+                activated_Conditions[exist_index].index_image= ConditionDatabase.instance_condition.indexDB[1].index_Image;
+            }
+            else if(next_apply_index == 3)
+            {
+                activated_Conditions[exist_index].index_image = ConditionDatabase.instance_condition.indexDB[2].index_Image;
+            }
+
+        }
+        else if(IsExist == false)//존재하지 않을시
+        {
+            int index = ConditionDatabase.instance_condition.conditionDB.FindIndex(x => x.conditiontype == input_conditiontype);
+            condition_prefab.GetComponent<activated_condition>().condition_image = ConditionDatabase.instance_condition.conditionDB[index].condition_Image;
+            condition_prefab.GetComponent<activated_condition>().index_image = ConditionDatabase.instance_condition.indexDB[0].index_Image;
+            activated_Conditions[current_index_conditionofarray] = Instantiate(condition_prefab.GetComponent<activated_condition>());
+            current_index_conditionofarray++;
+        }
+    }
+    public void Remove_Condition_icon(ConditionType input_conditiontype)//컨디션 아이콘 제거 
+    {
+        int exist_index = 0;
+        for (int i = 0; i < activated_Conditions.Length; i++)
+        {
+            if (activated_Conditions[i].conditiontype == input_conditiontype)
+            {
+                
+                exist_index = i;
+                break;
+            }
+        }
+        activated_Conditions[exist_index] = null;
+        current_index_conditionofarray--;
+    }
 
 
     void Start()
@@ -52,10 +116,11 @@ public class Player_Status : MonoBehaviour//초기 스테이터스 설정
         }
         current_hp = max_hp;
         Is_Fixed_damage = false;
-
+        activated_Conditions= activated_condition_holder.GetComponentsInChildren<activated_condition>();
+        current_index_conditionofarray = 0;
 
     }
-    public void core_init(int i) {// 영구 스테이터스 상승후 저장기능
+    public void core_init(int i) {// 영구 스테이터스 상승후 저장기능,영구 스테이터스 상승시 해당 디버프 삭제 
 
         switch (i) {
 
@@ -65,27 +130,27 @@ public class Player_Status : MonoBehaviour//초기 스테이터스 설정
 
 
                 break;
-            case 1://1은 공격력
-                offensive_power = early_offensive_power+ (permanent_index[i]*permanent_offensive_power);
+            case 1://1은 공격력-일시적 버프 존재
+                offensive_power = early_offensive_power+ (permanent_index[i]*permanent_offensive_power)+(current_validnumber_state[0]* condition_applicator.input_offensive_power);
 
                 break;
-            case 2://2는 방어력
-                defensive_power = early_defensive_power + (permanent_index[i]*permanent_defensive_power); 
+            case 2://2는 방어력-일시적 버프 존재
+                defensive_power = early_defensive_power + (permanent_index[i]*permanent_defensive_power) + (current_validnumber_state[2] * condition_applicator.input_defensive_power); 
                 
                 break;
-            case 3://3은 이동속도
-                move_speed = early_move_speed + (permanent_index[i]*permanent_move_speed);
+            case 3://3은 이동속도-일시적 버프 존재
+                move_speed = early_move_speed + (permanent_index[i]*permanent_move_speed) + (current_validnumber_state[3] * condition_applicator.input_move_speed);
                
                 break;
-            case 4://4는 공격속도 
-                attack_speed = early_attack_speed + (permanent_index[i]*permanent_attack_speed);
+            case 4://4는 공격속도-일시적 버프 존재 
+                attack_speed = early_attack_speed + (permanent_index[i]*permanent_attack_speed) + (current_validnumber_state[1] * condition_applicator.input_attack_speed);
                 break;
-            case 5://5는 회복
-                recovery = early_recovery + (permanent_index[i]*permanent_recovery);
+            case 5://5는 회복-일시적 버프 존재
+                recovery = early_recovery + (permanent_index[i]*permanent_recovery) + (current_validnumber_state[5] * condition_applicator.input_recovery);
                 
                 break;
-            case 6://크리티컬
-                critical = early_critical + (permanent_index[i]*permanent_critical);
+            case 6://크리티컬-일시적 버프 존재
+                critical = early_critical + (permanent_index[i]*permanent_critical) + (current_validnumber_state[4] * condition_applicator.input_critical);
                
                 break;
 
@@ -106,6 +171,8 @@ public class Player_Status : MonoBehaviour//초기 스테이터스 설정
             current_valid_statetime[i] = 0.0f;
             current_validnumber_state[i] = 0;
         }
+        condition_applicator_object = GameObject.FindWithTag("Condition_applicator");
+        condition_applicator = condition_applicator_object.GetComponent<Condition_applicator>();
     }
     // Update is called once per frame
     void Update()
@@ -303,7 +370,7 @@ public class Player_Status : MonoBehaviour//초기 스테이터스 설정
         CancelInvoke("Start_toxin");
     }
 
-    public void init_state(int i) {//1-공격력,2-방어력,3-이동속도,4-공격속도,5-회복,6-크리티컬
+    public void init_state(int i) {//1-공격력,2-방어력,3-이동속도,4-공격속도,5-회복,6-크리티컬, 일시적인 버프 적용이 끝난후 영구수치를 합산한 종합수치로 돌아가는 모습
 
         switch (i)
         {

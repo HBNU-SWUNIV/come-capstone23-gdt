@@ -492,7 +492,7 @@ namespace DigitalRuby.AdvancedPolygonCollider
 
 #endif
 
-            Debug.Log("Updated polygon.");
+            //Debug.Log("Updated polygon.");
         }
 
         private List<Vector2[]> ProcessVertices(PolygonCollider2D collider, Vertices v, List<Vector2[]> list, ref PolygonParameters p, ref int pathIndex)

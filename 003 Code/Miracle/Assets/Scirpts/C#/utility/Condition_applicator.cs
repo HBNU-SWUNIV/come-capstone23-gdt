@@ -15,7 +15,7 @@ public class Condition_applicator : MonoBehaviour
 
     private float max_filled_time = 60.0f;//최대 버프 사용시간
     private int max_number_state = 3;
-    private float input_offensive_power = 5.0f, input_attack_speed = 5.0f, input_defensive_power = 5.0f, input_move_speed = 2.0f, input_critical = 5.0f, input_recovery = 5.0f;//중첩당 적용버프 수치
+    public float input_offensive_power = 5.0f, input_attack_speed = 5.0f, input_defensive_power = 5.0f, input_move_speed = 2.0f, input_critical = 5.0f, input_recovery = 5.0f;//중첩당 적용버프 수치
     private float input_weak = 5.0f, input_deceleration = 5.0f, input_destroy = 5.0f,input_coldair=5.0f;//중첩다 적용 디버프 수치 
     private int selected_state_index;
 
@@ -51,7 +51,9 @@ public class Condition_applicator : MonoBehaviour
                     status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
                     StartCoroutine(status.enumerators[selected_state_index]);//새로운 버프 사용시간 타이머 동작
                     status.add_offensive_power(input_offensive_power);
+                    //status.Add_Condition_icon(ConditionType.strength, status.current_validnumber_state[selected_state_index] + 1);//아이콘 추가 
                     status.current_validnumber_state[selected_state_index]++;
+                    
                 }
                 break;
             case State.quick://1==신속

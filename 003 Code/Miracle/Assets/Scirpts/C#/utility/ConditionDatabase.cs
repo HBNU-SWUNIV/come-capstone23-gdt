@@ -13,7 +13,7 @@ public class ConditionDatabase : MonoBehaviour
         instance_condition = this;
     }
     public List<Condition_icon> conditionDB = new List<Condition_icon>();
-   
+    public List<icon_index> indexDB = new List<icon_index>();
     // Update is called once per frame
     void Update()
     {
