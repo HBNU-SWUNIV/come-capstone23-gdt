@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.PackageManager;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 public enum State {  non,strength, quick, solid, agility, focus, recovery,  burn, weak, deceleration, destroy, toxin, coldair, cooling,fixed_attack }
 
@@ -19,17 +19,19 @@ public class Condition_applicator : MonoBehaviour
     private float input_weak = 5.0f, input_deceleration = 5.0f, input_destroy = 5.0f,input_coldair=5.0f;//중첩다 적용 디버프 수치 
     private int selected_state_index;
 
-    
+    public Transform activated_condition_holder;
     public GameObject player;
-
-
+    public Particle_manager particle_manager;
+    public ParticleSystem particle_system;
     private Player_Status status;
+    private Image[] Images;
+
     // Start is called before the first frame update
     void Awake()
     {
         player = GameObject.FindWithTag("Player");
         status = player.GetComponent<Player_Status>();//플레이어 오브젝트의 status 컴포넌트 접근 
-
+        particle_manager = player.GetComponent<Particle_manager>();
         for (int i = 0; i < 13; i++) {//초기 enumerator 설정
 
             status.enumerators[i] = start_reuse_waiting_time(i);
@@ -47,24 +49,47 @@ public class Condition_applicator : MonoBehaviour
                 selected_state_index=0;
                 if (status.current_validnumber_state[selected_state_index] < max_number_state)
                 {
+                    if (status.current_validnumber_state[selected_state_index]==0)//처음 버프 적용시 
+                    {
+                        Images = activated_condition_holder.GetChild(0).gameObject.GetComponentsInChildren<Image>();
+                        Images[0].sprite = ConditionDatabase.Instance.conditionDB[0].condition_Image;
+                        Images[1].sprite = ConditionDatabase.Instance.indexDB[0].index_Image;
+                        activated_condition_holder.GetChild(0).gameObject.SetActive(true);
+                    }
                     StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단
                     status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
                     StartCoroutine(status.enumerators[selected_state_index]);//새로운 버프 사용시간 타이머 동작
                     status.add_offensive_power(input_offensive_power);
-                    //status.Add_Condition_icon(ConditionType.strength, status.current_validnumber_state[selected_state_index] + 1);//아이콘 추가 
-                    status.current_validnumber_state[selected_state_index]++;
                     
+                    status.current_validnumber_state[selected_state_index]++;
+                    Images[1].sprite = ConditionDatabase.Instance.indexDB[status.current_validnumber_state[selected_state_index] - 1].index_Image;
+                    particle_system = particle_manager.particles[0].GetComponentInChildren<ParticleSystem>();
+                    particle_system.Play();
+                    Debug.Log($"{particle_system.transform.position}");
+                    Debug.Log("공격력 증가 포션 로그 후 ");
                 }
                 break;
             case State.quick://1==신속
                 selected_state_index = 1;
                 if (status.current_validnumber_state[selected_state_index] < max_number_state)
                 {
+                    if (status.current_validnumber_state[selected_state_index] == 0)//처음 버프 적용시 
+                    {
+                        Images = activated_condition_holder.GetChild(1).gameObject.GetComponentsInChildren<Image>();
+                        Images[0].sprite = ConditionDatabase.Instance.conditionDB[1].condition_Image;//상태아이콘 
+                        Images[1].sprite = ConditionDatabase.Instance.indexDB[0].index_Image;//인덱스 아이콘
+                        activated_condition_holder.GetChild(1).gameObject.SetActive(true);
+                    }
                     StopCoroutine(status.enumerators[selected_state_index]);
                     status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
                     StartCoroutine(status.enumerators[selected_state_index]);//새로운 버프 사용시간 타이머 동작
                     status.add_attack_speed(input_attack_speed);
                     status.current_validnumber_state[selected_state_index]++;
+                    Images[1].sprite = ConditionDatabase.Instance.indexDB[status.current_validnumber_state[selected_state_index] - 1].index_Image;
+                    particle_system = particle_manager.particles[1].GetComponentInChildren<ParticleSystem>();
+                    particle_system.Play();
+                    Debug.Log($"{particle_system.transform.position}");
+                    Debug.Log("공격속도  포션 로그 후 ");
                 }
                 break;
             case State.solid://2==견고 
@@ -215,11 +240,13 @@ public class Condition_applicator : MonoBehaviour
                 status.init_state(1);//괴력 초기화 
                 status.current_validnumber_state[i]=0;
                 status.current_valid_statetime[i] = 0.0f;
+                activated_condition_holder.GetChild(0).gameObject.SetActive(false);
                 break;
             case 1:
                 status.init_state(4);//신속 초기화 
                 status.current_validnumber_state[i] = 0;
                 status.current_valid_statetime[i] = 0.0f;
+                activated_condition_holder.GetChild(1).gameObject.SetActive(false);
                 break;
             case 2:
                 status.init_state(2);//견고 초기화 

@@ -21,6 +21,8 @@ TagManager:
   - GameManager
   - ItemDatabase
   - Player_skilling
+  - Smoke_creator
+  - Buff_icon
   layers:
   - Default
   - TransparentFX

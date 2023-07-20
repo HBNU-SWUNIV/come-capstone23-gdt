@@ -9,7 +9,7 @@ public class activated_condition : MonoBehaviour
     public Image condition_image;
     public Image index_image;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         
     }

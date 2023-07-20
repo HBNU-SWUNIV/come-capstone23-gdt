@@ -169,6 +169,7 @@ MonoBehaviour:
   - 0
   current_validnumber_state: 000000000000000000000000
   current_burn: 0
+  minimal_enemy_number: 0
   hp: 0
   offensive_power: 0
   defensive_power: 0

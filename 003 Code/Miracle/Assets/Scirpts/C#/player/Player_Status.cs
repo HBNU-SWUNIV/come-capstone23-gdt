@@ -27,11 +27,11 @@ public class Player_Status : MonoBehaviour//초기 스테이터스 설정
     public int current_burn=0, current_toxin=0;
     public bool Is_protective_film, Is_Fixed_damage;//보호막 및 고정데미지 
 
-    public int pocket_money,current_index_conditionofarray;
+    public int pocket_money;
     public Movement2D movement;
-    public Transform activated_condition_holder;
-    public activated_condition[] activated_Conditions;
-    public GameObject condition_prefab,condition_applicator_object;
+    //public Transform activated_condition_holder;
+    //public activated_condition[] activated_Conditions;
+    public GameObject condition_applicator_object;
     private Condition_applicator condition_applicator;
 
     private float permanent_hp=100f, permanent_offensive_power=5f, permanent_defensive_power=5f, permanent_move_speed=2f, permanent_attack_speed=0.1f, permanent_recovery=10f, permanent_critical=5f;
@@ -48,63 +48,11 @@ public class Player_Status : MonoBehaviour//초기 스테이터스 설정
 
     public void Add_Condition_icon(ConditionType input_conditiontype,int next_apply_index)// 데이터베이스에서의 타입과 다음에 중첩할 수치 
     {
-        bool IsExist=false;
-        int exist_index=0;
-
-        if (activated_Conditions.Length == 0)
-        {
-            int index = ConditionDatabase.instance_condition.conditionDB.FindIndex(x => x.conditiontype == input_conditiontype);
-            condition_prefab.GetComponent<activated_condition>().condition_image = ConditionDatabase.instance_condition.conditionDB[index].condition_Image;
-            condition_prefab.GetComponent<activated_condition>().index_image = ConditionDatabase.instance_condition.indexDB[0].index_Image;
-            activated_Conditions[current_index_conditionofarray] = Instantiate(condition_prefab.GetComponent<activated_condition>());
-            current_index_conditionofarray++;
-            return;
-        }
-
-        for(int i=0;i< activated_Conditions.Length; i++)
-        {
-            if (activated_Conditions[i].conditiontype == input_conditiontype)
-            {
-                IsExist = true;
-                exist_index = i;
-                break;
-            }
-        }
-        if (IsExist == true)//이미 존재할시 
-        {
-            if (next_apply_index == 2)
-            {
-                activated_Conditions[exist_index].index_image= ConditionDatabase.instance_condition.indexDB[1].index_Image;
-            }
-            else if(next_apply_index == 3)
-            {
-                activated_Conditions[exist_index].index_image = ConditionDatabase.instance_condition.indexDB[2].index_Image;
-            }
-
-        }
-        else if(IsExist == false)//존재하지 않을시
-        {
-            int index = ConditionDatabase.instance_condition.conditionDB.FindIndex(x => x.conditiontype == input_conditiontype);
-            condition_prefab.GetComponent<activated_condition>().condition_image = ConditionDatabase.instance_condition.conditionDB[index].condition_Image;
-            condition_prefab.GetComponent<activated_condition>().index_image = ConditionDatabase.instance_condition.indexDB[0].index_Image;
-            activated_Conditions[current_index_conditionofarray] = Instantiate(condition_prefab.GetComponent<activated_condition>());
-            current_index_conditionofarray++;
-        }
+        
     }
     public void Remove_Condition_icon(ConditionType input_conditiontype)//컨디션 아이콘 제거 
     {
-        int exist_index = 0;
-        for (int i = 0; i < activated_Conditions.Length; i++)
-        {
-            if (activated_Conditions[i].conditiontype == input_conditiontype)
-            {
-                
-                exist_index = i;
-                break;
-            }
-        }
-        activated_Conditions[exist_index] = null;
-        current_index_conditionofarray--;
+        
     }
 
 
@@ -116,8 +64,10 @@ public class Player_Status : MonoBehaviour//초기 스테이터스 설정
         }
         current_hp = max_hp;
         Is_Fixed_damage = false;
-        activated_Conditions= activated_condition_holder.GetComponentsInChildren<activated_condition>();
-        current_index_conditionofarray = 0;
+        //activated_Conditions= activated_condition_holder.GetComponentsInChildren<activated_condition>();
+        //current_index_conditionofarray = 0;
+        
+
 
     }
     public void core_init(int i) {// 영구 스테이터스 상승후 저장기능,영구 스테이터스 상승시 해당 디버프 삭제 

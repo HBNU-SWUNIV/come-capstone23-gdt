@@ -6,6 +6,7 @@ public class smoke_creator : MonoBehaviour
 {
     GameObject player;
     Animator animator;
+    public int smoke_vertical_figure;
     // Start is called before the first frame update
     void Awake()
     {
@@ -15,10 +16,11 @@ public class smoke_creator : MonoBehaviour
     }
     private void Update()
     {
-        this.transform.position = player.transform.position;
+       
     }
     public void activate()
     {
+        this.transform.position = player.transform.position+new Vector3(0, smoke_vertical_figure, 0);
         animator.SetTrigger("Change_class");
     }
 }

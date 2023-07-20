@@ -11,19 +11,20 @@ public enum Mode { assassin,shock,shooter}
 public class playercontroller : MonoBehaviour//피격 상태정의 
 {
     public Mode mode;
-    public Animator[] animators;
+    
     private Movement2D movement2d;
     private Player_Status status;
     private InventoryUI inventory_ui;
     AudioSource audiosrc;
     bool isMoving = false;
     //bool is_Shop_open;
-    GameObject fade_system, manager;
+    GameObject fade_system, manager,smoke_creator_object;
     FadeSystem performer_fade_system;
     Animator animator;
     public RuntimeAnimatorController[] animation_controllers= new RuntimeAnimatorController[3];
     private Rigidbody2D rigid;
-
+    public smoke_creator smoke_script;
+    
     [SerializeField]GameObject condition_applicator;
     [SerializeField] Condition_applicator applicator;
 
@@ -44,8 +45,9 @@ public class playercontroller : MonoBehaviour//피격 상태정의
         //is_Shop_open = false;
         animator = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody2D>();
-        animators = new Animator[2];
-        animators = GetComponentsInChildren<Animator>();
+        smoke_creator_object = GameObject.FindWithTag("Smoke_creator");
+        smoke_script = smoke_creator_object.GetComponent<smoke_creator>();
+
     }
    
    
@@ -251,24 +253,24 @@ public class playercontroller : MonoBehaviour//피격 상태정의
         }
 
 
-        if (Input.GetKeyDown(KeyCode.F1))
+        if (Input.GetKeyDown(KeyCode.F1)&& movement2d.isGround)
         {
             mode = Mode.assassin;
             animator.runtimeAnimatorController = animation_controllers[0];
-            animators[1].SetTrigger("Change_class");
+            smoke_script.activate();
         }
-        if (Input.GetKeyDown(KeyCode.F2))
+        if (Input.GetKeyDown(KeyCode.F2) && movement2d.isGround)
         {
             mode = Mode.shock;
             animator.runtimeAnimatorController = animation_controllers[1];
-            animators[1].SetTrigger("Change_class");
-           
+            smoke_script.activate();
+
         }
-        if (Input.GetKeyDown(KeyCode.F3))
+        if (Input.GetKeyDown(KeyCode.F3) && movement2d.isGround)
         {
             mode = Mode.shooter;
             animator.runtimeAnimatorController = animation_controllers[2];
-            animators[1].SetTrigger("Change_class");
+            smoke_script.activate();
         }
     }
 }

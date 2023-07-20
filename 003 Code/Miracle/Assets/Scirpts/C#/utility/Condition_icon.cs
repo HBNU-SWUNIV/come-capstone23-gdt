@@ -13,7 +13,7 @@ public class Condition_icon {
     public ConditionType conditiontype;
     public string conditionname;
     public string condition_description;
-    public Image condition_Image;
+    public Sprite condition_Image;
     
 
 

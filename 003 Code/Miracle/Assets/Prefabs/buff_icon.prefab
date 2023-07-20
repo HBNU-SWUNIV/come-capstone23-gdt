@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3994259690272422219}
   m_Layer: 5
   m_Name: buff_icon
-  m_TagString: Untagged
+  m_TagString: Buff_icon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -91,8 +91,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   conditiontype: 0
-  condition_image: {fileID: 937282684323492449}
-  index_image: {fileID: 3874992951552696110}
+  condition_image: {fileID: 0}
+  index_image: {fileID: 0}
 --- !u!1 &4126180722728640247
 GameObject:
   m_ObjectHideFlags: 0

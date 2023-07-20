@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class icon_index 
 {
 
-    public Image index_Image;
+    public Sprite index_Image;
     // Start is called before the first frame update
     void Start()
     {
