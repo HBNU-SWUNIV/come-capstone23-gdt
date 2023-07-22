@@ -286,6 +286,7 @@ public class Player_Status : MonoBehaviour//초기 스테이터스 설정
             yield return new WaitForSeconds(60.0f);
             current_burn=0;
             CancelInvoke("reduce_hp_1");
+            condition_applicator.activated_condition_holder.GetChild(13).gameObject.SetActive(false);
         }
     }
     public void reduce_offensive_power(float input)//약화

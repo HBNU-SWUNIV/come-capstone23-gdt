@@ -80,6 +80,11 @@ public class ItemDatabase : MonoBehaviour
                 condition_Applicator.Apply_state();
                 Debug.Log("회복 증가");
                 break;
+            case 7://고정데미지
+                condition_Applicator.Set_state(State.fixed_attack);
+                condition_Applicator.Apply_state();
+                Debug.Log("고정데미지 적용");
+                break;
         }
     }
     

@@ -51,10 +51,10 @@ public class Condition_applicator : MonoBehaviour
                 {
                     if (status.current_validnumber_state[selected_state_index]==0)//처음 버프 적용시 
                     {
-                        Images = activated_condition_holder.GetChild(0).gameObject.GetComponentsInChildren<Image>();
-                        Images[0].sprite = ConditionDatabase.Instance.conditionDB[0].condition_Image;
+                        Images = activated_condition_holder.GetChild(selected_state_index).gameObject.GetComponentsInChildren<Image>();
+                        Images[0].sprite = ConditionDatabase.Instance.conditionDB[selected_state_index].condition_Image;
                         Images[1].sprite = ConditionDatabase.Instance.indexDB[0].index_Image;
-                        activated_condition_holder.GetChild(0).gameObject.SetActive(true);
+                        activated_condition_holder.GetChild(selected_state_index).gameObject.SetActive(true);
                     }
                     StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단
                     status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
@@ -75,10 +75,10 @@ public class Condition_applicator : MonoBehaviour
                 {
                     if (status.current_validnumber_state[selected_state_index] == 0)//처음 버프 적용시 
                     {
-                        Images = activated_condition_holder.GetChild(1).gameObject.GetComponentsInChildren<Image>();
-                        Images[0].sprite = ConditionDatabase.Instance.conditionDB[1].condition_Image;//상태아이콘 
+                        Images = activated_condition_holder.GetChild(selected_state_index).gameObject.GetComponentsInChildren<Image>();
+                        Images[0].sprite = ConditionDatabase.Instance.conditionDB[selected_state_index].condition_Image;//상태아이콘 
                         Images[1].sprite = ConditionDatabase.Instance.indexDB[0].index_Image;//인덱스 아이콘
-                        activated_condition_holder.GetChild(1).gameObject.SetActive(true);
+                        activated_condition_holder.GetChild(selected_state_index).gameObject.SetActive(true);
                     }
                     StopCoroutine(status.enumerators[selected_state_index]);
                     status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
@@ -96,22 +96,38 @@ public class Condition_applicator : MonoBehaviour
                 selected_state_index = 2;
                 if (status.current_validnumber_state[selected_state_index] < max_number_state)
                 {
+                    if (status.current_validnumber_state[selected_state_index] == 0)//처음 버프 적용시 
+                    {
+                        Images = activated_condition_holder.GetChild(selected_state_index).gameObject.GetComponentsInChildren<Image>();
+                        Images[0].sprite = ConditionDatabase.Instance.conditionDB[selected_state_index].condition_Image;//상태아이콘 
+                        Images[1].sprite = ConditionDatabase.Instance.indexDB[0].index_Image;//인덱스 아이콘
+                        activated_condition_holder.GetChild(selected_state_index).gameObject.SetActive(true);
+                    }
                     StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단
                     status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
                     StartCoroutine(status.enumerators[selected_state_index]);//새로운 버프 사용시간 타이머 동작
                     status.add_defensive_power(input_defensive_power);
                     status.current_validnumber_state[selected_state_index]++;
+                    Images[1].sprite = ConditionDatabase.Instance.indexDB[status.current_validnumber_state[selected_state_index] - 1].index_Image;
                 }
                 break;
             case State.agility://3==민첩
                 selected_state_index = 3;
                 if (status.current_validnumber_state[selected_state_index] < max_number_state)
                 {
+                    if (status.current_validnumber_state[selected_state_index] == 0)//처음 버프 적용시 
+                    {
+                        Images = activated_condition_holder.GetChild(selected_state_index).gameObject.GetComponentsInChildren<Image>();
+                        Images[0].sprite = ConditionDatabase.Instance.conditionDB[selected_state_index].condition_Image;//상태아이콘 
+                        Images[1].sprite = ConditionDatabase.Instance.indexDB[0].index_Image;//인덱스 아이콘
+                        activated_condition_holder.GetChild(selected_state_index).gameObject.SetActive(true);
+                    }
                     StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단
                     status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
                     StartCoroutine(status.enumerators[selected_state_index]);//새로운 버프 사용시간 타이머 동작
                     status.add_move_speed(input_move_speed);
                     status.current_validnumber_state[selected_state_index]++;
+                    Images[1].sprite = ConditionDatabase.Instance.indexDB[status.current_validnumber_state[selected_state_index] - 1].index_Image;
                 }
                 break;
 
@@ -119,28 +135,48 @@ public class Condition_applicator : MonoBehaviour
                 selected_state_index = 4;
                 if (status.current_validnumber_state[selected_state_index] < max_number_state)
                 {
+                    if (status.current_validnumber_state[selected_state_index] == 0)//처음 버프 적용시 
+                    {
+                        Images = activated_condition_holder.GetChild(selected_state_index).gameObject.GetComponentsInChildren<Image>();
+                        Images[0].sprite = ConditionDatabase.Instance.conditionDB[selected_state_index].condition_Image;//상태아이콘 
+                        Images[1].sprite = ConditionDatabase.Instance.indexDB[0].index_Image;//인덱스 아이콘
+                        activated_condition_holder.GetChild(selected_state_index).gameObject.SetActive(true);
+                    }
                     StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단
                     status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
                     StartCoroutine(status.enumerators[selected_state_index]);//새로운 버프 사용시간 타이머 동작
                     status.add_critical(input_critical);
                     status.current_validnumber_state[selected_state_index]++;
+                    Images[1].sprite = ConditionDatabase.Instance.indexDB[status.current_validnumber_state[selected_state_index] - 1].index_Image;
                 }
                 break;
             case State.recovery://5==회복
                 selected_state_index = 5;
                 if (status.current_validnumber_state[selected_state_index] < max_number_state)
                 {
+                    if (status.current_validnumber_state[selected_state_index] == 0)//처음 버프 적용시 
+                    {
+                        Images = activated_condition_holder.GetChild(selected_state_index).gameObject.GetComponentsInChildren<Image>();
+                        Images[0].sprite = ConditionDatabase.Instance.conditionDB[selected_state_index].condition_Image;//상태아이콘 
+                        Images[1].sprite = ConditionDatabase.Instance.indexDB[0].index_Image;//인덱스 아이콘
+                        activated_condition_holder.GetChild(selected_state_index).gameObject.SetActive(true);
+                    }
                     StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단
                     status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
                     StartCoroutine(status.enumerators[selected_state_index]);//새로운 버프 사용시간 타이머 동작
                     status.add_recovery(input_recovery);
                     status.current_validnumber_state[selected_state_index]++;
+                    Images[1].sprite = ConditionDatabase.Instance.indexDB[status.current_validnumber_state[selected_state_index] - 1].index_Image;
                 }
                 break;
             case State.burn://화상은 스테이터스에서 관리 
                 
                 if (status.current_burn < 1)
                 {
+                    Images = activated_condition_holder.GetChild(13).gameObject.GetComponentsInChildren<Image>();
+                    Images[0].sprite = ConditionDatabase.Instance.conditionDB[13].condition_Image;//상태아이콘 
+                    Images[1].sprite = ConditionDatabase.Instance.indexDB[0].index_Image;//인덱스 아이콘
+                    activated_condition_holder.GetChild(13).gameObject.SetActive(true);
                     status.continuous_decline_hp(1);
                 }
                 break;
@@ -148,45 +184,77 @@ public class Condition_applicator : MonoBehaviour
                 selected_state_index = 6;
                 if (status.current_validnumber_state[selected_state_index] < max_number_state)
                 {
+                    if (status.current_validnumber_state[selected_state_index] == 0)//처음 버프 적용시 
+                    {
+                        Images = activated_condition_holder.GetChild(selected_state_index).gameObject.GetComponentsInChildren<Image>();
+                        Images[0].sprite = ConditionDatabase.Instance.conditionDB[selected_state_index].condition_Image;//상태아이콘 
+                        Images[1].sprite = ConditionDatabase.Instance.indexDB[0].index_Image;//인덱스 아이콘
+                        activated_condition_holder.GetChild(selected_state_index).gameObject.SetActive(true);
+                    }
                     StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단
                     status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
                     StartCoroutine(status.enumerators[selected_state_index]);//새로운 버프 사용시간 타이머 동작
                     status.reduce_offensive_power(input_weak);
                     status.current_validnumber_state[selected_state_index]++;
+                    Images[1].sprite = ConditionDatabase.Instance.indexDB[status.current_validnumber_state[selected_state_index] - 1].index_Image;
                 }
                 break;
             case State.deceleration://7==감속
                 selected_state_index = 7;
                 if (status.current_validnumber_state[selected_state_index] < max_number_state)
                 {
+                    if (status.current_validnumber_state[selected_state_index] == 0)//처음 버프 적용시 
+                    {
+                        Images = activated_condition_holder.GetChild(selected_state_index).gameObject.GetComponentsInChildren<Image>();
+                        Images[0].sprite = ConditionDatabase.Instance.conditionDB[selected_state_index].condition_Image;//상태아이콘 
+                        Images[1].sprite = ConditionDatabase.Instance.indexDB[0].index_Image;//인덱스 아이콘
+                        activated_condition_holder.GetChild(selected_state_index).gameObject.SetActive(true);
+                    }
                     StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단
                     status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
                     StartCoroutine(status.enumerators[selected_state_index]);//새로운 버프 사용시간 타이머 동작
                     status.reduce_attack_speed(input_deceleration);
                     status.current_validnumber_state[selected_state_index]++;
+                    Images[1].sprite = ConditionDatabase.Instance.indexDB[status.current_validnumber_state[selected_state_index] - 1].index_Image;
                 }
                 break;
             case State.destroy://8==파괴 
                 selected_state_index = 8;
                 if (status.current_validnumber_state[selected_state_index] < max_number_state)
                 {
+                    if (status.current_validnumber_state[selected_state_index] == 0)//처음 버프 적용시 
+                    {
+                        Images = activated_condition_holder.GetChild(selected_state_index).gameObject.GetComponentsInChildren<Image>();
+                        Images[0].sprite = ConditionDatabase.Instance.conditionDB[selected_state_index].condition_Image;//상태아이콘 
+                        Images[1].sprite = ConditionDatabase.Instance.indexDB[0].index_Image;//인덱스 아이콘
+                        activated_condition_holder.GetChild(selected_state_index).gameObject.SetActive(true);
+                    }
                     StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단
                     status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
                     StartCoroutine(status.enumerators[selected_state_index]);//새로운 버프 사용시간 타이머 동작
                     status.reduce_defensive_power(input_destroy);
                     status.current_validnumber_state[selected_state_index]++;
+                    Images[1].sprite = ConditionDatabase.Instance.indexDB[status.current_validnumber_state[selected_state_index] - 1].index_Image;
                 }
                 break;
             case State.toxin://9==독
                 selected_state_index = 9;
                 if (status.current_validnumber_state[selected_state_index] < max_number_state)
-                { 
+                {
+                    if (status.current_validnumber_state[selected_state_index] == 0)//처음 버프 적용시 
+                    {
+                        Images = activated_condition_holder.GetChild(selected_state_index).gameObject.GetComponentsInChildren<Image>();
+                        Images[0].sprite = ConditionDatabase.Instance.conditionDB[selected_state_index].condition_Image;//상태아이콘 
+                        Images[1].sprite = ConditionDatabase.Instance.indexDB[0].index_Image;//인덱스 아이콘
+                        activated_condition_holder.GetChild(selected_state_index).gameObject.SetActive(true);
+                    }
                     StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단
                     status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
                     StartCoroutine(status.enumerators[selected_state_index]);//새로운 버프 사용시간 타이머 동작
                     status.current_toxin++;
                     status.InVoke_fuction();
                     status.current_validnumber_state[selected_state_index]++;
+                    Images[1].sprite = ConditionDatabase.Instance.indexDB[status.current_validnumber_state[selected_state_index] - 1].index_Image;
                 }
                 break;
             case State.coldair://10==냉기 
@@ -199,34 +267,58 @@ public class Condition_applicator : MonoBehaviour
 
                 else if(status.current_validnumber_state[selected_state_index] < max_number_state)
                 {
+                    if (status.current_validnumber_state[selected_state_index] == 0)//처음 버프 적용시 
+                    {
+                        Images = activated_condition_holder.GetChild(selected_state_index).gameObject.GetComponentsInChildren<Image>();
+                        Images[0].sprite = ConditionDatabase.Instance.conditionDB[selected_state_index].condition_Image;//상태아이콘 
+                        Images[1].sprite = ConditionDatabase.Instance.indexDB[0].index_Image;//인덱스 아이콘
+                        activated_condition_holder.GetChild(selected_state_index).gameObject.SetActive(true);
+                    }
                     StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단
                     status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
                     StartCoroutine(status.enumerators[selected_state_index]);//새로운 버프 사용시간 타이머 동작
                     status.reduece_move_speed(input_coldair);
                     status.current_validnumber_state[selected_state_index]++;
+                    Images[1].sprite = ConditionDatabase.Instance.indexDB[status.current_validnumber_state[selected_state_index] - 1].index_Image;
                 }
                 break;
             case State.cooling://11==냉각 
                 selected_state_index = 11;
                 if (status.current_validnumber_state[selected_state_index] < 1)
                 {
+                    if (status.current_validnumber_state[selected_state_index] == 0)//처음 버프 적용시 
+                    {
+                        Images = activated_condition_holder.GetChild(selected_state_index).gameObject.GetComponentsInChildren<Image>();
+                        Images[0].sprite = ConditionDatabase.Instance.conditionDB[selected_state_index].condition_Image;//상태아이콘 
+                        Images[1].sprite = ConditionDatabase.Instance.indexDB[0].index_Image;//인덱스 아이콘
+                        activated_condition_holder.GetChild(selected_state_index).gameObject.SetActive(true);
+                    }
                     StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단
                     status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
                     StartCoroutine(status.enumerators[selected_state_index]);//새로운 버프 사용시간 타이머 동작
                     status.movement.jumpforce = 0.0f;
                     status.move_speed = 0.0f;
-                    status.current_validnumber_state[selected_state_index]++;
+                    
+                    
                 }
                 break;
             case State.fixed_attack://고정데미지 여부 
                 selected_state_index = 12;
                 if (status.current_validnumber_state[selected_state_index] < 1)
                 {
+                    if (status.current_validnumber_state[selected_state_index] == 0)//처음 버프 적용시 
+                    {
+                        Images = activated_condition_holder.GetChild(selected_state_index).gameObject.GetComponentsInChildren<Image>();
+                        Images[0].sprite = ConditionDatabase.Instance.conditionDB[selected_state_index].condition_Image;//상태아이콘 
+                        Images[1].sprite = ConditionDatabase.Instance.indexDB[0].index_Image;//인덱스 아이콘
+                        activated_condition_holder.GetChild(selected_state_index).gameObject.SetActive(true);
+                    }
                     StopCoroutine(status.enumerators[selected_state_index]);//기존에 동작하던 현재 버프 사용시간 타이머 중단
                     status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
                     StartCoroutine(status.enumerators[selected_state_index]);//새로운 버프 사용시간 타이머 동작
                     status.Is_Fixed_damage = true;
-                    status.current_validnumber_state[selected_state_index]++;
+                    
+                    
                 }
 
                 break;
@@ -252,58 +344,69 @@ public class Condition_applicator : MonoBehaviour
                 status.init_state(2);//견고 초기화 
                 status.current_validnumber_state[i] = 0;
                 status.current_valid_statetime[i] = 0.0f;
+                activated_condition_holder.GetChild(2).gameObject.SetActive(false);
                 break;
             case 3:
                 status.init_state(3);//민첩 초기화 
                 status.current_validnumber_state[i] = 0;
                 status.current_valid_statetime[i] = 0.0f;
+                activated_condition_holder.GetChild(3).gameObject.SetActive(false);
                 break;
             case 4:
                 status.init_state(6);//집중 초기화 
                 status.current_validnumber_state[i] = 0;
                 status.current_valid_statetime[i] = 0.0f;
+                activated_condition_holder.GetChild(4).gameObject.SetActive(false);
                 break;
             case 5:
                 status.init_state(5);//회복 초기화 
                 status.current_validnumber_state[i] = 0;
                 status.current_valid_statetime[i] = 0.0f;
+                activated_condition_holder.GetChild(5).gameObject.SetActive(false);
                 break;
             case 6:
                 status.init_state(1);//약화 초기화 
                 status.current_validnumber_state[i] = 0;
                 status.current_valid_statetime[i] = 0.0f;
+                activated_condition_holder.GetChild(6).gameObject.SetActive(false);
                 break;
             case 7:
                 status.init_state(4);//감속 초기화 
                 status.current_validnumber_state[i] = 0;
                 status.current_valid_statetime[i] = 0.0f;
+                activated_condition_holder.GetChild(7).gameObject.SetActive(false);
                 break;
             case 8:
                 status.init_state(2);//파괴 초기화 
                 status.current_validnumber_state[i] = 0;
                 status.current_valid_statetime[i] = 0.0f;
+                activated_condition_holder.GetChild(8).gameObject.SetActive(false);
                 break;
             case 9:
                 status.InVoke_Cancel_fuction();//독 초기화 
                 status.current_toxin = 0;
                 status.current_validnumber_state[i] = 0;
                 status.current_valid_statetime[i] = 0.0f;
+                activated_condition_holder.GetChild(9).gameObject.SetActive(false);
                 break;
             case 10:
                 status.init_state(3);//냉기 초기화 
                 status.current_validnumber_state[i] = 0;
                 status.current_valid_statetime[i] = 0.0f;
+                activated_condition_holder.GetChild(10).gameObject.SetActive(false);
                 break;
             case 11://냉각 초기화 
                 status.movement.jumpforce = 8.0f;//점프 초기값
                 status.init_state(3);//초기 이동속도 값
                 status.current_validnumber_state[i] = 0;
                 status.current_valid_statetime[i] = 0.0f;
+                activated_condition_holder.GetChild(11).gameObject.SetActive(false);
                 break;
             case 12://플레이어 고정데미지 
                 status.Is_Fixed_damage = false;
                 status.current_validnumber_state[i] = 0;
                 status.current_valid_statetime[i] = 0.0f;
+                activated_condition_holder.GetChild(12).gameObject.SetActive(false);
                 break;
         }
 
