@@ -17,6 +17,7 @@ public class playercontroller : MonoBehaviour//피격 상태정의
     private InventoryUI inventory_ui;
     AudioSource audiosrc;
     bool isMoving = false;
+    public bool isRight;
     //bool is_Shop_open;
     GameObject fade_system, manager,smoke_creator_object;
     FadeSystem performer_fade_system;
@@ -55,12 +56,12 @@ public class playercontroller : MonoBehaviour//피격 상태정의
     private void OnCollisionEnter2D(Collision2D collision) 
     {
         
-        if (collision.gameObject.tag.Equals("Enemy_weapon"))//적의 공격에 당할경우 
+        if (collision.gameObject.tag.Equals("Enemy_weapon"))//적의 원거리 공격에 당할경우,잡몹용
         {
             if (this.CompareTag("Player"))
             {
                 animator.SetTrigger("Player_damaged");
-                float enemy_offensive = collision.gameObject.GetComponent<EnemyStatus>().offensive_power;
+                float enemy_offensive = collision.gameObject.GetComponent<EnemyWeaponStatus>().enemy_offensive_power;
                 movement2d.OnDamaged(collision.transform.position);
                 if (status.Is_protective_film == true)//캐릭터의 보호막이 있는 경우 
                 {
@@ -85,7 +86,7 @@ public class playercontroller : MonoBehaviour//피격 상태정의
             }
             
         }
-        else if (collision.gameObject.tag.Equals("Enemy"))//적에게 접촉할경우 
+        else if (collision.gameObject.tag.Equals("Enemy"))//적에게 직접 접촉할경우,잡몹용
         {
             if (this.CompareTag("Player"))
             {
@@ -125,6 +126,64 @@ public class playercontroller : MonoBehaviour//피격 상태정의
                 Destroy(collision.gameObject);
             }
         }
+        else if (collision.gameObject.tag.Equals("Boss"))//보스 한테 직접 피격시 
+        {
+            if (this.CompareTag("Player"))
+            {
+                animator.SetTrigger("Player_damaged");//피격 모션 활성화
+                float enemy_offensive = collision.gameObject.GetComponent<boss_status>().offensive_power;
+                movement2d.OnDamaged(collision.transform.position);
+                if (status.Is_protective_film == true)//캐릭터의 보호막이 있는 경우 
+                {
+                    if (status.protective_film >= enemy_offensive)//실수치 깎아내기 
+                    {
+                        status.protective_film -= enemy_offensive;
+
+                    }
+                    else if (status.protective_film < enemy_offensive)
+                    {
+                        float Remaining_attack_power = enemy_offensive - status.protective_film;
+                        status.protective_film = 0f;
+                        status.Is_protective_film = false;
+                        status.current_hp -= Remaining_attack_power - (status.defensive_power / 10);
+                    }
+
+                }
+                else if (status.Is_protective_film == false)//캐릭터의 보호막이 없는 경우 
+                {
+                    status.current_hp -= enemy_offensive - (status.defensive_power / 10);
+                }
+            }
+        }
+        else if (collision.gameObject.tag.Equals("Boss_long_range_attack"))//보스 원거리 공격 피격시 
+        {
+            if (this.CompareTag("Player"))
+            {
+                animator.SetTrigger("Player_damaged");//피격 모션 활성화
+                float enemy_offensive = collision.gameObject.GetComponent<Boss_long_range_status>().boss_offensive_power;
+                movement2d.OnDamaged(collision.transform.position);
+                if (status.Is_protective_film == true)//캐릭터의 보호막이 있는 경우 
+                {
+                    if (status.protective_film >= enemy_offensive)//실수치 깎아내기 
+                    {
+                        status.protective_film -= enemy_offensive;
+
+                    }
+                    else if (status.protective_film < enemy_offensive)
+                    {
+                        float Remaining_attack_power = enemy_offensive - status.protective_film;
+                        status.protective_film = 0f;
+                        status.Is_protective_film = false;
+                        status.current_hp -= Remaining_attack_power - (status.defensive_power / 10);
+                    }
+
+                }
+                else if (status.Is_protective_film == false)//캐릭터의 보호막이 없는 경우 
+                {
+                    status.current_hp -= enemy_offensive - (status.defensive_power / 10);
+                }
+            }
+        }
     }
     private void OnTriggerStay2D(Collider2D collision) 
     {
@@ -151,9 +210,17 @@ public class playercontroller : MonoBehaviour//피격 상태정의
             performer_fade_system.total_start();
         }
         
-        
-        
     }
+
+    private void OnTriggerEnter2D(Collider2D coll)
+    {
+        if (coll.gameObject.tag.Equals("falling_rock"))
+        {
+            applicator.Set_state(State.deceleration);
+            applicator.Apply_state();
+        }
+    }
+
     public void player_death()//플레이어 사망
     {
         gameObject.layer = 12;
@@ -186,6 +253,14 @@ public class playercontroller : MonoBehaviour//피격 상태정의
 
         if (x != 0)
         {
+            if (x > 0)
+            {
+                isRight = true;
+            }
+            else if (x < 0)
+            {
+                isRight = false;
+            }
             movement2d.Move(x);
             isMoving = true;
             animator.SetBool("IsMove", isMoving);

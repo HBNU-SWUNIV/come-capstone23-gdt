@@ -8,7 +8,8 @@ public class EnemyMove : MonoBehaviour
     public GameObject player;
     Rigidbody2D rb;
     SpriteRenderer sprite;
-    
+    public Animator animator;
+    public int number_current_skill,output_random;
     public float detectionRange = 10f;    // 추적을 시작할 플레이어의 거리
     public float raycastDistance = 1f;   // 몬스터가 플레이어가 있는지 체크할 레이캐스트 거리
 
@@ -24,6 +25,7 @@ public class EnemyMove : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
         player = GameObject.FindWithTag("Player");
+        animator = GetComponent<Animator>();
         
     }
 
@@ -91,13 +93,33 @@ public class EnemyMove : MonoBehaviour
 
             if (hit.collider != null && hit.collider.CompareTag("Player"))
             {
+                Random_attack();
                 // 플레이어와 충돌 처리
                 // 예: 플레이어에게 데미지를 입히는 등의 로직을 구현
             }
         }
     }
 
+    public void Random_attack()
+    {
+        output_random = Random.Range(1, number_current_skill + 1);
 
+        switch (output_random)
+        {
+            case 1:
+                animator.SetTrigger("Attack1");
+                break;
+
+            case 2:
+                animator.SetTrigger("Attack2");
+                break;
+
+            case 3:
+                animator.SetTrigger("Attack3");
+                break;
+
+        }
+    }
 
 
     /*void Think() {

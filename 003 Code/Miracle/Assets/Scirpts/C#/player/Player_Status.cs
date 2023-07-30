@@ -46,14 +46,6 @@ public class Player_Status : MonoBehaviour//초기 스테이터스 설정
         }
     }
 
-    public void Add_Condition_icon(ConditionType input_conditiontype,int next_apply_index)// 데이터베이스에서의 타입과 다음에 중첩할 수치 
-    {
-        
-    }
-    public void Remove_Condition_icon(ConditionType input_conditiontype)//컨디션 아이콘 제거 
-    {
-        
-    }
 
 
     void Start()

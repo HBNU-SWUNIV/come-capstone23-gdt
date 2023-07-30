@@ -143,11 +143,15 @@ public class EnemyStatus : MonoBehaviour
         { //고정데미지 일시 
 
             hp -= player_status.offensive_power * damage_magnification;
+            Debug.Log($"고정데미지 :{player_status.offensive_power * damage_magnification}");
+            Game_manager.instance.Apply_damaged_real_figure(gameObject.transform, (int)((int)player_status.offensive_power * damage_magnification));
         }
         else if (player_status.Is_Fixed_damage == false)//고정데미지 아닐시 
         {
             float damage = player_status.offensive_power - (defensive_power / 5);
             hp -= damage * damage_magnification;
+            Debug.Log($"일반데미지 :{damage * damage_magnification}");
+            Game_manager.instance.Apply_damaged_real_figure(gameObject.transform, (int)((int)damage * damage_magnification));
         }
 
     }

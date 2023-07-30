@@ -28,6 +28,9 @@ public class Game_manager : MonoBehaviour
     public string path;
     public int nowSlot;
 
+
+    public GameObject damaged_text;//데미지 출력 text
+
     public void Awake()
     {
         path = Application.persistentDataPath+ "/save_file";
@@ -52,6 +55,13 @@ public class Game_manager : MonoBehaviour
     {
         //inventoryPanel.SetActive(activeInventory);
     }
+
+    public void Apply_damaged_real_figure(Transform input_transform, int input_figure)
+    {
+        damaged_text.SetActive(true);
+        damaged_text.GetComponent<monster_hited_damaged>().apply_figure(input_transform, input_figure);
+    }
+
 
     // Update is called once per frame
     void Update()

@@ -23,6 +23,11 @@ TagManager:
   - Player_skilling
   - Smoke_creator
   - Buff_icon
+  - Boss_Condition_applicator
+  - falling_rock
+  - YellowDust
+  - Boss
+  - Boss_long_range_attack
   layers:
   - Default
   - TransparentFX
@@ -37,7 +42,7 @@ TagManager:
   - Store
   - Player_skilling
   - Player_death
-  - 
+  - falling_rock
   - 
   - 
   - 

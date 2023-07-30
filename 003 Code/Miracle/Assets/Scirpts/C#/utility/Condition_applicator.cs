@@ -20,7 +20,7 @@ public class Condition_applicator : MonoBehaviour
     private int selected_state_index;
 
     public Transform activated_condition_holder;
-    public GameObject player;
+    public GameObject player,particle_object;
     public Particle_manager particle_manager;
     public ParticleSystem particle_system;
     private Player_Status status;
@@ -35,6 +35,14 @@ public class Condition_applicator : MonoBehaviour
         for (int i = 0; i < 13; i++) {//초기 enumerator 설정
 
             status.enumerators[i] = start_reuse_waiting_time(i);
+        }
+    }
+    
+    private void Update()
+    {
+        if (particle_system != null)
+        {
+            particle_system.transform.position = player.transform.position;
         }
     }
     public void Set_state(State state) {
@@ -63,10 +71,12 @@ public class Condition_applicator : MonoBehaviour
                     
                     status.current_validnumber_state[selected_state_index]++;
                     Images[1].sprite = ConditionDatabase.Instance.indexDB[status.current_validnumber_state[selected_state_index] - 1].index_Image;
-                    particle_system = particle_manager.particles[0].GetComponentInChildren<ParticleSystem>();
+
+                    particle_object = Instantiate(particle_manager.particles[selected_state_index], player.transform.position, Quaternion.identity);
+                    particle_system = particle_object.GetComponentInChildren<ParticleSystem>();
                     particle_system.Play();
-                    Debug.Log($"{particle_system.transform.position}");
-                    Debug.Log("공격력 증가 포션 로그 후 ");
+                    
+                   
                 }
                 break;
             case State.quick://1==신속
@@ -86,10 +96,10 @@ public class Condition_applicator : MonoBehaviour
                     status.add_attack_speed(input_attack_speed);
                     status.current_validnumber_state[selected_state_index]++;
                     Images[1].sprite = ConditionDatabase.Instance.indexDB[status.current_validnumber_state[selected_state_index] - 1].index_Image;
-                    particle_system = particle_manager.particles[1].GetComponentInChildren<ParticleSystem>();
+
+                    particle_object = Instantiate(particle_manager.particles[selected_state_index], player.transform.position, Quaternion.identity);
+                    particle_system = particle_object.GetComponentInChildren<ParticleSystem>();
                     particle_system.Play();
-                    Debug.Log($"{particle_system.transform.position}");
-                    Debug.Log("공격속도  포션 로그 후 ");
                 }
                 break;
             case State.solid://2==견고 
@@ -109,6 +119,10 @@ public class Condition_applicator : MonoBehaviour
                     status.add_defensive_power(input_defensive_power);
                     status.current_validnumber_state[selected_state_index]++;
                     Images[1].sprite = ConditionDatabase.Instance.indexDB[status.current_validnumber_state[selected_state_index] - 1].index_Image;
+
+                    particle_object = Instantiate(particle_manager.particles[selected_state_index], player.transform.position, Quaternion.identity);
+                    particle_system = particle_object.GetComponentInChildren<ParticleSystem>();
+                    particle_system.Play();
                 }
                 break;
             case State.agility://3==민첩
@@ -128,6 +142,10 @@ public class Condition_applicator : MonoBehaviour
                     status.add_move_speed(input_move_speed);
                     status.current_validnumber_state[selected_state_index]++;
                     Images[1].sprite = ConditionDatabase.Instance.indexDB[status.current_validnumber_state[selected_state_index] - 1].index_Image;
+
+                    particle_object = Instantiate(particle_manager.particles[selected_state_index], player.transform.position, Quaternion.identity);
+                    particle_system = particle_object.GetComponentInChildren<ParticleSystem>();
+                    particle_system.Play();
                 }
                 break;
 
@@ -148,6 +166,10 @@ public class Condition_applicator : MonoBehaviour
                     status.add_critical(input_critical);
                     status.current_validnumber_state[selected_state_index]++;
                     Images[1].sprite = ConditionDatabase.Instance.indexDB[status.current_validnumber_state[selected_state_index] - 1].index_Image;
+
+                    particle_object = Instantiate(particle_manager.particles[selected_state_index], player.transform.position, Quaternion.identity);
+                    particle_system = particle_object.GetComponentInChildren<ParticleSystem>();
+                    particle_system.Play();
                 }
                 break;
             case State.recovery://5==회복
@@ -167,6 +189,10 @@ public class Condition_applicator : MonoBehaviour
                     status.add_recovery(input_recovery);
                     status.current_validnumber_state[selected_state_index]++;
                     Images[1].sprite = ConditionDatabase.Instance.indexDB[status.current_validnumber_state[selected_state_index] - 1].index_Image;
+
+                    particle_object = Instantiate(particle_manager.particles[selected_state_index], player.transform.position, Quaternion.identity);
+                    particle_system = particle_object.GetComponentInChildren<ParticleSystem>();
+                    particle_system.Play();
                 }
                 break;
             case State.burn://화상은 스테이터스에서 관리 
@@ -178,6 +204,10 @@ public class Condition_applicator : MonoBehaviour
                     Images[1].sprite = ConditionDatabase.Instance.indexDB[0].index_Image;//인덱스 아이콘
                     activated_condition_holder.GetChild(13).gameObject.SetActive(true);
                     status.continuous_decline_hp(1);
+
+                    particle_object = Instantiate(particle_manager.particles[6], player.transform.position, Quaternion.identity);
+                    particle_system = particle_object.GetComponentInChildren<ParticleSystem>();
+                    particle_system.Play();
                 }
                 break;
             case State.weak://6== 약화 
@@ -197,6 +227,10 @@ public class Condition_applicator : MonoBehaviour
                     status.reduce_offensive_power(input_weak);
                     status.current_validnumber_state[selected_state_index]++;
                     Images[1].sprite = ConditionDatabase.Instance.indexDB[status.current_validnumber_state[selected_state_index] - 1].index_Image;
+
+                    particle_object = Instantiate(particle_manager.particles[7], player.transform.position, Quaternion.identity);
+                    particle_system = particle_object.GetComponentInChildren<ParticleSystem>();
+                    particle_system.Play();
                 }
                 break;
             case State.deceleration://7==감속
@@ -216,6 +250,10 @@ public class Condition_applicator : MonoBehaviour
                     status.reduce_attack_speed(input_deceleration);
                     status.current_validnumber_state[selected_state_index]++;
                     Images[1].sprite = ConditionDatabase.Instance.indexDB[status.current_validnumber_state[selected_state_index] - 1].index_Image;
+
+                    particle_object = Instantiate(particle_manager.particles[8], player.transform.position, Quaternion.identity);
+                    particle_system = particle_object.GetComponentInChildren<ParticleSystem>();
+                    particle_system.Play();
                 }
                 break;
             case State.destroy://8==파괴 
@@ -235,6 +273,10 @@ public class Condition_applicator : MonoBehaviour
                     status.reduce_defensive_power(input_destroy);
                     status.current_validnumber_state[selected_state_index]++;
                     Images[1].sprite = ConditionDatabase.Instance.indexDB[status.current_validnumber_state[selected_state_index] - 1].index_Image;
+
+                    particle_object = Instantiate(particle_manager.particles[9], player.transform.position, Quaternion.identity);
+                    particle_system = particle_object.GetComponentInChildren<ParticleSystem>();
+                    particle_system.Play();
                 }
                 break;
             case State.toxin://9==독
@@ -255,6 +297,10 @@ public class Condition_applicator : MonoBehaviour
                     status.InVoke_fuction();
                     status.current_validnumber_state[selected_state_index]++;
                     Images[1].sprite = ConditionDatabase.Instance.indexDB[status.current_validnumber_state[selected_state_index] - 1].index_Image;
+
+                    particle_object = Instantiate(particle_manager.particles[10], player.transform.position, Quaternion.identity);
+                    particle_system = particle_object.GetComponentInChildren<ParticleSystem>();
+                    particle_system.Play();
                 }
                 break;
             case State.coldair://10==냉기 
@@ -280,6 +326,10 @@ public class Condition_applicator : MonoBehaviour
                     status.reduece_move_speed(input_coldair);
                     status.current_validnumber_state[selected_state_index]++;
                     Images[1].sprite = ConditionDatabase.Instance.indexDB[status.current_validnumber_state[selected_state_index] - 1].index_Image;
+
+                    particle_object = Instantiate(particle_manager.particles[11], player.transform.position, Quaternion.identity);
+                    particle_system = particle_object.GetComponentInChildren<ParticleSystem>();
+                    particle_system.Play();
                 }
                 break;
             case State.cooling://11==냉각 
@@ -298,8 +348,10 @@ public class Condition_applicator : MonoBehaviour
                     StartCoroutine(status.enumerators[selected_state_index]);//새로운 버프 사용시간 타이머 동작
                     status.movement.jumpforce = 0.0f;
                     status.move_speed = 0.0f;
-                    
-                    
+
+                    particle_object = Instantiate(particle_manager.particles[11], player.transform.position, Quaternion.identity);
+                    particle_system = particle_object.GetComponentInChildren<ParticleSystem>();
+                    particle_system.Play();
                 }
                 break;
             case State.fixed_attack://고정데미지 여부 
@@ -317,8 +369,11 @@ public class Condition_applicator : MonoBehaviour
                     status.enumerators[selected_state_index] = start_reuse_waiting_time(selected_state_index);
                     StartCoroutine(status.enumerators[selected_state_index]);//새로운 버프 사용시간 타이머 동작
                     status.Is_Fixed_damage = true;
-                    
-                    
+
+                    particle_object = Instantiate(particle_manager.particles[12], player.transform.position, Quaternion.identity);
+                    particle_system = particle_object.GetComponentInChildren<ParticleSystem>();
+                    particle_system.Play();
+
                 }
 
                 break;

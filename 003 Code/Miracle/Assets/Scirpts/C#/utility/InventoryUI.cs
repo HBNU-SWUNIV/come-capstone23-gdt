@@ -22,6 +22,7 @@ public class InventoryUI : MonoBehaviour
     public Text player_gained_coin;
     public GameObject player;
     public GameObject Record_book;
+   
 
     public int slot_activate_fee;//추가 슬롯 활성화 비용
 
@@ -39,6 +40,7 @@ public class InventoryUI : MonoBehaviour
         closeShop.onClick.AddListener(DeActiveShop);//이벤트 함수 연결
         Record_book.SetActive(active_record);
     }
+    
     
     void SlotChange()
     {
