@@ -58,7 +58,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: Blue_light_casting
+    m_ConditionEvent: light_casting
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 2170710584887918089}
@@ -184,7 +184,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: Blue_light_teleport_attack
+    m_ConditionEvent: light_teleport_attack
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -9106041959820145833}
@@ -256,7 +256,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: Blue_light_teleport_ready
+    m_ConditionEvent: light_teleport_ready
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3255079041379314284}
@@ -308,25 +308,25 @@ AnimatorController:
   m_Name: blue_light_controller
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: Blue_light_attack
+  - m_Name: light_attack
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: Blue_light_casting
+  - m_Name: light_casting
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: Blue_light_teleport_ready
+  - m_Name: light_teleport_ready
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: Blue_light_teleport_attack
+  - m_Name: light_teleport_attack
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -399,7 +399,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: Blue_light_attack
+    m_ConditionEvent: light_attack
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -659868970374429037}

@@ -13,10 +13,10 @@ public class boss_status : MonoBehaviour
     [Header("초기값 적용")]
     public float hp, offensive_power, defensive_power, attack_speed, move_speed;//체력,공격력,방어력,공격속도,이동속도
 
-    private float initial_hp;//초기체력
+    public float initial_hp;//초기체력
     private float early_move_speed, early_attack_speed;//입력한 초기값 저장 
     private float damage_magnification;//데미지 배율
-
+    public float remained_hp_percent;
    
     private Player_Status player_status;
     private EnemyMove enemy_move;
@@ -52,15 +52,15 @@ public class boss_status : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float percent = (initial_hp - hp / initial_hp) * 100;
+        remained_hp_percent = ( hp / initial_hp) * 100;
         enemy_move.movespeed = this.move_speed;
 
         if (hp <= 0)
         {
-            bringer_Dead_animation();
+            boss_Dead_animation();
         }
     }
-    public void bringer_Dead_animation()
+    public void boss_Dead_animation()
     {
         
             boss_animator.SetTrigger("Death");

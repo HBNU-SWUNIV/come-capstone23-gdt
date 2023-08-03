@@ -2,19 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Angel_state { blue, green, red }
+
 public class angel_move : MonoBehaviour
 {
-    public Animator bringer_animator;
-    public GameObject player, spell_attack_object;
+    public int percent_angel_hp;
+    public Animator angel_animator;
+    public GameObject player, angel_long_attack1, angel_long_attack2, angel_long_attack3;
     Rigidbody2D rb;
     public boss_status boss_status_script;
-    public SpriteRenderer render;
+    public Angel_state angel_state;
 
     public float detectionRange = 10f;    // 추적을 시작할 플레이어의 거리
     public float raycastDistance = 1f;
 
     public float movespeed;
-
+    public RuntimeAnimatorController[] animation_controllers = new RuntimeAnimatorController[3];
     private bool isPlayerInRange;
     private bool isFacingRight = true;
     // Start is called before the first frame update
@@ -22,20 +25,20 @@ public class angel_move : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindWithTag("Player");
-        bringer_animator = GetComponent<Animator>();
+        angel_animator = GetComponent<Animator>();
         boss_status_script = GetComponent<boss_status>();
-        spell_attack_object.GetComponent<Boss_long_range_status>().boss_offensive_power = (int)boss_status_script.offensive_power;
-        render = GetComponent<SpriteRenderer>();
+        angel_long_attack1.GetComponent<Boss_long_range_status>().boss_offensive_power = (int)boss_status_script.offensive_power;
+        angel_long_attack2.GetComponent<Boss_long_range_status>().boss_offensive_power = (int)boss_status_script.offensive_power;
+        angel_long_attack3.GetComponent<Boss_long_range_status>().boss_offensive_power = (int)boss_status_script.offensive_power;
+        angel_state = Angel_state.blue;
     }
 
-    private void Start()
-    {
-        InvokeRepeating("Bringer_Death_random_attack", 10f, 10f);
-    }
+   
 
     // Update is called once per frame
     void Update()
     {
+        percent_angel_hp = (int)boss_status_script.remained_hp_percent;
         if (player != null)
         {
             float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
@@ -43,7 +46,7 @@ public class angel_move : MonoBehaviour
             // 플레이어가 일정 거리 이내에 있을 때 추적 시작
             if (distanceToPlayer <= detectionRange)
             {
-                bringer_animator.SetBool("IsMove", true);
+                angel_animator.SetBool("IsMove", true);
                 isPlayerInRange = true;
 
                 // 플레이어와의 방향을 체크
@@ -64,11 +67,23 @@ public class angel_move : MonoBehaviour
             }
             else
             {
-                bringer_animator.SetBool("IsMove", false);
+                angel_animator.SetBool("IsMove", false);
                 isPlayerInRange = false;
                 rb.velocity = new Vector2(0f, rb.velocity.y);
             }
         }
+
+        if (percent_angel_hp == 50)//체력 50퍼센트 일시 
+        {
+            angel_animator.SetTrigger("Next_stage");
+            Set_second_stage();
+        }
+        else if (percent_angel_hp == 10)//체력 10퍼센트 남을시 
+        {
+            angel_animator.SetTrigger("Next_stage");
+            Set_third_stage();
+        }
+        
     }
 
     public void Flip()
@@ -87,8 +102,62 @@ public class angel_move : MonoBehaviour
 
             if (hit.collider != null && hit.collider.CompareTag("Player"))
             {
-                bringer_animator.SetTrigger("Death_Attack");//일반 휘두르기 공격
+                angel_animator.SetTrigger("light_attack");//일반 휘두르기 공격
             }
+        }
+    }
+
+    public void Teleport_attack_ready()
+    {
+        angel_animator.SetTrigger("light_teleport_ready");
+    }
+    public void Teleport_attack_activate()
+    {
+        this.gameObject.transform.position = player.transform.position;
+        angel_animator.SetTrigger("light_teleport_attack");
+    }
+
+    void Set_second_stage()
+    {
+        Invoke("angel_second_stage", 5f);
+    }
+
+    void Set_third_stage()
+    {
+        Invoke(" angel_third_stage", 5f);
+    }
+
+    public void angel_second_stage()
+    {
+        angel_state = Angel_state.green;
+        angel_animator.runtimeAnimatorController = animation_controllers[1];
+        boss_status_script.offensive_power += 5f;
+    }
+
+    public void angel_third_stage()
+    {
+        angel_state = Angel_state.red;
+        angel_animator.runtimeAnimatorController = animation_controllers[2];
+        boss_status_script.offensive_power += 5f;
+    }
+
+    public void activate_circle_long_attack()//원거리 투사체 발산 공격 
+    {
+        switch (angel_state)
+        {
+            case Angel_state.blue://블루 상태 
+
+
+                break;
+
+            case Angel_state.green://그린 상태
+
+                break;
+
+                 
+            case Angel_state.red://레드 상태 
+
+                break;
         }
     }
 }
