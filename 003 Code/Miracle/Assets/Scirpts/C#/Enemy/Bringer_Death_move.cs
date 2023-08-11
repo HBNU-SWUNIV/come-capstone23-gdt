@@ -98,18 +98,10 @@ public class Bringer_Death_move : MonoBehaviour
         Instantiate(spell_attack_object,new Vector3(player.transform.position.x, player.transform.position.y+9, player.transform.position.z),Quaternion.identity);
     }
 
-    public void Behind_attack()
+    public void Behind_attack_ready()
     {
-        bringer_animator.SetTrigger("Shadowmove");
-        if (player.GetComponent<playercontroller>().isRight==true)
-        {
-            this.transform.position = player.transform.position + new Vector3(-1,0,0);//플레이어 왼쪽 
-        }
-        else if(player.GetComponent<playercontroller>().isRight == false)
-        {
-            this.transform.position = player.transform.position + new Vector3(1, 0, 0);//플레이어 오른쪽
-        }
-        bringer_animator.SetTrigger("Shadowmove_reverse");
+        bringer_animator.SetTrigger("Shadowmove");// 뒤치기 준비모션
+        
     }
 
     public void Bringer_Death_random_attack()
@@ -119,11 +111,26 @@ public class Bringer_Death_move : MonoBehaviour
         switch (index)
         {
             case 1:
-                Behind_attack();
+                Behind_attack_ready();
                 break;
             case 2:
                 Spell_attack();
                 break;
         }
     }
+
+    public void Behind_attack_start()
+    {
+        if (player.GetComponent<playercontroller>().isRight == true)
+        {
+            this.transform.position = player.transform.position + new Vector3(-1, 0, 0);//플레이어 왼쪽 
+        }
+        else if (player.GetComponent<playercontroller>().isRight == false)
+        {
+            this.transform.position = player.transform.position + new Vector3(1, 0, 0);//플레이어 오른쪽
+        }
+        bringer_animator.SetTrigger("Shadowmove_reverse");//플레이어 뒤로 완벽히 이동
+    }
+
+    
 }

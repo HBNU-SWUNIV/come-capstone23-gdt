@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using UnityEngine.EventSystems;
 
 
 
@@ -15,11 +16,13 @@ public class PlayerData //플레이어 이름,플레이어스테이터스,도감상황,무기
 
 public class Game_manager : MonoBehaviour
 {
-    public RingMenu ColorSelectPrefab;
-    protected RingMenu ColorSelectInstance;
+    //RingMenu
+    public RingMenu MainMenuPrefab;
+    protected RingMenu MainMenuInstance;
 
-   
-    
+
+
+
     //single 
     public static Game_manager instance;
 
@@ -66,14 +69,13 @@ public class Game_manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
 
         if (Input.GetMouseButtonDown(1))
         {
-            ColorSelectInstance = Instantiate(ColorSelectPrefab, FindAnyObjectByType<Canvas>().transform);
+            MainMenuInstance = Instantiate(MainMenuPrefab, FindAnyObjectByType<Canvas>().transform);
+            Time.timeScale = 0.3f;
+            Time.timeScale = 0.3f;
         }
-        
-
     }
 
     

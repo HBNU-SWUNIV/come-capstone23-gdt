@@ -28,6 +28,11 @@ TagManager:
   - YellowDust
   - Boss
   - Boss_long_range_attack
+  - Teleport_Desert_normal
+  - Teleport_Field_normal
+  - Teleport_Forest_normal
+  - Teleport_Lake_normal
+  - Teleport
   layers:
   - Default
   - TransparentFX

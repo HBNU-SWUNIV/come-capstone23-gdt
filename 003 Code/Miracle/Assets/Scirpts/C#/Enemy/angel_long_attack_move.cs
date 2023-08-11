@@ -5,9 +5,11 @@ using UnityEngine;
 public class angel_long_attack_move : MonoBehaviour
 {
     public GameObject Player;
-    public bool IsPlayerRight,IsPlayerUp,Is_x_same,Is_y_same;
+    public bool IsPlayerRight,IsPlayerUp,Is_x_same,Is_y_same,IsMove;
     public SpriteRenderer render;
     public Animator animator;
+    Vector3 direction;
+    public float movespeed;
    
     void Awake()
     {
@@ -23,6 +25,9 @@ public class angel_long_attack_move : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        direction = Player.transform.position - this.transform.position;
+        this.transform.position += direction.normalized * movespeed;
+        
         Check_x();
         render.flipX = IsPlayerRight;
         Check_y();
@@ -75,6 +80,7 @@ public class angel_long_attack_move : MonoBehaviour
         }
         else if (Player.transform.position.x == this.transform.position.x)
         {
+            IsPlayerRight = false;
             Is_x_same = true;
         }
     }

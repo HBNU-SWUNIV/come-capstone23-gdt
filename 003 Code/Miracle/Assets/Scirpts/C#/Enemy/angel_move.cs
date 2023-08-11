@@ -146,17 +146,17 @@ public class angel_move : MonoBehaviour
         switch (angel_state)
         {
             case Angel_state.blue://블루 상태 
-
+                Instantiate(angel_long_attack1, this.transform.position, Quaternion.identity);
 
                 break;
 
             case Angel_state.green://그린 상태
-
+                Instantiate(angel_long_attack2, this.transform.position, Quaternion.identity);
                 break;
 
                  
             case Angel_state.red://레드 상태 
-
+                Instantiate(angel_long_attack3, this.transform.position, Quaternion.identity);
                 break;
         }
     }

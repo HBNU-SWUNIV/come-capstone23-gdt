@@ -189,11 +189,8 @@ public class playercontroller : MonoBehaviour//피격 상태정의
     {
         if (Input.GetKeyDown(KeyCode.F))// 포탈이용시 f키 사용
         {
-            if (collision.gameObject.tag.Equals("Teleport_Village"))
-            {
-                SceneManager.LoadScene("Village");
-            }
-            else if (collision.gameObject.tag.Equals("Teleport_Desert_normal"))
+            
+            if (collision.gameObject.tag.Equals("Teleport_Desert_normal"))
             {
                 SceneManager.LoadScene("Desert_normal");
             }
@@ -205,7 +202,18 @@ public class playercontroller : MonoBehaviour//피격 상태정의
             {
                 SceneManager.LoadScene("Deepforest_normal");
             }
-
+            else if (collision.gameObject.tag.Equals("Teleport_Forest_normal"))
+            {
+                SceneManager.LoadScene("Forest_normal");
+            }
+            else if (collision.gameObject.tag.Equals("Teleport_Field_normal"))
+            {
+                SceneManager.LoadScene("Field_normal");
+            }
+            else if (collision.gameObject.tag.Equals("Teleport"))
+            {
+                gameObject.transform.position = collision.gameObject.GetComponent<Teleport>().opposite_teleport.transform.position;
+            }
 
             performer_fade_system.total_start();
         }

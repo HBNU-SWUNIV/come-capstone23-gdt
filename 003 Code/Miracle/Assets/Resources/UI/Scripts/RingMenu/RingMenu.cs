@@ -10,9 +10,12 @@ public class RingMenu : MonoBehaviour
     public float GapWidthDegree = 1f;               //RingElements 사이의 거리
     protected RingCakePiece[] Pieces;
     protected Vector3 RingPosition;
+    public GameObject Color_selector;
+    
 
     void Start()
     {
+        Color_selector = GameObject.FindWithTag("Color_Selector");
         var stepLength = 360f / Data.Elements.Length;               //RIngElement 하나의 길이    
         Pieces = new RingCakePiece[Data.Elements.Length];
         RingPosition = Input.mousePosition;
@@ -52,6 +55,40 @@ public class RingMenu : MonoBehaviour
         {
             Debug.Log(Data.Elements[activeElement].Name);
 
+            switch (activeElement)
+            {
+
+                case 1:
+                    Color_selector.GetComponent<Color_Attack>().Set_Color_mode(Color_mode.red);
+                    Color_selector.GetComponent<Color_Attack>().Apply_Color();
+                    break;
+
+                case 2:
+                    Color_selector.GetComponent<Color_Attack>().Set_Color_mode(Color_mode.orange);
+                    Color_selector.GetComponent<Color_Attack>().Apply_Color();
+                    break;
+                case 3:
+                    Color_selector.GetComponent<Color_Attack>().Set_Color_mode(Color_mode.yellow);
+                    Color_selector.GetComponent<Color_Attack>().Apply_Color();
+                    break;
+
+                case 4:
+                    Color_selector.GetComponent<Color_Attack>().Set_Color_mode(Color_mode.green);
+                    Color_selector.GetComponent<Color_Attack>().Apply_Color();
+                    break;
+
+                case 5:
+                    Color_selector.GetComponent<Color_Attack>().Set_Color_mode(Color_mode.blue);
+                    Color_selector.GetComponent<Color_Attack>().Apply_Color();
+                    break;
+
+                case 6:
+                    Color_selector.GetComponent<Color_Attack>().Set_Color_mode(Color_mode.purple);
+                    Color_selector.GetComponent<Color_Attack>().Apply_Color();
+                    break;
+            }
+
+            Time.timeScale = 1f;
             Destroy(gameObject);
         }
     }
