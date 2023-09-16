@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 234430526823843932}
   m_Layer: 0
   m_Name: angel_long_blue_attack
-  m_TagString: Untagged
+  m_TagString: Boss_long_range_attack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -142,7 +142,9 @@ MonoBehaviour:
   IsMove: 0
   render: {fileID: 0}
   animator: {fileID: 0}
-  movespeed: 0
+  movespeed: 3
+  angel_long_attack_state: 0
+  condition_applicator_object: {fileID: 0}
 --- !u!60 &7359144067566614261
 PolygonCollider2D:
   m_ObjectHideFlags: 0

@@ -17,7 +17,7 @@ public class Player_Status : MonoBehaviour//초기 스테이터스 설정
     public delegate void OnChangecoin();
     public OnChangecoin onChangecoin;
 
-    private playercontroller playercontroller_object;
+    private playercontroller playercontroller;
 
     public float[] current_valid_statetime = new float[13];//각 상태별 시간 
     public int[] current_validnumber_state = new int[13]; //각 상태별 횟수 
@@ -107,7 +107,7 @@ public class Player_Status : MonoBehaviour//초기 스테이터스 설정
     {
         movement = GetComponent<Movement2D>();
         animator = GetComponent<Animator>();
-        playercontroller_object = GetComponent<playercontroller>();
+        playercontroller = GetComponent<playercontroller>();
         for (int i = 0; i < current_valid_statetime.Length; i++)
         {
             current_valid_statetime[i] = 0.0f;
@@ -128,7 +128,7 @@ public class Player_Status : MonoBehaviour//초기 스테이터스 설정
         if (current_hp <= 0)
         {
             animator.SetTrigger("Player_death");
-            playercontroller_object.player_death();
+            playercontroller.player_death();
         }
     }
 

@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public enum Angel_long_attack_state { blue,green,red};
+
 public class angel_long_attack_move : MonoBehaviour
 {
     public GameObject Player;
@@ -10,15 +13,25 @@ public class angel_long_attack_move : MonoBehaviour
     public Animator animator;
     Vector3 direction;
     public float movespeed;
-   
+    public Angel_long_attack_state angel_long_attack_state;
+    public GameObject condition_applicator_object;
+    private Condition_applicator condition_applicator;
+
     void Awake()
     {
         Player = GameObject.FindWithTag("Player");
         render = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        condition_applicator_object = GameObject.FindWithTag("Condition_applicator");
+        condition_applicator = condition_applicator_object.GetComponent<Condition_applicator>();
     }
 
-    public void Self_destroy()//플레이어에게 피격되거나 맵 밖을 나가면 파괴 
+    private void Start()
+    {
+        Invoke("Self_destroy", 3f);//생성 3초뒤 스스로 자멸
+        
+    }
+    public void Self_destroy()//플레이어에게 피격되거나 몇 초뒤 스스로 사라짐 
     {
         Destroy(this.gameObject);
     }
@@ -65,6 +78,29 @@ public class angel_long_attack_move : MonoBehaviour
 
 
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag.Equals("Player"))//플레이어와의 접촉 
+        {
+            if(angel_long_attack_state== Angel_long_attack_state.blue)
+            {
+                condition_applicator.Set_state(State.deceleration);
+                condition_applicator.Apply_state();
+            }
+            else if(angel_long_attack_state == Angel_long_attack_state.green)
+            {
+                condition_applicator.Set_state(State.toxin);
+                condition_applicator.Apply_state();
+            }
+            else if (angel_long_attack_state == Angel_long_attack_state.red)
+            {
+                condition_applicator.Set_state(State.burn);
+                condition_applicator.Apply_state();
+            }
+        }
+    }
+
 
     public void Check_x()
     {

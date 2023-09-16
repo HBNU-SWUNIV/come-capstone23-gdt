@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum boss_types { golem,death,angel,skeleton,dragon}
+
+
 public class boss_status : MonoBehaviour
 {
     public float[] current_valid_statetime = new float[3];//³Ã±â,°¨¼Ó,³Ã°¢
@@ -25,6 +28,7 @@ public class boss_status : MonoBehaviour
     private Rito.WeightedRandomPicker<bool> wrPicker;
     private Color_Attack color_attack;
     public Animator boss_animator;
+    public boss_types boss_type;
 
     private void Awake()
     {

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Angel_state { blue, green, red }
+public enum Angel_state { blue, purple, red }
 
 public class angel_move : MonoBehaviour
 {
@@ -17,6 +17,7 @@ public class angel_move : MonoBehaviour
     public float raycastDistance = 1f;
 
     public float movespeed;
+    public float initial_movespeed;
     public RuntimeAnimatorController[] animation_controllers = new RuntimeAnimatorController[3];
     private bool isPlayerInRange;
     private bool isFacingRight = true;
@@ -31,6 +32,7 @@ public class angel_move : MonoBehaviour
         angel_long_attack2.GetComponent<Boss_long_range_status>().boss_offensive_power = (int)boss_status_script.offensive_power;
         angel_long_attack3.GetComponent<Boss_long_range_status>().boss_offensive_power = (int)boss_status_script.offensive_power;
         angel_state = Angel_state.blue;
+        initial_movespeed = movespeed;
     }
 
    
@@ -52,8 +54,8 @@ public class angel_move : MonoBehaviour
                 // 플레이어와의 방향을 체크
                 float direction = player.transform.position.x - transform.position.x;
 
-                // 좌우 이동
-                rb.velocity = new Vector2(direction, rb.velocity.y).normalized * movespeed;
+                //천사는 공중에서 이동 
+                transform.position = Vector2.MoveTowards(transform.position, player.transform.position, movespeed * Time.deltaTime);
 
                 // 몬스터가 바라보는 방향 설정
                 if (direction > 0f && isFacingRight)
@@ -75,11 +77,13 @@ public class angel_move : MonoBehaviour
 
         if (percent_angel_hp == 50)//체력 50퍼센트 일시 
         {
+            movespeed = 0f;
             angel_animator.SetTrigger("Next_stage");
             Set_second_stage();
         }
         else if (percent_angel_hp == 10)//체력 10퍼센트 남을시 
         {
+            movespeed = 0f;
             angel_animator.SetTrigger("Next_stage");
             Set_third_stage();
         }
@@ -129,13 +133,15 @@ public class angel_move : MonoBehaviour
 
     public void angel_second_stage()
     {
-        angel_state = Angel_state.green;
+        movespeed = initial_movespeed;
+        angel_state = Angel_state.purple;
         angel_animator.runtimeAnimatorController = animation_controllers[1];
         boss_status_script.offensive_power += 5f;
     }
 
     public void angel_third_stage()
     {
+        movespeed = initial_movespeed;
         angel_state = Angel_state.red;
         angel_animator.runtimeAnimatorController = animation_controllers[2];
         boss_status_script.offensive_power += 5f;
@@ -145,12 +151,13 @@ public class angel_move : MonoBehaviour
     {
         switch (angel_state)
         {
-            case Angel_state.blue://블루 상태 
+            case Angel_state.blue://블루 상태
+                
                 Instantiate(angel_long_attack1, this.transform.position, Quaternion.identity);
 
                 break;
 
-            case Angel_state.green://그린 상태
+            case Angel_state.purple://그린 상태
                 Instantiate(angel_long_attack2, this.transform.position, Quaternion.identity);
                 break;
 

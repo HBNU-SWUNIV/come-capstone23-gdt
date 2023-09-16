@@ -60,6 +60,7 @@ public class playercontroller : MonoBehaviour//피격 상태정의
         {
             if (this.CompareTag("Player"))
             {
+                Destroy(collision.gameObject);
                 animator.SetTrigger("Player_damaged");
                 float enemy_offensive = collision.gameObject.GetComponent<EnemyWeaponStatus>().enemy_offensive_power;
                 movement2d.OnDamaged(collision.transform.position);
@@ -159,6 +160,7 @@ public class playercontroller : MonoBehaviour//피격 상태정의
         {
             if (this.CompareTag("Player"))
             {
+                Destroy(collision.gameObject);//원거리 피격체 소멸
                 animator.SetTrigger("Player_damaged");//피격 모션 활성화
                 float enemy_offensive = collision.gameObject.GetComponent<Boss_long_range_status>().boss_offensive_power;
                 movement2d.OnDamaged(collision.transform.position);
@@ -222,7 +224,7 @@ public class playercontroller : MonoBehaviour//피격 상태정의
 
     private void OnTriggerEnter2D(Collider2D coll)
     {
-        if (coll.gameObject.tag.Equals("falling_rock"))
+        if (coll.gameObject.tag.Equals("falling_rock"))//골렘 낙석 피해시 
         {
             applicator.Set_state(State.deceleration);
             applicator.Apply_state();

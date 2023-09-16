@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 6188116750769937863}
   m_Layer: 0
   m_Name: Death_angel
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -81,7 +81,9 @@ MonoBehaviour:
   attack_speed: 0
   move_speed: 0
   initial_hp: 0
+  remained_hp_percent: 0
   boss_animator: {fileID: 0}
+  boss_type: 0
 --- !u!60 &6188116750769937860
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -333,6 +335,7 @@ MonoBehaviour:
   detectionRange: 10
   raycastDistance: 1
   movespeed: 3
+  initial_movespeed: 0
   animation_controllers:
   - {fileID: 9100000, guid: 1ae1c83f729a96247a3987bddaa099c5, type: 2}
   - {fileID: 9100000, guid: 63b35267f8fd3ff4ca821b8f1c54b5a6, type: 2}
