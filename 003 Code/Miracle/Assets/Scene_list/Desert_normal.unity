@@ -7690,6 +7690,7 @@ MonoBehaviour:
   number_starting_point: 0
   random_monster_index: 0
   alive_number_monster: 0
+  number_portal: 0
   enemylayer:
     serializedVersion: 2
     m_Bits: 256
@@ -10124,6 +10125,7 @@ MonoBehaviour:
   number_starting_point: 0
   random_monster_index: 0
   alive_number_monster: 0
+  number_portal: 0
   enemylayer:
     serializedVersion: 2
     m_Bits: 256
@@ -11608,7 +11610,8 @@ GameObject:
   - component: {fileID: 429333650}
   - component: {fileID: 429333652}
   - component: {fileID: 429333651}
-  m_Layer: 0
+  - component: {fileID: 429333653}
+  m_Layer: 6
   m_Name: Desert ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11757,6 +11760,32 @@ SpriteShapeRenderer:
   m_LocalAABB:
     m_Center: {x: 172.03543, y: -86.25505, z: 0}
     m_Extent: {x: 415.42633, y: 97.05333, z: 0}
+--- !u!61 &429333653
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 429333649}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 172.03546, y: -87.152725}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 830.85266, y: 192.31131}
+  m_EdgeRadius: 0
 --- !u!1 &432814343
 GameObject:
   m_ObjectHideFlags: 0
@@ -12520,7 +12549,8 @@ GameObject:
   - component: {fileID: 461543376}
   - component: {fileID: 461543378}
   - component: {fileID: 461543377}
-  m_Layer: 0
+  - component: {fileID: 461543379}
+  m_Layer: 6
   m_Name: Desert ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12669,6 +12699,32 @@ SpriteShapeRenderer:
   m_LocalAABB:
     m_Center: {x: 172.03543, y: -79.207565, z: 0}
     m_Extent: {x: 415.42633, y: 90.005844, z: 0}
+--- !u!61 &461543379
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461543375}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 172.03546, y: -80.14433}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 830.85266, y: 178.13815}
+  m_EdgeRadius: 0
 --- !u!1 &463747210
 GameObject:
   m_ObjectHideFlags: 0
@@ -14970,7 +15026,8 @@ GameObject:
   - component: {fileID: 535926113}
   - component: {fileID: 535926115}
   - component: {fileID: 535926114}
-  m_Layer: 0
+  - component: {fileID: 535926116}
+  m_Layer: 6
   m_Name: Desert ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15119,6 +15176,32 @@ SpriteShapeRenderer:
   m_LocalAABB:
     m_Center: {x: 172.03543, y: -79.93354, z: 0}
     m_Extent: {x: 415.42633, y: 90.73182, z: 0}
+--- !u!61 &535926116
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 535926112}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 172.03546, y: -80.578896}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 830.85266, y: 180.17293}
+  m_EdgeRadius: 0
 --- !u!1 &539369788
 GameObject:
   m_ObjectHideFlags: 0
@@ -17234,11 +17317,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8375372033766970485, guid: 5df36bac7fdded5448becb6efe432ddb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -3362.1
       objectReference: {fileID: 0}
     - target: {fileID: 8375372033766970485, guid: 5df36bac7fdded5448becb6efe432ddb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -803.2
       objectReference: {fileID: 0}
     - target: {fileID: 8375372033766970485, guid: 5df36bac7fdded5448becb6efe432ddb, type: 3}
       propertyPath: m_LocalPosition.z
@@ -22195,6 +22278,7 @@ MonoBehaviour:
   number_starting_point: 0
   random_monster_index: 0
   alive_number_monster: 0
+  number_portal: 0
   enemylayer:
     serializedVersion: 2
     m_Bits: 256
@@ -25761,7 +25845,8 @@ GameObject:
   - component: {fileID: 957762559}
   - component: {fileID: 957762561}
   - component: {fileID: 957762560}
-  m_Layer: 0
+  - component: {fileID: 957762562}
+  m_Layer: 6
   m_Name: Desert ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25910,6 +25995,32 @@ SpriteShapeRenderer:
   m_LocalAABB:
     m_Center: {x: 175.39078, y: -91.62479, z: 0}
     m_Extent: {x: 418.78168, y: 102.423065, z: 0}
+--- !u!61 &957762562
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 957762558}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 175.39081, y: -92.4032}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 837.56335, y: 203.2893}
+  m_EdgeRadius: 0
 --- !u!1 &957900205
 GameObject:
   m_ObjectHideFlags: 0
@@ -27703,6 +27814,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boss_teleport
       objectReference: {fileID: 0}
+    - target: {fileID: 9181673530768223756, guid: 3793c77e977750b4e83e626d6147f8d0, type: 3}
+      propertyPath: m_TagString
+      value: Teleport_Desert_boss
+      objectReference: {fileID: 0}
     - target: {fileID: 9181673530768223758, guid: 3793c77e977750b4e83e626d6147f8d0, type: 3}
       propertyPath: m_Size.x
       value: 0.29311824
@@ -27866,7 +27981,8 @@ GameObject:
   - component: {fileID: 1025605987}
   - component: {fileID: 1025605989}
   - component: {fileID: 1025605988}
-  m_Layer: 0
+  - component: {fileID: 1025605990}
+  m_Layer: 6
   m_Name: Desert ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28015,6 +28131,32 @@ SpriteShapeRenderer:
   m_LocalAABB:
     m_Center: {x: 172.03543, y: -87.40238, z: 0}
     m_Extent: {x: 415.42633, y: 98.20066, z: 0}
+--- !u!61 &1025605990
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1025605986}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 172.03546, y: -88.387276}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 830.85266, y: 194.43153}
+  m_EdgeRadius: 0
 --- !u!1001 &1029891817
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30797,7 +30939,8 @@ GameObject:
   - component: {fileID: 1155047364}
   - component: {fileID: 1155047366}
   - component: {fileID: 1155047365}
-  m_Layer: 0
+  - component: {fileID: 1155047367}
+  m_Layer: 6
   m_Name: Desert ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30946,6 +31089,32 @@ SpriteShapeRenderer:
   m_LocalAABB:
     m_Center: {x: 171.40004, y: -70.73678, z: 0}
     m_Extent: {x: 416.0617, y: 81.53506, z: 0}
+--- !u!61 &1155047367
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1155047363}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 171.40002, y: -71.46505}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 832.1234, y: 161.61357}
+  m_EdgeRadius: 0
 --- !u!1 &1155822795
 GameObject:
   m_ObjectHideFlags: 0
@@ -33693,7 +33862,8 @@ GameObject:
   - component: {fileID: 1224956744}
   - component: {fileID: 1224956743}
   - component: {fileID: 1224956742}
-  m_Layer: 0
+  - component: {fileID: 1224956745}
+  m_Layer: 6
   m_Name: Desert ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33842,6 +34012,32 @@ Transform:
   m_Father: {fileID: 309286131}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1224956745
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1224956741}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 170.67603, y: -55.556618}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 833.5714, y: 130.0318}
+  m_EdgeRadius: 0
 --- !u!1 &1229024497
 GameObject:
   m_ObjectHideFlags: 0
@@ -35556,6 +35752,7 @@ MonoBehaviour:
   number_starting_point: 0
   random_monster_index: 0
   alive_number_monster: 0
+  number_portal: 0
   enemylayer:
     serializedVersion: 2
     m_Bits: 256
@@ -36345,7 +36542,8 @@ GameObject:
   - component: {fileID: 1360606394}
   - component: {fileID: 1360606396}
   - component: {fileID: 1360606395}
-  m_Layer: 0
+  - component: {fileID: 1360606397}
+  m_Layer: 6
   m_Name: Desert ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36494,6 +36692,32 @@ SpriteShapeRenderer:
   m_LocalAABB:
     m_Center: {x: 172.03543, y: -81.3555, z: 0}
     m_Extent: {x: 415.42633, y: 92.15378, z: 0}
+--- !u!61 &1360606397
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1360606393}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 172.03546, y: -82.06189}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 830.85266, y: 182.89478}
+  m_EdgeRadius: 0
 --- !u!1 &1365561395
 GameObject:
   m_ObjectHideFlags: 0
@@ -38955,8 +39179,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1453859267}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.124137, y: -13.79232, z: -0.031254336}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -236.38, y: -446.09, z: 224.51}
+  m_LocalScale: {x: 0.48493853, y: 0.48493853, z: 0.48493853}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 309286131}
@@ -42745,7 +42969,8 @@ GameObject:
   - component: {fileID: 1643989886}
   - component: {fileID: 1643989888}
   - component: {fileID: 1643989887}
-  m_Layer: 0
+  - component: {fileID: 1643989889}
+  m_Layer: 6
   m_Name: Desert ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42894,6 +43119,32 @@ SpriteShapeRenderer:
   m_LocalAABB:
     m_Center: {x: 173.28293, y: -90.47095, z: 0}
     m_Extent: {x: 416.67383, y: 101.269226, z: 0}
+--- !u!61 &1643989889
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1643989885}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 173.28296, y: -91.038666}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 833.34766, y: 201.40302}
+  m_EdgeRadius: 0
 --- !u!1 &1646202575
 GameObject:
   m_ObjectHideFlags: 0
@@ -43099,6 +43350,7 @@ MonoBehaviour:
   number_starting_point: 0
   random_monster_index: 0
   alive_number_monster: 0
+  number_portal: 0
   enemylayer:
     serializedVersion: 2
     m_Bits: 256
@@ -43739,6 +43991,7 @@ MonoBehaviour:
   number_starting_point: 0
   random_monster_index: 0
   alive_number_monster: 0
+  number_portal: 0
   enemylayer:
     serializedVersion: 2
     m_Bits: 256
@@ -46235,7 +46488,8 @@ GameObject:
   - component: {fileID: 1748721184}
   - component: {fileID: 1748721186}
   - component: {fileID: 1748721185}
-  m_Layer: 0
+  - component: {fileID: 1748721187}
+  m_Layer: 6
   m_Name: Desert ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46384,6 +46638,32 @@ SpriteShapeRenderer:
   m_LocalAABB:
     m_Center: {x: 175.39029, y: -96.811775, z: 0}
     m_Extent: {x: 418.7812, y: 107.610054, z: 0}
+--- !u!61 &1748721187
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1748721183}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 175.39032, y: -97.424904}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 837.5624, y: 213.99385}
+  m_EdgeRadius: 0
 --- !u!1001 &1749367205
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -46782,7 +47062,8 @@ GameObject:
   - component: {fileID: 1762812376}
   - component: {fileID: 1762812378}
   - component: {fileID: 1762812377}
-  m_Layer: 0
+  - component: {fileID: 1762812379}
+  m_Layer: 6
   m_Name: Desert ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46931,6 +47212,32 @@ SpriteShapeRenderer:
   m_LocalAABB:
     m_Center: {x: 172.03543, y: -87.198006, z: 0}
     m_Extent: {x: 415.42633, y: 97.996284, z: 0}
+--- !u!61 &1762812379
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1762812375}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 172.03546, y: -88.17585}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 830.85266, y: 194.03688}
+  m_EdgeRadius: 0
 --- !u!1 &1765762616
 GameObject:
   m_ObjectHideFlags: 0
@@ -49311,7 +49618,8 @@ GameObject:
   - component: {fileID: 1855216512}
   - component: {fileID: 1855216514}
   - component: {fileID: 1855216513}
-  m_Layer: 0
+  - component: {fileID: 1855216515}
+  m_Layer: 6
   m_Name: Desert ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49460,6 +49768,32 @@ SpriteShapeRenderer:
   m_LocalAABB:
     m_Center: {x: 175.1246, y: -83.92131, z: 0}
     m_Extent: {x: 418.5155, y: 94.71959, z: 0}
+--- !u!61 &1855216515
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1855216511}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 175.12463, y: -84.89577}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 837.031, y: 187.49026}
+  m_EdgeRadius: 0
 --- !u!1 &1855908512
 GameObject:
   m_ObjectHideFlags: 0
@@ -53977,7 +54311,8 @@ GameObject:
   - component: {fileID: 2013292469}
   - component: {fileID: 2013292471}
   - component: {fileID: 2013292470}
-  m_Layer: 0
+  - component: {fileID: 2013292472}
+  m_Layer: 6
   m_Name: Desert ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54126,6 +54461,32 @@ SpriteShapeRenderer:
   m_LocalAABB:
     m_Center: {x: 172.03543, y: -93.71003, z: 0}
     m_Extent: {x: 415.42633, y: 104.50831, z: 0}
+--- !u!61 &2013292472
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2013292468}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 172.03546, y: -94.38175}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 830.85266, y: 207.67317}
+  m_EdgeRadius: 0
 --- !u!1 &2013305078
 GameObject:
   m_ObjectHideFlags: 0
@@ -57098,6 +57459,7 @@ MonoBehaviour:
   number_starting_point: 0
   random_monster_index: 0
   alive_number_monster: 0
+  number_portal: 0
   enemylayer:
     serializedVersion: 2
     m_Bits: 256

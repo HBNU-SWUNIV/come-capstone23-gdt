@@ -20,7 +20,7 @@ public class Field_enviroment : MonoBehaviour
     void Set_teleport()
     {
         List<GameObject> list_teleports = teleports.ToList();
-        for (int i = 0; i < total_teleport_number; i++)//랜덤뽑기 46회 반복,15개의 필드 랑 보스방 입구로 들어서는 1개의 포탈을 포함해 총 46개,실질 보스방으로 이어지는 포탈은 예외 
+        for (int i = 0; i < list_teleports.Count; i++)//랜덤뽑기 46회 반복,15개의 필드 랑 보스방 입구로 들어서는 1개의 포탈을 포함해 총 46개,실질 보스방으로 이어지는 포탈은 예외 
         {
             int rand = Random.Range(0, list_teleports.Count);
             if (first_teleport == null)

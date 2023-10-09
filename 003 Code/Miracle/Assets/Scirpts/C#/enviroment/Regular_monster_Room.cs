@@ -9,7 +9,7 @@ public class Regular_monster_Room : MonoBehaviour
     public GameObject[] monster_starting_points;
     public GameObject[] monsters;
     public GameObject[] portals;
-    public int number_monster, number_starting_point, random_monster_index, alive_number_monster;
+    public int number_monster, number_starting_point, random_monster_index, alive_number_monster, number_portal;
 
     [SerializeField]
     private LayerMask enemylayer;
@@ -19,13 +19,14 @@ public class Regular_monster_Room : MonoBehaviour
     {
         number_monster = monsters.Length;//각 필드에 생성될 몬스터 프리팹수 
         number_starting_point = monster_starting_points.Length;//몬스터가 소환될 각 자리수 
+        number_portal = portals.Length;
         IsClear = false;
         for (int i=0;i< number_starting_point; i++)
         {
             random_monster_index = Random.Range(0, number_monster);
             Instantiate(monsters[random_monster_index], monster_starting_points[i].transform.position, Quaternion.identity);
         }
-        for(int i=0;i< portals.Length; i++)
+        for(int i=0;i< number_portal; i++)
         {
             portals[i].SetActive(false);
         }

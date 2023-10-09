@@ -22,7 +22,7 @@ public class boss_status : MonoBehaviour
     public float remained_hp_percent;
    
     private Player_Status player_status;
-    private EnemyMove enemy_move;
+    private Boss_move enemy_move;
     private GameObject Object_enemy_applicator, Player, Color_selector;
     private Boss_Condition_applicator boss_applicator;
     private Rito.WeightedRandomPicker<bool> wrPicker;
@@ -34,7 +34,7 @@ public class boss_status : MonoBehaviour
     {
        
 
-        enemy_move = GetComponent<EnemyMove>();
+        enemy_move = GetComponent<Boss_move>();
         Object_enemy_applicator = GameObject.FindWithTag("Boss_Condition_applicator");
         boss_applicator = Object_enemy_applicator.GetComponent<Boss_Condition_applicator>();
         Player = GameObject.FindWithTag("Player");
@@ -57,7 +57,7 @@ public class boss_status : MonoBehaviour
     void Update()
     {
         remained_hp_percent = ( hp / initial_hp) * 100;
-        enemy_move.movespeed = this.move_speed;
+        enemy_move.movespeed = (int)this.move_speed;
 
         if (hp <= 0)
         {

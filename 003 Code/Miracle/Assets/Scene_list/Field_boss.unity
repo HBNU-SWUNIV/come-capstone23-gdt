@@ -224,11 +224,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8375372033766970485, guid: 5df36bac7fdded5448becb6efe432ddb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -25.68
       objectReference: {fileID: 0}
     - target: {fileID: 8375372033766970485, guid: 5df36bac7fdded5448becb6efe432ddb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -505.1
       objectReference: {fileID: 0}
     - target: {fileID: 8375372033766970485, guid: 5df36bac7fdded5448becb6efe432ddb, type: 3}
       propertyPath: m_LocalPosition.z
@@ -276,7 +276,7 @@ GameObject:
   - component: {fileID: 324808589}
   - component: {fileID: 324808588}
   - component: {fileID: 324808591}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Forest ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -658,7 +658,7 @@ Transform:
   - {fileID: 429516247}
   - {fileID: 880059159}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &706505922
 GameObject:
@@ -1237,6 +1237,34 @@ PrefabInstance:
     - target: {fileID: 1305683866303390171, guid: 553693b0c197a914684145c1e89849f9, type: 3}
       propertyPath: m_Name
       value: Bringer_Death
+      objectReference: {fileID: 0}
+    - target: {fileID: 1305683866303390172, guid: 553693b0c197a914684145c1e89849f9, type: 3}
+      propertyPath: hp
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1305683866303390172, guid: 553693b0c197a914684145c1e89849f9, type: 3}
+      propertyPath: boss_type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1305683866303390172, guid: 553693b0c197a914684145c1e89849f9, type: 3}
+      propertyPath: initial_hp
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1305683866303390172, guid: 553693b0c197a914684145c1e89849f9, type: 3}
+      propertyPath: move_speed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1305683866303390172, guid: 553693b0c197a914684145c1e89849f9, type: 3}
+      propertyPath: attack_speed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1305683866303390172, guid: 553693b0c197a914684145c1e89849f9, type: 3}
+      propertyPath: defensive_power
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1305683866303390172, guid: 553693b0c197a914684145c1e89849f9, type: 3}
+      propertyPath: offensive_power
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1305683866303390174, guid: 553693b0c197a914684145c1e89849f9, type: 3}
       propertyPath: m_RootOrder

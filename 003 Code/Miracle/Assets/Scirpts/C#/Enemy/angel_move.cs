@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum Angel_state { blue, purple, red }
 
-public class angel_move : MonoBehaviour
+public class angel_move : Boss_move
 {
     public int percent_angel_hp;
     public Animator angel_animator;
@@ -16,7 +16,7 @@ public class angel_move : MonoBehaviour
     public float detectionRange = 10f;    // 추적을 시작할 플레이어의 거리
     public float raycastDistance = 1f;
 
-    public float movespeed;
+    //public float movespeed;
     public float initial_movespeed;
     public RuntimeAnimatorController[] animation_controllers = new RuntimeAnimatorController[3];
     private bool isPlayerInRange;

@@ -212,6 +212,26 @@ public class playercontroller : MonoBehaviour//피격 상태정의
             {
                 SceneManager.LoadScene("Field_normal");
             }
+            else if (collision.gameObject.tag.Equals("Teleport_Field_boss"))
+            {
+                SceneManager.LoadScene("Field_boss");
+            }
+            else if (collision.gameObject.tag.Equals("Teleport_Deepforest_boss"))
+            {
+                SceneManager.LoadScene("Deepforest_boss");
+            }
+            else if (collision.gameObject.tag.Equals("Teleport_Desert_boss"))
+            {
+                SceneManager.LoadScene("Desert_boss");
+            }
+            else if (collision.gameObject.tag.Equals("Teleport_Lake_boss"))
+            {
+                SceneManager.LoadScene("Lake_boss");
+            }
+            else if (collision.gameObject.tag.Equals("Teleport_Forest_boss"))
+            {
+                SceneManager.LoadScene("Forest_boss");
+            }
             else if (collision.gameObject.tag.Equals("Teleport"))
             {
                 gameObject.transform.position = collision.gameObject.GetComponent<Teleport>().opposite_teleport.transform.position;

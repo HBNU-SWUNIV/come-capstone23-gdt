@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class golem_move : MonoBehaviour
+public class golem_move : Boss_move
 {
     public Animator golem_animator;
     public GameObject player;
@@ -12,7 +12,7 @@ public class golem_move : MonoBehaviour
     public float detectionRange = 10f;    // 추적을 시작할 플레이어의 거리
     public float raycastDistance = 1f;
 
-    public float movespeed;
+    //public float movespeed;
 
     private bool isPlayerInRange;
     private bool isFacingRight = true;
@@ -26,7 +26,7 @@ public class golem_move : MonoBehaviour
 
     private void Start()
     {
-        InvokeRepeating("Random_rock_attack", 10, 10);
+        InvokeRepeating("Random_rock_attack", 4, 4);
     }
 
     // Update is called once per frame

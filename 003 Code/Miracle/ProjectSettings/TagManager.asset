@@ -33,6 +33,11 @@ TagManager:
   - Teleport_Forest_normal
   - Teleport_Lake_normal
   - Teleport
+  - Teleport_Deepforest_boss
+  - Teleport_Desert_boss
+  - Teleport_Field_boss
+  - Teleport_Forest_boss
+  - Teleport_Lake_boss
   layers:
   - Default
   - TransparentFX

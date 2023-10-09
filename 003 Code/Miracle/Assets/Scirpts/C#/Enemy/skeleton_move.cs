@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class skeleton_move : MonoBehaviour
+public class skeleton_move : Boss_move
+
 {
     public GameObject player;
     public boss_status boss_status_script;
@@ -11,7 +12,7 @@ public class skeleton_move : MonoBehaviour
     public float detectionRange = 10f;    // 추적을 시작할 플레이어의 거리
     public float raycastDistance = 1f;
     Rigidbody2D rb;
-    public float movespeed;
+    //public float movespeed;
     private bool isPlayerInRange;
     private bool isFacingRight = true;
 
