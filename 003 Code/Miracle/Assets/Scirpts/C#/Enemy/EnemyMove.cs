@@ -45,7 +45,7 @@ public class EnemyMove : MonoBehaviour
                 float direction = player.transform.position.x - transform.position.x;
 
                 // 좌우 이동
-                rb.velocity = new Vector2(direction, rb.velocity.y).normalized * movespeed;
+                rb.velocity = new Vector2(direction, 0).normalized * movespeed;
 
                 // 몬스터가 바라보는 방향 설정
                 if (direction > 0f && isFacingRight)
@@ -60,7 +60,7 @@ public class EnemyMove : MonoBehaviour
             else
             {
                 isPlayerInRange = false;
-                rb.velocity = new Vector2(0f, rb.velocity.y);
+                rb.velocity = new Vector2(0f, 0);
             }
         }
 

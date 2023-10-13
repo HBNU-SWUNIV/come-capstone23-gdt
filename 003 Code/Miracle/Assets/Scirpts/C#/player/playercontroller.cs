@@ -255,7 +255,11 @@ public class playercontroller : MonoBehaviour//피격 상태정의
     {
         gameObject.layer = 12;
 
-        //플레이어 키보드 입력 막는 코드 필요 
+        GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePosition;//플레이어 움직임 봉쇄
+
+        Invoke("Return_Village",3.0f);//3초후 원래 마을로 돌아감 
+
+
     }
     public void Set_tag_Player()
     {
@@ -274,6 +278,13 @@ public class playercontroller : MonoBehaviour//피격 상태정의
     
     }
 
+    public void Return_Village()//마을로 돌아가는 시스템
+    {
+
+        performer_fade_system.total_start();//페이드 인 페이드 아웃 
+
+
+    }
 
     // Update is called once per frame
     void Update()//실질적 움직임 컨트롤

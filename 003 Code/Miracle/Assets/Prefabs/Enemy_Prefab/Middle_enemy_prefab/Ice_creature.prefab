@@ -31,8 +31,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4967279188796686457}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.01, y: -0.01, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.0099999, y: -0.0099999, z: 0}
+  m_LocalScale: {x: 7.3340526, y: 7.3340526, z: 7.3340526}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -130,11 +130,11 @@ MonoBehaviour:
   current_validnumber_state: 000000000000000000000000
   current_burn: 0
   minimal_enemy_number: 3
-  hp: 0
-  offensive_power: 0
-  defensive_power: 0
+  hp: 120
+  offensive_power: 7
+  defensive_power: 20
   attack_speed: 0
-  move_speed: 0
+  move_speed: 2
 --- !u!95 &3317227845056332466
 Animator:
   serializedVersion: 5

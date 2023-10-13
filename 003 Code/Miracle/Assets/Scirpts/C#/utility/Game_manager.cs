@@ -42,10 +42,10 @@ public class Game_manager : MonoBehaviour
         {
             instance = this;
         }
-        else if (instance != this)
+        /*else if (instance != this)
         {
             Destroy(instance.gameObject);
-        }
+        }*/
 
 
         
