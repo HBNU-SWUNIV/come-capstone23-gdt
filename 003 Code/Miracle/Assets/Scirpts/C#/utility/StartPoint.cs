@@ -6,15 +6,17 @@ public class StartPoint : MonoBehaviour
 {
 
    
-    private GameObject player;
+    public GameObject player;
     // Start is called before the first frame update
     void Start()
     {
-        player= GameObject.FindWithTag("Player");
-
+        //player= GameObject.FindWithTag("Player");
+        player = playercontroller.player_object;
+        Debug.Log(player);
         if (player != null)//시작 위치 설정
         {
             player.transform.position = this.transform.position;
+            
 
         }
     }

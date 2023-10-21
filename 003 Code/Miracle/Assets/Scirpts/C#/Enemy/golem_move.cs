@@ -7,6 +7,7 @@ public class golem_move : Boss_move
     public Animator golem_animator;
     public GameObject player;
     public GameObject[] rock_spawners;
+    public AudioClip[] golem_audio;
     Rigidbody2D rb;
 
     public float detectionRange = 10f;    // 추적을 시작할 플레이어의 거리
@@ -46,7 +47,7 @@ public class golem_move : Boss_move
                 float direction = player.transform.position.x - transform.position.x;
 
                 // 좌우 이동
-                rb.velocity = new Vector2(direction, rb.velocity.y).normalized * movespeed;
+                rb.velocity = new Vector2(direction, 0).normalized * movespeed;
 
                 // 몬스터가 바라보는 방향 설정
                 if (direction > 0f && isFacingRight)

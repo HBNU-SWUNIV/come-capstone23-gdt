@@ -10,8 +10,10 @@ public enum Mode { assassin,shock,shooter}
 
 public class playercontroller : MonoBehaviour//피격 상태정의 
 {
+
     public Mode mode;
-    
+    static public GameObject player_canvas;
+    static public GameObject player_object;
     private Movement2D movement2d;
     private Player_Status status;
     private InventoryUI inventory_ui;
@@ -21,7 +23,7 @@ public class playercontroller : MonoBehaviour//피격 상태정의
     //bool is_Shop_open;
     GameObject fade_system, manager,smoke_creator_object;
     FadeSystem performer_fade_system;
-    Animator animator;
+    public Animator animator;
     public RuntimeAnimatorController[] animation_controllers= new RuntimeAnimatorController[3];
     private Rigidbody2D rigid;
     public smoke_creator smoke_script;
@@ -32,13 +34,14 @@ public class playercontroller : MonoBehaviour//피격 상태정의
 
 
     // Start is called before the first frame update
-    private void Awake()
+    private void Start()
     {
         movement2d = GetComponent<Movement2D>();
         status= GetComponent<Player_Status>();
         condition_applicator = GameObject.FindWithTag("Condition_applicator");
         applicator = condition_applicator.GetComponent<Condition_applicator>();
         audiosrc = GetComponent<AudioSource>();
+        player_object = GameObject.FindWithTag("Player");
         fade_system = GameObject.FindWithTag("Fade");
         performer_fade_system = fade_system.GetComponent<FadeSystem>();
         manager = GameObject.FindWithTag("GameManager");
@@ -48,6 +51,7 @@ public class playercontroller : MonoBehaviour//피격 상태정의
         rigid = GetComponent<Rigidbody2D>();
         smoke_creator_object = GameObject.FindWithTag("Smoke_creator");
         smoke_script = smoke_creator_object.GetComponent<smoke_creator>();
+        player_canvas.SetActive(false);
 
     }
    
@@ -253,12 +257,15 @@ public class playercontroller : MonoBehaviour//피격 상태정의
 
     public void player_death()//플레이어 사망
     {
-        gameObject.layer = 12;
+        
+        
+            gameObject.layer = 12;
 
-        GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePosition;//플레이어 움직임 봉쇄
+            GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezePosition;//플레이어 움직임 봉쇄
 
-        Invoke("Return_Village",3.0f);//3초후 원래 마을로 돌아감 
-
+            Invoke("Return_Village", 3.0f);//3초후 원래 마을로 돌아감 
+        
+       
 
     }
     public void Set_tag_Player()
@@ -283,7 +290,31 @@ public class playercontroller : MonoBehaviour//피격 상태정의
 
         performer_fade_system.total_start();//페이드 인 페이드 아웃 
 
+        GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;//플레이어 움직임 봉쇄
+        GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
 
+        status.current_hp = status.max_hp;//체력 재회복
+        status.isDead = false;
+
+        switch (mode)
+        {
+            case Mode.assassin:
+                animator.Play("assassin_idle");
+                break;
+            case Mode.shooter:
+                animator.Play("Shooter_idle");
+                break;
+
+            case Mode.shock:
+                animator.Play("Shock_wake");
+                break;
+        }
+
+        SceneManager.LoadScene("Village");
+
+        
+
+        gameObject.layer = 7;//플레이어 레이어 재설정
     }
 
     // Update is called once per frame
@@ -313,7 +344,7 @@ public class playercontroller : MonoBehaviour//피격 상태정의
             animator.SetBool("IsMove", isMoving);
         }
 
-        /*if (isMoving && movement2d.isGround)//땅위에 있고 움직인다는 가정
+        if (isMoving && movement2d.isGround)//땅위에 있고 움직인다는 가정
         {
 
             if (!audiosrc.isPlaying)
@@ -323,7 +354,9 @@ public class playercontroller : MonoBehaviour//피격 상태정의
         }
         else {
             audiosrc.Stop();
-        }*/
+        }
+
+        
 
         if (rigid.velocity.y < 0)
         {

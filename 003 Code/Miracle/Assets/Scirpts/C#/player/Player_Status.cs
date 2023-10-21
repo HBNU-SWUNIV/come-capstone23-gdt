@@ -14,6 +14,7 @@ public class Player_Status : MonoBehaviour//초기 스테이터스 설정
 
     Animator animator;
 
+    public bool isDead = false;
     public delegate void OnChangecoin();
     public OnChangecoin onChangecoin;
 
@@ -123,13 +124,23 @@ public class Player_Status : MonoBehaviour//초기 스테이터스 설정
 
         movement.speed = move_speed;
 
-        
 
-        if (current_hp <= 0)
+        if (current_hp <= 0 && isDead == false)
         {
             animator.SetTrigger("Player_death");
-            playercontroller.player_death();
+            playercontroller.player_death();//죽음
+            isDead = true;
         }
+
+
+
+        /*if (current_hp <= 0)
+        {
+            isDead = true;
+       
+            animator.SetTrigger("Player_death");
+            playercontroller.player_death();
+        }*/
     }
 
     public void permanent_status_add(int i)//영구적인 스테이터스 상승시 저장,도감 시스템

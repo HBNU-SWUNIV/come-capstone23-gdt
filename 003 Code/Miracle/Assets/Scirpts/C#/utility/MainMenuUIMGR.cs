@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class MainMenuUIMGR : MonoBehaviour
 {
+
+
     public void StartBTNFunction()
     {
         GameObject.Find("Canvas").transform.Find("StartPanel").gameObject.SetActive(true);
@@ -13,6 +15,7 @@ public class MainMenuUIMGR : MonoBehaviour
 
     public void StartYesBTNFunction()
     {
+        playercontroller.player_canvas.SetActive(true);
         SceneManager.LoadScene("Village");
     }
 

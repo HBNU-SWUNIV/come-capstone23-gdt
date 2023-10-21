@@ -39,6 +39,8 @@ TagManager:
   - Teleport_Forest_boss
   - Teleport_Lake_boss
   - enemys
+  - Normal_teleport_left
+  - Normal_teleport_right
   layers:
   - Default
   - TransparentFX

@@ -6,41 +6,35 @@ using UnityEngine;
 public class Forest_enviroment : MonoBehaviour
 {//땅에서 올라오는 장애물 추가 필요
 
-    public GameObject[] teleports;
-    public int total_teleport_number;
-    public GameObject first_teleport, second_teleport;
+    public GameObject[] left_teleports, right_teleports;
+    public int left_teleport_number;
     // Start is called before the first frame update
     void Start()
     {
-        teleports = GameObject.FindGameObjectsWithTag("Teleport");
-        total_teleport_number = teleports.Length;
+        left_teleports = GameObject.FindGameObjectsWithTag("Normal_teleport_left");
+        right_teleports = GameObject.FindGameObjectsWithTag("Normal_teleport_right");
         Set_teleport();
     }
 
 
     void Set_teleport()
     {
-        List<GameObject> list_teleports = teleports.ToList();
-        for (int i = 0; i < total_teleport_number; i++)//랜덤뽑기 46회 반복,15개의 필드 랑 보스방 입구로 들어서는 1개의 포탈을 포함해 총 46개,실질 보스방으로 이어지는 포탈은 예외 
+        List<int> selected_numbers = new List<int>();
+        int selected_number;
+        List<GameObject> List_left_teleports = left_teleports.ToList();
+        List<GameObject> List_right_teleports = right_teleports.ToList();
+        for (int i = 0; i < List_left_teleports.Count; i++)//랜덤뽑기 46회 반복,15개의 필드 랑 보스방 입구로 들어서는 1개의 포탈을 포함해 총 46개,실질 보스방으로 이어지는 포탈은 예외 
         {
-            int rand = Random.Range(0, list_teleports.Count);
-            if (first_teleport == null)
+            do
             {
-                first_teleport = list_teleports[rand];
-                list_teleports.RemoveAt(rand);
-            }
-            else if ((first_teleport != null) && (second_teleport == null))
-            {
-                second_teleport = list_teleports[rand];
-                list_teleports.RemoveAt(rand);
-            }
-            else if ((first_teleport != null) && (second_teleport != null))
-            {
-                first_teleport.GetComponent<Teleport>().opposite_teleport = second_teleport;
-                second_teleport.GetComponent<Teleport>().opposite_teleport = first_teleport;
-                first_teleport = null;
-                second_teleport = null;
-            }
+                selected_number = Random.Range(0, List_left_teleports.Count);
+            } while (selected_numbers.Contains(selected_number));
+
+            selected_numbers.Add(selected_number);
+
+            left_teleports[i].GetComponent<Teleport>().opposite_teleport = right_teleports[selected_number];
+            right_teleports[selected_number].GetComponent<Teleport>().opposite_teleport = left_teleports[i];
+
         }
     }
 }

@@ -50,7 +50,7 @@ public class Bringer_Death_move : Boss_move
                 float direction = player.transform.position.x - transform.position.x;
 
                 // 좌우 이동
-                rb.velocity = new Vector2(direction, rb.velocity.y).normalized * movespeed;
+                rb.velocity = new Vector2(direction, 0).normalized * movespeed;
 
                 // 몬스터가 바라보는 방향 설정
                 if (direction > 0f && isFacingRight)
