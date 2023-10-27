@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum boss_types { golem,death,angel,skeleton,dragon}
 
@@ -48,8 +49,8 @@ public class boss_status : MonoBehaviour
         initial_hp = hp;
         early_move_speed = move_speed;
         early_attack_speed = attack_speed;
-       
 
+        
         wrPicker = new Rito.WeightedRandomPicker<bool>();
     }
 
@@ -68,6 +69,7 @@ public class boss_status : MonoBehaviour
     {
         
             boss_animator.SetTrigger("Death");
+        SceneManager.LoadScene("Village");
     }
 
     public void bringer_Dead()
@@ -160,8 +162,11 @@ public class boss_status : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)//플레이어의 공격에 당할경우 
     {
+        //Debug.Log(Player + "탐지됨 ");
+        //Debug.Log(Player.CompareTag("Player_skilling") + " player_skilling 탐지됨 ");
         if (Player.CompareTag("Player_skilling"))//플레이어가 공격중일때 
         {
+            
             calculate();//데미지 배율 계산
             boss_animator.SetTrigger("Hited");//피격 모션 활성화
             real_damage_apply();//데미지 실체력 적용 

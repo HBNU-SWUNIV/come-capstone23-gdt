@@ -34,9 +34,14 @@ public class MainMenuUIMGR : MonoBehaviour
         GameObject.Find("Canvas").transform.Find("LoadPanel").gameObject.SetActive(false);
     }
 
-    public void SettingBTNFunction()
+    public void HowBTNFunction()
     {
+        GameObject.Find("Canvas").transform.Find("HowPanel").gameObject.SetActive(true);
+    }
 
+    public void HowExitBTNFunction()
+    {
+        GameObject.Find("Canvas").transform.Find("HowPanel").gameObject.SetActive(false);
     }
 
     public void ExitBTNFunction()

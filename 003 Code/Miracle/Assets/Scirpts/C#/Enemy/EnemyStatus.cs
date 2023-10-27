@@ -63,6 +63,12 @@ public class EnemyStatus : MonoBehaviour
         render.material.color = new Color(percent*255 / 255f, percent * 255 / 255f, percent * 255 / 255f);
 
         enemy_move.movespeed = this.move_speed;
+
+        if (hp <= 0)
+        {
+            Destroy(gameObject);
+            //player_status.number_hunted_creature[minimal_enemy_number]++;
+        }
     }
     
     public void Dead()
@@ -70,7 +76,7 @@ public class EnemyStatus : MonoBehaviour
         if (hp <= 0)
         {
             Destroy(gameObject);
-            player_status.number_hunted_creature[minimal_enemy_number]++;
+            //player_status.number_hunted_creature[minimal_enemy_number]++;
         }
     }
 

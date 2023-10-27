@@ -12,6 +12,8 @@ public class angel_move : Boss_move
     Rigidbody2D rb;
     public boss_status boss_status_script;
     public Angel_state angel_state;
+    public AudioClip[] angel_audio;
+    public AudioSource angel_audio_source;
 
     public float detectionRange = 10f;    // 추적을 시작할 플레이어의 거리
     public float raycastDistance = 1f;
@@ -32,10 +34,15 @@ public class angel_move : Boss_move
         angel_long_attack2.GetComponent<Boss_long_range_status>().boss_offensive_power = (int)boss_status_script.offensive_power;
         angel_long_attack3.GetComponent<Boss_long_range_status>().boss_offensive_power = (int)boss_status_script.offensive_power;
         angel_state = Angel_state.blue;
+        angel_audio_source = GetComponent<AudioSource>();
         initial_movespeed = movespeed;
     }
 
-   
+    private void Start()
+    {
+        angel_audio_source.clip = angel_audio[0];
+        angel_audio_source.Play();
+    }
 
     // Update is called once per frame
     void Update()
@@ -60,10 +67,13 @@ public class angel_move : Boss_move
                 // 몬스터가 바라보는 방향 설정
                 if (direction > 0f && isFacingRight)
                 {
+                    isFacingRight = false;
                     Flip();
                 }
                 else if (direction < 0f && !isFacingRight)
                 {
+                    //보스가 오른쪽에 위치 
+                    isFacingRight = true;
                     Flip();
                 }
             }
@@ -92,21 +102,28 @@ public class angel_move : Boss_move
 
     public void Flip()
     {
-        isFacingRight = !isFacingRight;
+        //isFacingRight = !isFacingRight;
         transform.Rotate(0f, 180f, 0f);
     }
 
     private void FixedUpdate()
     {
+        
         // 플레이어를 감지하기 위해 레이캐스트 사용
         if (isPlayerInRange)
         {
-            Debug.DrawRay(rb.position, Vector2.left, new Color(0, 1, 0));
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, isFacingRight ? Vector2.right : Vector2.left, raycastDistance);
+            Debug.DrawRay(new Vector3(transform.position.x-1, transform.position.y - 3, transform.position.z), !isFacingRight ? Vector2.right : Vector2.left * raycastDistance, new Color(0, 1, 0));
+            RaycastHit2D hit = Physics2D.Raycast(new Vector3(transform.position.x-1, transform.position.y-3,transform.position.z), !isFacingRight ? Vector2.right : Vector2.left, raycastDistance);
 
+            Debug.Log(hit.collider != null);
+            Debug.Log(hit.collider.CompareTag("Player")+"태그 맞춤 플레이어 감지됨");
+            Debug.Log(hit.collider.gameObject.tag + "플레이어 태그 감지됨");
             if (hit.collider != null && hit.collider.CompareTag("Player"))
             {
                 angel_animator.SetTrigger("light_attack");//일반 휘두르기 공격
+                angel_audio_source.clip = angel_audio[2];
+                angel_audio_source.Play();
+
             }
         }
     }
@@ -166,5 +183,7 @@ public class angel_move : Boss_move
                 Instantiate(angel_long_attack3, this.transform.position, Quaternion.identity);
                 break;
         }
+        angel_audio_source.clip = angel_audio[3];
+        angel_audio_source.Play();
     }
 }

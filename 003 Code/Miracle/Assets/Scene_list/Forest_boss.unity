@@ -11338,6 +11338,10 @@ PrefabInstance:
       propertyPath: golem_audio.Array.data[2]
       value: 
       objectReference: {fileID: 8300000, guid: 9ad7c603ecbb5aa41ba27dea27e21e1b, type: 3}
+    - target: {fileID: 587478174698754448, guid: c7f2a70c5c44f30489477c3fa6b4917f, type: 3}
+      propertyPath: golem_audio.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 294823e04c20b0e4cb31b34a60a7228e, type: 3}
     - target: {fileID: 1977860296289646824, guid: c7f2a70c5c44f30489477c3fa6b4917f, type: 3}
       propertyPath: m_SortingOrder
       value: 2
@@ -11368,11 +11372,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7107037221665759685, guid: c7f2a70c5c44f30489477c3fa6b4917f, type: 3}
       propertyPath: lastDistanceThreshold
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8364803160706913091, guid: c7f2a70c5c44f30489477c3fa6b4917f, type: 3}
       propertyPath: m_FlipX
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8364803160706913091, guid: c7f2a70c5c44f30489477c3fa6b4917f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8364803160706913091, guid: c7f2a70c5c44f30489477c3fa6b4917f, type: 3}
       propertyPath: m_SortingOrder

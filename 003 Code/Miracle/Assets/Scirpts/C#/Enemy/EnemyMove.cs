@@ -18,7 +18,7 @@ public class EnemyMove : MonoBehaviour
     //public int nextMove;
 
     private bool isPlayerInRange;
-    private bool isFacingRight = true;
+    private bool isFacingRight = false;
     // Start is called before the first frame update
     void Awake()
     {
@@ -45,7 +45,9 @@ public class EnemyMove : MonoBehaviour
                 float direction = player.transform.position.x - transform.position.x;
 
                 // 좌우 이동
-                rb.velocity = new Vector2(direction, 0).normalized * movespeed;
+                //rb.velocity = new Vector2(direction, 0).normalized * movespeed;
+
+                animator.SetBool("IsMove", true);
 
                 // 몬스터가 바라보는 방향 설정
                 if (direction > 0f && isFacingRight)
@@ -60,6 +62,7 @@ public class EnemyMove : MonoBehaviour
             else
             {
                 isPlayerInRange = false;
+                animator.SetBool("IsMove", false);
                 rb.velocity = new Vector2(0f, 0);
             }
         }

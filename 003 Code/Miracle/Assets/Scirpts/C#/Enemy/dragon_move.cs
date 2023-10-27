@@ -9,7 +9,8 @@ public class dragon_move : Boss_move
     public GameObject player, dragon_long_attack;
     Rigidbody2D rb;
     public boss_status boss_status_script;
-
+    public AudioClip[] dragon_audio;
+    public AudioSource dragon_audio_source;
     public float detectionRange = 10f;    // 추적을 시작할 플레이어의 거리
     public float raycastDistance = 1f;
 
@@ -25,7 +26,13 @@ public class dragon_move : Boss_move
         dragon_animator = GetComponent<Animator>();
         boss_status_script = GetComponent<boss_status>();
         dragon_long_attack.GetComponent<Boss_long_range_status>().boss_offensive_power = (int)boss_status_script.offensive_power;
+        dragon_audio_source = GetComponent<AudioSource>();
+    }
 
+    private void Start()
+    {
+        dragon_audio_source.clip = dragon_audio[0];
+        dragon_audio_source.Play();
     }
 
     // Update is called once per frame
@@ -84,6 +91,8 @@ public class dragon_move : Boss_move
             if (hit.collider != null && hit.collider.CompareTag("Player"))
             {
                 dragon_animator.SetTrigger("Claw_attack");//일반 휘두르기 공격
+                dragon_audio_source.clip = dragon_audio[2];
+                dragon_audio_source.Play();
             }
         }
     }
@@ -91,5 +100,7 @@ public class dragon_move : Boss_move
     public void dragon_attack()
     {
         Instantiate(dragon_long_attack, this.gameObject.transform.position, Quaternion.identity);
+        dragon_audio_source.clip = dragon_audio[3];
+        dragon_audio_source.Play();
     }
 }

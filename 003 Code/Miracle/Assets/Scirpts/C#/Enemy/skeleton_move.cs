@@ -15,6 +15,8 @@ public class skeleton_move : Boss_move
     //public float movespeed;
     private bool isPlayerInRange;
     private bool isFacingRight = true;
+    public AudioClip[] skeleton_audio;
+    public AudioSource skeleton_audio_source;
 
 
     // Start is called before the first frame update
@@ -23,6 +25,7 @@ public class skeleton_move : Boss_move
         player = GameObject.FindWithTag("Player");
         boss_status_script = GetComponent<boss_status>();
         skeleton_animator = GetComponent<Animator>();
+        skeleton_audio_source = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody2D>();
         flame_spawners[0].GetComponent<Boss_long_range_status>().boss_offensive_power= (int)boss_status_script.offensive_power;
         flame_spawners[1].GetComponent<Boss_long_range_status>().boss_offensive_power = (int)boss_status_script.offensive_power;
@@ -30,6 +33,11 @@ public class skeleton_move : Boss_move
         flame_spawners[3].GetComponent<Boss_long_range_status>().boss_offensive_power = (int)boss_status_script.offensive_power;
     }
 
+    private void Start()
+    {
+        skeleton_audio_source.clip = skeleton_audio[0];
+        skeleton_audio_source.Play();
+    }
     // Update is called once per frame
     void Update()
     {
@@ -79,6 +87,8 @@ public class skeleton_move : Boss_move
             if (hit.collider != null && hit.collider.CompareTag("Player"))
             {
                 skeleton_animator.SetTrigger("Skeleton_attack");//일반 휘두르기 공격
+                skeleton_audio_source.clip = skeleton_audio[2];
+                skeleton_audio_source.Play();
             }
         }
     }
@@ -98,8 +108,10 @@ public class skeleton_move : Boss_move
 
 
         skeleton_animator.SetTrigger("Skeleton_casting");
+        skeleton_audio_source.clip = skeleton_audio[2];
+        skeleton_audio_source.Play();
 
-        foreach(GameObject spawner in flame_spawners)
+        foreach (GameObject spawner in flame_spawners)
         {
             Instantiate(spawner, transform.position, Quaternion.identity);
         }

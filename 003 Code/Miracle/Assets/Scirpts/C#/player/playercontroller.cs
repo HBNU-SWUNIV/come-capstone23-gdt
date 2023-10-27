@@ -10,7 +10,7 @@ public enum Mode { assassin,shock,shooter}
 
 public class playercontroller : MonoBehaviour//피격 상태정의 
 {
-
+    public int index_system = 0;
     public Mode mode;
     static public GameObject player_canvas;
     static public GameObject player_object;

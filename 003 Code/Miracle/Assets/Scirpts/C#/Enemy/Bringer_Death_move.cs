@@ -9,7 +9,8 @@ public class Bringer_Death_move : Boss_move
     Rigidbody2D rb;
     public boss_status boss_status_script;
     public SpriteRenderer render;
-
+    public AudioClip[] bringer_audio;
+    public AudioSource bringer_audio_source;
     public float detectionRange = 10f;    // 추적을 시작할 플레이어의 거리
     public float raycastDistance = 1f;
 
@@ -26,11 +27,15 @@ public class Bringer_Death_move : Boss_move
         boss_status_script = GetComponent<boss_status>();
         spell_attack_object.GetComponent<Boss_long_range_status>().boss_offensive_power = (int)boss_status_script.offensive_power;
         render = GetComponent<SpriteRenderer>();
+        bringer_audio_source = GetComponent<AudioSource>();
     }
 
     private void Start()
     {
-        InvokeRepeating("Bringer_Death_random_attack",10f,10f);
+        InvokeRepeating("Bringer_Death_random_attack",5f,5f);
+        bringer_audio_source.clip = bringer_audio[0];
+        bringer_audio_source.Play();
+
     }
 
     // Update is called once per frame
@@ -88,6 +93,8 @@ public class Bringer_Death_move : Boss_move
             if (hit.collider != null && hit.collider.CompareTag("Player"))
             {
                 bringer_animator.SetTrigger("Death_Attack");//일반 휘두르기 공격
+                bringer_audio_source.clip = bringer_audio[2];
+                bringer_audio_source.Play();
             }
         }
     }
@@ -117,6 +124,8 @@ public class Bringer_Death_move : Boss_move
                 Spell_attack();
                 break;
         }
+        bringer_audio_source.clip = bringer_audio[3];
+        bringer_audio_source.Play();
     }
 
     public void Behind_attack_start()

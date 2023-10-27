@@ -1912,15 +1912,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 156184949643080520, guid: fd840e0d3939a1f4f834af5b4e6b30fe, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 156184949643080520, guid: fd840e0d3939a1f4f834af5b4e6b30fe, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 156184949643080520, guid: fd840e0d3939a1f4f834af5b4e6b30fe, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 156184949643080520, guid: fd840e0d3939a1f4f834af5b4e6b30fe, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -2699,7 +2699,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 99999
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5360,6 +5360,7 @@ GameObject:
   - component: {fileID: 1485183240}
   - component: {fileID: 1485183242}
   - component: {fileID: 1485183241}
+  - component: {fileID: 1485183243}
   m_Layer: 5
   m_Name: HPbar
   m_TagString: Untagged
@@ -5428,6 +5429,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1485183239}
   m_CullTransparentMesh: 1
+--- !u!114 &1485183243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1485183239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3048c554416029a4080e48c818f46975, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 2016661023}
+  bar: {fileID: 2113003631}
 --- !u!1001 &1512131556
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6195,6 +6210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3048c554416029a4080e48c818f46975, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 2016661023}
   bar: {fileID: 1693731714}
 --- !u!114 &1693731714
 MonoBehaviour:
@@ -6840,15 +6856,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3838519155081353492, guid: 265aed0ae82caae41ac10b9a3bd70553, type: 3}
       propertyPath: early_max_hp
-      value: 100
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 3838519155081353492, guid: 265aed0ae82caae41ac10b9a3bd70553, type: 3}
       propertyPath: pocket_money
-      value: 10000
+      value: 100000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3838519155081353492, guid: 265aed0ae82caae41ac10b9a3bd70553, type: 3}
+      propertyPath: early_critical
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3838519155081353492, guid: 265aed0ae82caae41ac10b9a3bd70553, type: 3}
       propertyPath: early_move_speed
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3838519155081353492, guid: 265aed0ae82caae41ac10b9a3bd70553, type: 3}
+      propertyPath: early_defensive_power
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3838519155081353492, guid: 265aed0ae82caae41ac10b9a3bd70553, type: 3}
+      propertyPath: early_offensive_power
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6242087106736935392, guid: 265aed0ae82caae41ac10b9a3bd70553, type: 3}
       propertyPath: Invincible_time

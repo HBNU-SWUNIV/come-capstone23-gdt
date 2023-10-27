@@ -18,7 +18,7 @@ public class Deepforest_enviroment : MonoBehaviour
     {
         condition_applicator = GameObject.FindWithTag("Condition_applicator");
         applicator = condition_applicator.GetComponent<Condition_applicator>();
-        InvokeRepeating("apply_toxin", 2f, 2f);//처음 시작후 3초후 5초마다 발동
+        InvokeRepeating("apply_toxin", 10f, 10f);//처음 시작후 3초후 5초마다 발동
     }
 
     // Update is called once per frame

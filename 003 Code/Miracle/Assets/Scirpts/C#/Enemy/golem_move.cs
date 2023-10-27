@@ -8,6 +8,7 @@ public class golem_move : Boss_move
     public GameObject player;
     public GameObject[] rock_spawners;
     public AudioClip[] golem_audio;
+    public AudioSource golem_audio_source;
     Rigidbody2D rb;
 
     public float detectionRange = 10f;    // 추적을 시작할 플레이어의 거리
@@ -23,11 +24,14 @@ public class golem_move : Boss_move
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindWithTag("Player");
         golem_animator = GetComponent<Animator>();
+        golem_audio_source = GetComponent<AudioSource>();
     }
 
     private void Start()
     {
         InvokeRepeating("Random_rock_attack", 4, 4);
+        golem_audio_source.clip = golem_audio[0];
+        golem_audio_source.Play();
     }
 
     // Update is called once per frame
@@ -85,6 +89,8 @@ public class golem_move : Boss_move
             if (hit.collider != null && hit.collider.CompareTag("Player"))
             {
                 golem_animator.SetTrigger("Golem_skill_1");
+                golem_audio_source.clip = golem_audio[1];
+                golem_audio_source.Play();
             }
         }
     }
@@ -98,6 +104,8 @@ public class golem_move : Boss_move
         rock_spawners[4].transform.position = new Vector3(transform.position.x + 6, transform.position.y + 9, 0);
 
         golem_animator.SetTrigger("Golem_skill_2");
+        golem_audio_source.clip = golem_audio[1];
+        golem_audio_source.Play();
 
         foreach (GameObject spawner in rock_spawners)
         {
