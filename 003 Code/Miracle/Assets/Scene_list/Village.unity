@@ -2772,7 +2772,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2523279683660845310, guid: 7ba1656f4f2f7ce4eb095410b22e51e2, type: 3}
       propertyPath: m_TagString
-      value: Teleport_Deepforest_boss
+      value: Teleport_Field_normal
       objectReference: {fileID: 0}
     - target: {fileID: 3413842451700895072, guid: 7ba1656f4f2f7ce4eb095410b22e51e2, type: 3}
       propertyPath: m_Name
@@ -2780,7 +2780,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3413842451700895072, guid: 7ba1656f4f2f7ce4eb095410b22e51e2, type: 3}
       propertyPath: m_TagString
-      value: Teleport_Deepforest_normal
+      value: Teleport_Forest_boss
       objectReference: {fileID: 0}
     - target: {fileID: 3413842451700895078, guid: 7ba1656f4f2f7ce4eb095410b22e51e2, type: 3}
       propertyPath: m_SortingOrder
@@ -2862,6 +2862,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  current_portal_number: 0
 --- !u!1001 &4266991619116147155
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -270,4 +270,4 @@ MonoBehaviour:
   output_random: 0
   detectionRange: 10
   raycastDistance: 1
-  movespeed: 0
+  movespeed: 2

@@ -50,7 +50,7 @@ public class EnemyStatus : MonoBehaviour
         initial_hp = hp;
         early_move_speed = move_speed;
         early_attack_speed = attack_speed;
-        render.material.color= new Color(0/255f, 0/255f, 0/255f);
+        //render.material.color= new Color(0/255f, 0/255f, 0/255f);
 
         wrPicker = new Rito.WeightedRandomPicker<bool>();
     }
@@ -60,7 +60,7 @@ public class EnemyStatus : MonoBehaviour
     {
         float percent = (initial_hp - hp / initial_hp)*100;
 
-        render.material.color = new Color(percent*255 / 255f, percent * 255 / 255f, percent * 255 / 255f);
+        render.material.color = new Color(percent*255f / 255f, percent * 255f / 255f, percent * 255f/ 255f);
 
         enemy_move.movespeed = this.move_speed;
 

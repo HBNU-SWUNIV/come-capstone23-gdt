@@ -3927,7 +3927,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5038,7 +5038,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300002, guid: 9df566abd94e2d1499ef7aecbf0f7235, type: 3}
+  m_Sprite: {fileID: 777745585, guid: b612dc0c309c9a34fbcca9b534da3c94, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6890,6 +6890,26 @@ PrefabInstance:
       propertyPath: player_canvas
       value: 
       objectReference: {fileID: 624559779}
+    - target: {fileID: 6242087106736935393, guid: 265aed0ae82caae41ac10b9a3bd70553, type: 3}
+      propertyPath: weapon_sounds.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6242087106736935393, guid: 265aed0ae82caae41ac10b9a3bd70553, type: 3}
+      propertyPath: weapon_sounds.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 1f2844efbf7abf647ba3d75d510f823a, type: 3}
+    - target: {fileID: 6242087106736935393, guid: 265aed0ae82caae41ac10b9a3bd70553, type: 3}
+      propertyPath: weapon_sounds.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 57cde74b73a8bb04d8aa1ffb021bca22, type: 3}
+    - target: {fileID: 6242087106736935393, guid: 265aed0ae82caae41ac10b9a3bd70553, type: 3}
+      propertyPath: weapon_sounds.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 720bba1e0a9a2d041afcc66d7e481469, type: 3}
+    - target: {fileID: 6242087106736935393, guid: 265aed0ae82caae41ac10b9a3bd70553, type: 3}
+      propertyPath: weapon_sounds.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: f0ba505d3e3620446a88697c282a14e0, type: 3}
     - target: {fileID: 6242087106736935394, guid: 265aed0ae82caae41ac10b9a3bd70553, type: 3}
       propertyPath: m_Name
       value: Player

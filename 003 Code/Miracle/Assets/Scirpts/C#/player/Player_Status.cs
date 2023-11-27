@@ -13,7 +13,7 @@ public class Player_Status : MonoBehaviour//초기 스테이터스 설정
     public  float early_max_hp, early_offensive_power, early_defensive_power, early_move_speed,  early_attack_speed, early_critical,early_recovery;//입력한 초기값 저장 또는 영구적인 값 저장
 
     Animator animator;
-
+    public int portal_number=0;
     public bool isDead = false;
     public delegate void OnChangecoin();
     public OnChangecoin onChangecoin;

@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
@@ -27,7 +28,9 @@ public class playercontroller : MonoBehaviour//피격 상태정의
     public RuntimeAnimatorController[] animation_controllers= new RuntimeAnimatorController[3];
     private Rigidbody2D rigid;
     public smoke_creator smoke_script;
-    
+    public AudioClip[] weapon_sounds;
+
+
     [SerializeField]GameObject condition_applicator;
     [SerializeField] Condition_applicator applicator;
 
@@ -236,7 +239,11 @@ public class playercontroller : MonoBehaviour//피격 상태정의
             {
                 SceneManager.LoadScene("Forest_boss");
             }
-            else if (collision.gameObject.tag.Equals("Teleport"))
+            else if (collision.gameObject.tag.Equals("Normal_teleport_left"))
+            {
+                gameObject.transform.position = collision.gameObject.GetComponent<Teleport>().opposite_teleport.transform.position;
+            }
+            else if (collision.gameObject.tag.Equals("Normal_teleport_right"))
             {
                 gameObject.transform.position = collision.gameObject.GetComponent<Teleport>().opposite_teleport.transform.position;
             }
@@ -315,6 +322,11 @@ public class playercontroller : MonoBehaviour//피격 상태정의
         
 
         gameObject.layer = 7;//플레이어 레이어 재설정
+    }
+
+    public void Set_ground_sound()
+    {
+
     }
 
     // Update is called once per frame
@@ -397,10 +409,13 @@ public class playercontroller : MonoBehaviour//피격 상태정의
             if (!inventory_ui.isStoreActive && !inventory_ui.activeInventory)
             {
                 animator.SetTrigger("Attack");
+
+   
             }
+
             
         }
-
+        
 
         if (Input.GetKeyDown(KeyCode.F1)&& movement2d.isGround)
         {

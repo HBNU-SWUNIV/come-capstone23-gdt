@@ -14,6 +14,7 @@ public class angel_move : Boss_move
     public Angel_state angel_state;
     public AudioClip[] angel_audio;
     public AudioSource angel_audio_source;
+    public bool Is_Attacking = false;
 
     public float detectionRange = 10f;    // 추적을 시작할 플레이어의 거리
     public float raycastDistance = 1f;
@@ -37,6 +38,17 @@ public class angel_move : Boss_move
         angel_audio_source = GetComponent<AudioSource>();
         initial_movespeed = movespeed;
     }
+
+    public void Set_true_angel_IsAttacking()
+    {
+        Is_Attacking = true;
+    }
+
+    public void Set_false_angel_IsAttacking()
+    {
+        Is_Attacking = false;
+    }
+
 
     private void Start()
     {
@@ -120,9 +132,14 @@ public class angel_move : Boss_move
             Debug.Log(hit.collider.gameObject.tag + "플레이어 태그 감지됨");
             if (hit.collider != null && hit.collider.CompareTag("Player"))
             {
-                angel_animator.SetTrigger("light_attack");//일반 휘두르기 공격
-                angel_audio_source.clip = angel_audio[2];
-                angel_audio_source.Play();
+
+                if (!Is_Attacking)
+                {
+                    angel_animator.SetTrigger("light_attack");//일반 휘두르기 공격
+                    Set_true_angel_IsAttacking();
+                    angel_audio_source.clip = angel_audio[2];
+                    angel_audio_source.Play();
+                }
 
             }
         }

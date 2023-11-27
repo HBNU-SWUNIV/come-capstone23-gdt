@@ -68,7 +68,28 @@ public class boss_status : MonoBehaviour
     public void boss_Dead_animation()
     {
         
-            boss_animator.SetTrigger("Death");
+        boss_animator.SetTrigger("Death");
+
+        switch (boss_type)
+        {
+
+            case boss_types.death://데스브링거 처치시 
+                player_status.portal_number = 1;
+                break;
+
+            case boss_types.golem://골렘 처치시 
+                player_status.portal_number = 2;
+                break;
+            case boss_types.skeleton://해골 처치시 
+                player_status.portal_number = 3;
+                break;
+            case boss_types.dragon://용 처치시 
+                player_status.portal_number = 4;
+                break;
+        }
+
+
+
         SceneManager.LoadScene("Village");
     }
 
