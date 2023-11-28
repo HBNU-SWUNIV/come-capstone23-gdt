@@ -18,9 +18,15 @@ public class TooltpControl_inventory : MonoBehaviour,IPointerEnterHandler,IPoint
             tooltip.gameObject.SetActive(true);
             tooltip.SetupTooltip(item.itemname, item.item_description);
         }
+        Invoke("Set_false_Enter", 2f);
     }
 
     public void OnPointerExit(PointerEventData eventData)
+    {
+        tooltip.gameObject.SetActive(false);
+    }
+
+    public void Set_false_Enter()
     {
         tooltip.gameObject.SetActive(false);
     }

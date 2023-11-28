@@ -88,8 +88,12 @@ public class boss_status : MonoBehaviour
                 break;
         }
 
+        Invoke("Set_Village", 2f);
+        
+    }
 
-
+    public void Set_Village()
+    {
         SceneManager.LoadScene("Village");
     }
 

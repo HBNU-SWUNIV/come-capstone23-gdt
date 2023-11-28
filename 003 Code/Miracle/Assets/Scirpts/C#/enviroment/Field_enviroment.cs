@@ -27,7 +27,7 @@ public class Field_enviroment : MonoBehaviour
             do
             {
                 selected_number = Random.Range(0, List_left_teleports.Count);
-            } while (selected_numbers.Contains(selected_number));
+            } while (selected_numbers.Contains(selected_number) || i == selected_number);
 
             selected_numbers.Add(selected_number);
 
